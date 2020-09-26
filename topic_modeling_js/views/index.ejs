@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Topics modeling</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link href="/css/style.css" rel="stylesheet" type="text/css">
+  
+</head>
+<body class="container">
+
+    <div class="jumbotron">
+    <form action="http://127.0.0.1:8080/" method="post">
+        <textarea class="form-control" name="input" id="input" rows="3"></textarea>
+       <button type="submit">Send to backend</button>
+       
+    </form>
+    
+    <ul id="output">
+        
+
+        <% for (var i = 0; i < newListItems[0].length; i++) { %>
+          <% if (newListItems[0][i]["probability"] > 0.1) { %>
+          <li> <%= newListItems[0][i]["term"] + ' ' + newListItems[0][i]["probability"].toString() %> </li>
+        <% }} %>
+    </ul>
+  </div>
+</body>
+</html>
