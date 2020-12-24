@@ -6,18 +6,21 @@ from scipy.io import wavfile
 from python_speech_features import mfcc
 
     
-def write_song(prep_song, fn, method, save_path):
-    base_fn, _ = os.path.splitext(fn)
+def write_song(prep_song, file, method, save_path):
+    filename = os.path.split(file)[-1]
+    base_fn, _ = os.path.splitext(filename)
     data_fn = os.path.join(save_path, base_fn + "." + method)
     np.save(data_fn, prep_song)
 
     
 def wav_preprocess(filename, file=None, method="mfcc", save=False, save_path=None):
-    X = None
-    if file is not None:
-        _, X = wavfile.read(file)
-    else:
+    
+    if file is None:
         _, X = wavfile.read(filename)
+    else:
+        _, X = wavfile.read(file)
+    X = X[:660000]
+    print(X.shape)
     x_prep = None
     
     if method == "mfcc":
@@ -29,8 +32,12 @@ def wav_preprocess(filename, file=None, method="mfcc", save=False, save_path=Non
     else:
         raise ValueError("Unknow method")
     
+    
     if save:
-        write_song(x_prep, filename, method, save_path)
+        if save_path is None:
+            raise ValueError("Save path is undefined")
+        else:
+            write_song(x_prep, filename, method, save_path)
     return x_prep
 
 
@@ -40,7 +47,8 @@ def cached_songs(genre_list, base_dir, method):
         
         for fn in os.listdir(genre_dir):
             if fn.endswith(".wav"):
-                _ = wav_preprocess(os.path.join(genre_dir, fn), method, save=True)
+                _ = wav_preprocess(os.path.join(genre_dir, fn), method=method,
+                                    save=True, save_path=genre_dir)
 
                 
 def read_songs(genre_list, base_dir, method):

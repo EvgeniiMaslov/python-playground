@@ -35,9 +35,9 @@ def upload_file():
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-
-            ceps = wav_preprocess(filename=filename, 
-                                    file=file,
+            
+            ceps = wav_preprocess(filename=filename,
+                                    file=file, 
                                     method="mfcc",
                                     save=True, 
                                     save_path=app.config["UPLOAD_FOLDER"])
