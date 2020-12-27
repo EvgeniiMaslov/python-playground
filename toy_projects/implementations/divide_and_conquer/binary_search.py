@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Sep 22 11:11:34 2020
-
-@author: sqrte
-"""
+# Uses python3
+import sys
 
 def binary_search(a, key, low=None, high=None):
     n = len(a) - 1
@@ -23,9 +19,11 @@ def binary_search(a, key, low=None, high=None):
     else:
         return binary_search(a, key, mid+1, high)
 
-
-def linear_search(arr, element):
-    for index, value in enumerate(arr):
-        if value == element:
-            return index
-    return 'Value not in list'
+if __name__ == '__main__':
+    input = sys.stdin.read()
+    data = list(map(int, input.split()))
+    n = data[0]
+    m = data[n + 1]
+    a = data[1 : n + 1]
+    for x in data[n + 2:]:
+        print(binary_search(a, x), end = ' ')
