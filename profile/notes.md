@@ -156,7 +156,8 @@
 * Transformer
 * GAN
 * Transpose convolution
-* Markov decision processes
+* [Markov decision processes](#Markov-decision-processes)
+* The Thompson Sampling model - multi arm bandit example
 * Dynamic programming using Bellman equation
 * Dynamic programming
 * Reinforcement Learning with Monte Carlo
@@ -439,7 +440,7 @@ A challenge in measuring correlation is that the variables we want to compare ar
 $$
 p = \frac{Cov(X,Y)}{S_XS_Y}
 $$
-   
+
 2. Transform each value to its rank, which is its index in the sorted list of values. This transform leads to the “Spearman rank correlation coefficient.” To compute Spearman’s correlation, we have to compute the rank of each value, which is its index in the sorted sample. Spearman’s rank correlation is an alternative that mitigates the effect of outliers and skewed distributions.
 
 **The covariance** gives some sense of how much two values are linearly related to each other, as well as the scale of this variables:
@@ -1282,7 +1283,7 @@ H_a: средние групп не равны
 
 Рассмотрим все наблюдения как одну выборку, посчитаем среднее:
 $$
-\bar{\bar x} = \frac{3+1+2+5+3+4+7+6+5}{9} = 4
+\bar{\bar x} = \frac{3+1+2+5+3+4+7+6+5}{9} = 4
 $$
 Рассчитаем:
 $$
@@ -4353,7 +4354,7 @@ One training step of a GAN model with such a value function requires two optimiz
 
  While a convolution operation is usually used to downsample the feature space, a transposed convolution operation is usually used for upsampling the feature space. Upsampling feature maps using transposed convolution works by inserting 0s between the elements of the input feature maps.
 
-![](D:/Github/Study/DS and ML book notes/img/transpose_conv.png)
+![](img/transpose_conv.png)
 
 
 
@@ -4385,6 +4386,8 @@ Assume that we have the net preactivation feature maps obtained after a convolut
 
 
 
+The Markov decision process, or MDP, is simply a process that models how the AI interacts with the environment over time.
+
 The standard approach for solving MDP problems is by using dynamic programming, but RL offers some key advantages over dynamic programming.
 
 The types of problems that require learning an interactive and sequential decisionmaking process, where the decision at time step t affects the subsequent situations, are mathematically formalized as Markov decision processes (MDPs).
@@ -4399,7 +4402,7 @@ The environment dynamics can be considered deterministic if particular actions f
 
 A Markov process can be represented as a directed cyclic graph in which the nodes in the graph represent the different states of the environment. The edges of the graph (that is, the connections between the nodes) represent the transition probabilities between the states.
 
-![](D:/Github/Study/DS and ML book notes/img/markov_process.png)
+![](img\markov_process.png)
 
 As the agent interacts with the environment, the sequence of observations or states forms a trajectory. There are two types of trajectories. If an agent's trajectory can be divided into subparts such that each starts at time t = 0 and ends in a terminal state 𝑆_𝑇 (at t = T), the task is called an episodic task. On the other hand, if the trajectory is infinitely continuous without a terminal state, the task is called a continuing task. The task related to a learning agent for the game of chess is an episodic task, whereas a cleaning robot that is keeping a house tidy is typically performing a continuing task. 
 
@@ -4426,6 +4429,57 @@ $$
 In short, the return is the weighted sum of rewards for an entire episode, which would be equal to the discounted final reward in our chess example (since there is only one reward). The value function is the expectation over all possible episodes, which basically computes how "valuable" it is on average to make a certain move.
 
 
+
+### The Thompson Sampling model - multi arm bandit example
+
+
+
+Each slot machine has its own Beta distribution. Over the rounds, the Beta distribution of the slot machine with the highest conversion rate will be progressively shifted to the right, and the Beta distributions of the strategies with lower conversion rates will be progressively shifted to the left. Therefore,  the slot machine with the highest conversion rate will be selected more and more.
+
+```python
+# Importing the libraries
+import numpy as np
+
+# Setting conversion rates and the number of samples
+conversionRates = [0.15, 0.04, 0.13, 0.11, 0.05]
+N = 10000
+d = len(conversionRates)
+
+# Creating the dataset
+X = np.zeros((N, d))
+for i in range(N):
+ for j in range(d):
+ if np.random.rand() < conversionRates[j]:
+ X[i][j] = 1
+
+# Making arrays to count our losses and wins
+nPosReward = np.zeros(d)
+nNegReward = np.zeros(d)
+
+# Taking our best slot machine through beta distribution and updating
+its losses and wins
+for i in range(N):
+ selected = 0
+ maxRandom = 0
+    
+ for j in range(d):
+ 	randomBeta = np.random.beta(nPosReward[j] + 1, nNegReward[j] + 1)
+ 	if randomBeta > maxRandom:
+ 		maxRandom = randomBeta
+ 		selected = j
+        
+ if X[i][selected] == 1:
+ 	nPosReward[selected] += 1
+ else:
+ 	nNegReward[selected] += 1
+    
+# Showing which slot machine is considered the best
+nSelected = nPosReward + nNegReward
+for i in range(d):
+ print('Machine number ' + str(i + 1) + ' was selected ' + str(nSelected[i]) + ' times')
+
+print('Conclusion: Best machine is machine number ' + str(np.argmax(nSelected) + 1))
+```
 
 
 
