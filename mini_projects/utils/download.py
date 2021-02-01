@@ -46,7 +46,8 @@ def get_dataset_from_kaggle(comp_name):
     api.competition_download_files(comp_name)
 
     filename = comp_name + ".zip"
-    os.mkdir("data")
+    if not os.path.isdir('data'):
+        os.mkdir("data")
     arch_path = os.path.join("data", filename)
 
     shutil.move(filename, arch_path)
