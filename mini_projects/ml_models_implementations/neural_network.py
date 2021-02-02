@@ -1,3 +1,5 @@
+import numpy as np
+
 class NeuralNetMLP(object):
     
     def __init__(self, n_hidden=30, l2=0., epochs=100, eta=0.1,

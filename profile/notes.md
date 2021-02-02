@@ -1,10 +1,7 @@
 **Linear Algebra**
 
-* Matrix property
 * Eigen decomposition
 * Singular Value Decomposition
-* Moore-Penrose pseudoinverse
-* The Trace Operator
 
 **Statistic**
 
@@ -55,7 +52,6 @@
 **Machine Learning**
 
 * [Maximum Likelihood](#Maximum Likelihood)
-* Building Blocks of a Learning Algorithm 
 * [Bayesian Statistics](#bayesian-statistics)
 * [Gradient Descent](#Gradient Descent)
   * [Gradient Descent](#Gradient Descent)
@@ -66,15 +62,8 @@
 * [Regression metrics](#Regression metrics)
 * [Classification metrics](#Classification metrics)
 * [Validation](#Validation)
-* [Strategies for Imbalance Data](#strategies-for-imbalance-data)
 * [Regularization](#regularization)
-* Feature Selection
-* [Feature Extraction](#feature-extraction)
-* [Feature importance](#Feature importance)
 * [Model Evaluating and Hyperparameter Tuning](#Model Evaluation and Hyperparameter Tuning)
-* [Standardization and Normalization](#Standardization and Normalization)
-* [Data imputation](#Data imputation)
-* Linear and Logistic Regression: Similarities and Differences
 * Learning to label sequence
 * [Active learning](#Active learning)
 * [Semi-supervised learning](#Semi-supervised learning)
@@ -87,39 +76,99 @@
 * [Learning to Recommend](#Learning to Recommend)
 * [Прогнозирование временных рядов](#Прогнозирование временных рядов)
 
-[**Regression**](#regression)
+
+
+[**Working with data**](#Working-with-data)
+
+
+
+1. Tabular data
+
+* [Data imputation](#Data imputation)
+* [Standardization and Normalization](#Standardization and Normalization)
+* [Feature Selection](#Feature-selection)
+* [Feature Extraction](#feature-extraction)
+* [Feature importance](#Feature importance)
+* [Strategies for Imbalance Data](#strategies-for-imbalance-data)
+* 
+
+
+
+[**Machine learning models**](#Machine-learning-models)
+
+
+
+1. Regression models:
 
 * [Linear Regression](#linear-regression)
-* Using regularized methods for regression
 * [Polynomial Regression](#Polynomial Regression)
-* Splines
+* [RANSAC](#RANSAC)
+* [SVM](#support-vector-machine)
 * [Generalized Additive Models](#Generalized Additive Models)
+* [K-Nearest Neighboors](#k-nearest-neighboors)
+* [Decision Tree](#Decision-tree)
+* [Random Forest](#Random-Forest)
+
+
+
+2. Classification models:
+
+* [Logistic regression](#logistic-regression)
 * [Generalized linear model](#Generalized linear model)
+* [SVM](#support-vector-machine)
+* [Naive Bayes](#naive-bayes)
+* [Not so Naive Bayes](#Not so Naive Bayes)
+* [K-Nearest Neighboors](#k-nearest-neighboors)
+* [Decision Tree](#Decision-tree)
+* [Random Forest](#Random-Forest)
+
+
+
+3. Clustering
+
+* [K-means](#k-means)
+* [K-means++](#k-means++)
+* [Hierarchical Clustering](#hierarchical-clustering)
+* [Locating regions of high density via DBSCAN](#Locating regions of high density via DBSCAN)
+* [Gaussian Mixture Models](#Gaussian-Mixture-Models)
+* [Кластеризация с помощью минимального остовного дерева](#Кластеризация-с-помощью-минимального-остовного-дерева)
+
+
+
+4. Dimensionality reduction
+
+* [Principal Components Analysis](#principal-components-analysis)
+* [Linear Discriminant Analysis](#Linear Discriminant Analysis)
+* [Kernel PCA](#Kernel PCA)
+* [UMAP](#UMAP)
+
+
+
+[**Regression**](#regression)
+
+* Using regularized methods for regression
 * Confidence and Prediction Intervals
 * Factor (categorical) variables in Regression
 * Testing the Assumptions: Regression Diagnostics
-* [RANSAC](#RANSAC)
 * [Residual Plots](#residual-plots)
-* Approaches to fit ml models
 
-[**SVM**](#support-vector-machine)
+
 
 **Classification**
 
-* [Naive Bayes](#naive-bayes)
-* [Not so Naive Bayes](#Not so Naive Bayes)
 * Discriminant Analysis
-* [Logistic regression](#logistic-regression)
+
 * One class classification
+
 * [Multilabel classification](#Multilabel classification)
+
+  
 
 **Trees**
 
-* [Tree Models](#tree-models)
-* Bagging and Random Forest
 * Dealing with nonlinear relationships using random forests
 
-[**K-Nearest Neighboors**](#k-nearest-neighboors)
+
 
 **Ensemble models**
 
@@ -127,40 +176,23 @@
 * [Boosting](#boosting)
 * [Combining models](Combining models)
 
-[**Dimensionality reduction**](#Dimensionality reduction)
 
-* [Principal Components Analysis](#principal-components-analysis)
-* [Linear Discriminant Analysis](#Linear Discriminant Analysis)
-* [Kernel PCA](#Kernel PCA)
-* [UMAP](#UMAP)
 
 [**Clustering**](#clustering)
 
-* [K means](#k means)
-* K means++
 * Hard versus soft clustering
 * Quantifying the quality of clustering via silhouette plots
-* [Hierarchical Clustering](#hierarchical-clustering)
-* [Locating regions of high density via DBSCAN](#Locating regions of high density via DBSCAN)
-* Gaussian Mixture Models
-* Кластеризация с помощью минимального остовного дерева
+
+  
 
 [**Neural Networks**](#neural-networks)
 
-* Deep Networks
-* Forward Propagation
-* Backward Propagation
+* [MLP units choice](#MLP units choice)
 * Implementing a Multilayer Artificial Neural Network from Scratch
 * Activation Functions
 * [Exploding gradient and vanishing gradient](#Exploding gradient and vanishing gradient)
 * Transformer
 * GAN
-* Transpose convolution
-* [Markov decision processes](#Markov-decision-processes)
-* The Thompson Sampling model - multi arm bandit example
-* Dynamic programming using Bellman equation
-* Dynamic programming
-* Reinforcement Learning with Monte Carlo
 * Temporal difference learning
 
 
@@ -168,10 +200,18 @@
 [**Convolutional Neural Networks**](#**Convolutional Neural Networks**)
 
 * [Discrete convolutions in one dimension](#Discrete convolutions in one dimension)
+
 * [Determining the size of the convolution output](#Determining the size of the convolution output)
+
 * [Performing a discrete convolution in 2D](#Performing a discrete convolution in 2D)
+
+* [Transposed convolution](#Transposed-convolution)
+
 * [Subsampling layers](#Subsampling layers)
+
 * [Implementing CNN](#Implementing CNN)
+
+  
 
 [**Recurrent Neural Networks**](#Recurrent Neural Networks)
 
@@ -180,7 +220,19 @@
 * [Hidden-recurrence versus output-recurrence](#Hidden-recurrence versus output-recurrence)
 * [LSTM](#LSTM)
 
+
+
+[**Reinforcement Learning**](#Reinforcement-Learning)
+
+* [Markov decision processes](#Markov-decision-processes)
+* [The Thompson Sampling model - multi arm bandit example](#The-Thompson-Sampling-model)
+* [Reinforcement Learning with Monte Carlo](#Reinforcement Learning with Monte Carlo)
+
+
+
 [**Computer Vision**](#computer vision)
+
+* Histogram of Oriented Gradients
 
 
 
@@ -207,29 +259,7 @@
 
 ## Linear Algebra
 
-### Matrix property
 
-Matrix product operations **properties**:
-$$
-\bold A (\bold B + \bold C) = \bold A \bold B + \bold A \bold C
-\\
-\bold A (\bold B \bold C) = (\bold A \bold B) \bold C
-\\
-\bold A \bold B != \bold B \bold A
-\\
-\bold x^T \bold y = \bold y^T \bold x
-\\
-(\bold A \bold B)^T = \bold A ^T \bold B^T
-\\
-$$
-Sometimes we need to measure the size of a vector. We usually measure the size of the vectors using a function called a **norm**.
-$$
-||x||_p = (\sum_i |x_i| ^ p) ^{1/p}
-$$
-Sometimes we may also need to measure size of a matrix, the most common way to do this is with the otherwise obscure **Frobenius norm**
-$$
-||A||_F = \sqrt{\sum_{i,j} A^2_{i,j}}
-$$
 
 ### Eigen decomposition
 
@@ -255,13 +285,13 @@ Where **Q** - orthogonal matrix composed of eigenvectors of **A**, and **Λ** is
 
 
 
-Every real matrix has a SVD, but the same is not true of the eigendecomposition. The SVD is similar to eigendecomposition, except A is the product of three matrices:
+Every real matrix has a SVD, but the same is not true of the eigen decomposition. The SVD is similar to eigen decomposition, except A is the product of three matrices:
 $$
 \bold A = \bold U \bold D \bold V^T
 $$
 **U** and **V** - orthogonal matrices, **D** - diagonal. The elements along the diagonal of **D** are known as the singular values of matrix **A**. The columns of **U** - left-singular vectors; the columns of **V** - right-singular vectors.
 
-We can interpret SVD in terms of eigendecomposition of **A**. The left-singular vectors of **A** are the eigenvectors of **AA**^T; the right-singular vectors are the eigenvectors **A**^T **A**. The non-zero singular values of **A** are the square root of eigenvalues of **A**^T **A**.
+We can interpret SVD in terms of eigen decomposition of **A**. The left-singular vectors of **A** are the eigenvectors of **A**^T; the right-singular vectors are the eigenvectors **A**^T **A**. The non-zero singular values of **A** are the square root of eigenvalues of **A**^T **A**.
 
 U: u_j - собственные векторы матрицы A * A^T
 
@@ -269,37 +299,11 @@ V: v_j - собственные векторы матрицы A^T * A
 
 D: на диагонали - корни из собственных значений матриц A^T * A и  A * A^T
 
-### Moore-Penrose pseudoinverse
-
-
-$$
-\bold A ^+ = \bold V \bold D ^+ \bold U^T
-$$
-
-where **U, D, V** are the singular value decomposition of **A** and pseudoinverse D^+ of a diagonal matrix **D** is obtained by taking reciprocal of its non-zero elements then taking the transpose of the resulting matrix.
-
-
-
-### The Trace Operator
-
-
-
-The trace operator gives the sum of all of the diagonal entries of a matrix:
-$$
-Tr(\bold A) = \sum_i \bold A_{i,i}
-$$
-
-
-
 
 
 
 
 ## Statistic
-
-
-
-
 
 
 
@@ -1762,13 +1766,6 @@ $$
 $$
 
 
-### Building Blocks of a Learning Algorithm М
-
-Each learning algorithm consisted of three parts: 
-
-1. a loss function;
-2. an optimization criterion based on the loss function (a cost function, for example); and 
-3. an optimization routine leveraging training data to find a solution to the optimization criterion
 
 ### Bayesian Statistics
 
@@ -1984,7 +1981,7 @@ Penalized regression is similar in spirit to AIC. Instead of explicitly searchin
 For classification, things are a little bit more complicated. The most widely used metrics and tools to assess the classification model are: 
 
 * confusion matrix
-* accuracy
+* accuracy - не учитывается ни дисбаланс классов, ни цена ошибки на объектах разных классов.
 * cost-sensitive accuracy
 * precision/recall
 * area under the ROC curve.
@@ -1993,6 +1990,8 @@ For classification, things are a little bit more complicated. The most widely us
 
 **Precision, Recall, Sensitivity, Specificity (Точность, Полнота, Чувствительность, Специфичность)**
 $$
+accuracy = \frac{TP+TN}{TP+TN+FP+FN}
+\\
 precision = \frac{TP}{TP + FP}
 \\
 recall = \frac{TP}{TP + FN}
@@ -2008,22 +2007,16 @@ Precision - количество сбитых самолетов / общее к
 
 Recall - количество сбитых самолетов / общее количество самолетов
 
-The precision is the proportion of relevant documents in the list of all returned documents. The recall is the ratio of the relevant documents returned by the search engine to the total number of the relevant documents that could have been returned. However, scikit-learn also implements macro and micro averaging methods to extend those scoring metrics to multiclass problems via one-vs.-all (OvA) classification. The micro-average is calculated from the individual TPs, TNs, FPs, and FNs of the system. For example, the micro-average of the precision score in a k-class system can be calculated as follows:
+The precision is the proportion of relevant documents in the list of all returned documents. The recall is the ratio of the relevant documents returned by the search engine to the total number of the relevant documents that could have been returned.
+
+However, scikit-learn also implements macro and micro averaging methods to extend those scoring metrics to multiclass problems via one-vs.-all (OvA) classification. The micro-average is calculated from the individual TPs, TNs, FPs, and FNs of the system. For example, the micro-average of the precision score in a k-class system can be calculated as follows:
 $$
 precision_{micro} = \frac{TP_1 + ... + TP_k}{TP_1 + ... + TP_k + FP_1 + ... FP_k}
 \\
 precision_{macro} = \frac{precision_1 + ... precision_k}{k}
 $$
 
-**Accuracy**
 
-Accuracy is given by the number of correctly classified examples divided by the total number of classified examples. In terms of the confusion matrix, it is given by:
-$$
-accuracy = \frac{TP+TN}{TP+TN+FP+FN}
-$$
-Accuracy is a useful metric when errors in predicting all classes are equally important.
-
-Недостаток: не учитывается ни дисбаланс классов, ни цена ошибки на объектах разных классов.
 
 **Cost-sensitive accuracy**
 
@@ -2043,6 +2036,8 @@ ROC curves can only be used to assess classifiers that return some confidence sc
 
 To draw a ROC curve, you first discretize the range of the confidence score. If this range for a model is [0, 1], then you can discretize it like this: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]. Then, you use each discrete value as the prediction threshold and predict the labels of examples in your dataset using the model and this threshold. For example, if you want to compute TPR and FPR for the threshold equal to 0.7, you apply the model to each example, get the score, and, if the score if higher than or equal to 0.7, you predict the positive class; otherwise, you predict the negative class.
 
+
+
 ### Validation
 
 **Cross-validation (кросс проверка)**
@@ -2050,8 +2045,6 @@ To draw a ROC curve, you first discretize the range of the confidence score. If 
 Cross-validation works like follows. First, you fix the values of the hyperparameters you want to evaluate. Then you split your training set into several subsets of the same size. Each subset is called a fold. Typically, five-fold cross-validation is used in practice. With five-fold cross-validation, you randomly split your training data into five folds: {F1, F2,...,F5}. Each Fk, k = 1,..., 5 contains 20% of your training data. Then you train five models as follows. To train the first model, f1, you use all examples from folds F2, F3, F4, and F5 as the training set and the examples from F1 as the validation set. To train the second model, f2, you use the examples from folds F1, F3, F4, and F5 to train and the examples from F2 as the validation set. You continue building models iteratively like this and compute the value of the metric of interest on each validation set, from F1 to F5. Then you average the five values of the metric to get the final value
 
 **Hold-out validation**
-
-
 
 **Leave-one-out**
 
@@ -2061,45 +2054,7 @@ Cross-validation works like follows. First, you fix the values of the hyperparam
 
 
 
-### Strategies for Imbalance Data
 
-* Undersample - Use fewer of the prevalent class records in the classification model.
-
-* Oversample - Use more of the rare class records in the classification model, bootstrapping if necessary.
-
-* Up weight or down weight - Attach more (or less) weight to the rare (or prevalent) class in the model.
-
-* Data generation - Like bootstrapping, except each new bootstrapped record is slightly different from its source.
-
-* Z-score - The value that results after standardization.
-
-  
-
-A variation of upsampling via bootstrapping (see “Undersampling”) is data generation by perturbing existing records to create new records. The intuition behind this idea is that since we only observe a limited set of instances, the algorithm doesn’t have a rich set of information to build classification “rules.” By creating new records that are similar but not identical to existing records, the algorithm has a chance to learn a more robust set of rules.
-
-Highly imbalanced data (i.e., where the interesting outcomes, the 1s, are rare) are problematic for classification algorithms. One strategy is to balance the training data via undersampling the abundant case (or oversampling the rare case). If using all the 1s still leaves you with too few 1s, you can bootstrap the rare cases, or use SMOTE to create synthetic data similar to existing rare cases. Imbalanced data usually indicates that correctly classifying one class (the 1s) has higher value, and that value ratio should be built into the assessment metric.
-
-
-
-One way to deal with imbalanced class proportions during model fitting is to assign a larger penalty to wrong predictions on the minority class. Via scikit-learn, adjusting such a penalty is as convenient as setting the class_weight parameter to class_weight='balanced', which is implemented for most classifiers.
-
-Other popular strategies for dealing with class imbalance include upsampling the minority class, downsampling the majority class, and the generation of synthetic training examples.
-
-```python
-from sklearn.utils import resample
-X_upsampled, y_upsampled = resample(
-									X_imb[y_imb == 1],
-									y_imb[y_imb == 1],
-									replace=True,
-									n_samples=X_imb[y_imb == 0].shape[0],
-									random_state=123)
-```
-
-Similarly, we could downsample the majority class by removing training examples from the dataset. To perform downsampling using the resample function, we could simply swap the class 1 label with class 0 in the previous code example and vice versa.
-
-There are two popular algorithms that oversample the minority class by creating synthetic examples: the **synthetic minority oversampling technique** (SMOTE) and the **adaptive synthetic sampling method** (ADASYN).
-
-SMOTE and ADASYN work similarly in many ways. For a given example xi of the minority class, they pick k nearest neighbors of this example (let’s denote this set of k examples Sk) and then create a synthetic example xnew as xi + (xzi - xi), where xzi is an example of the minority class chosen randomly from Sk. The interpolation hyperparameter is a random number in the range [0, 1]. Both SMOTE and ADASYN randomly pick all possible xi in the dataset. In ADASYN, the number of synthetic examples generated for each xi is proportional to the number of examples in Sk which are not from the minority class. Therefore, more synthetic examples are generated in the area where the examples of the minority class are rare.
 
 ### Regularization
 
@@ -2141,37 +2096,7 @@ The concept of **dropout** is very simple. Each time you run a training example 
 
 Another regularization technique that can be applied not just to neural networks, but to virtually any learning algorithm, is called **data augmentation**. This technique is often used to regularize models that work with images. Once you have your original labeled training set, you can create a synthetic example from an original example by applying various transformations to the original image: zooming it slightly, rotating, flipping, darkening, and so on. You keep the original label in these synthetic examples. In practice, this often results in increased performance of the model.
 
-### Feature Selection
 
-A classic sequential feature selection algorithm is sequential backward selection (SBS), which aims to reduce the dimensionality of the initial feature subspace with a minimum decay in the performance of the classifier to improve upon computational efficiency.
-
-The idea behind the SBS algorithm is quite simple: SBS sequentially removes features from the full feature subset until the new feature subspace contains the desired number of features. In order to determine which feature is to be removed at each stage, we need to define the criterion function, J, that we want to minimize. 
-
-The criterion calculated by the criterion function can simply be the difference in performance of the classifier before and after the removal of a particular feature. Then, the feature to be removed at each stage can simply be defined as the feature that maximizes this criterion; or in more simple terms, at each stage we eliminate the feature that causes the least performance loss after removal. Based on the preceding definition of SBS, we can outline the algorithm in four simple steps: 
-
-1. Initialize the algorithm with k = d, where d is the dimensionality of the full feature space, 𝑿𝑑. 
-2. Determine the feature, 𝒙−, that maximizes the criterion: 𝒙− = argmax 𝐽(𝑿𝑘 − 𝒙), where 𝒙 ∈ 𝑿𝑘. 
-3. Remove the feature, 𝒙−, from the feature set: 𝑿𝑘−1 = 𝑿𝑘 − 𝒙− ; 𝑘 = 𝑘 − 1. 
-4. Terminate if k equals the number of desired features; otherwise, go to step 2
-
-Also we can select features use random forest importance, l1 regularization.
-
-### Feature Extraction
-
-For the feature extraction you can use:
-
-* Principal component analysis (PCA) for unsupervised data compression 
-* Linear discriminant analysis (LDA) as a supervised dimensionality reduction technique for maximizing class separability 
-* Nonlinear dimensionality reduction via kernel principal component analysis (KPCA)
-
-### Feature importance
-
-There are two ways to measure variable importance: 
-
-1. By the decrease in accuracy of the model if the values of a variable are randomly permuted (type=1). Randomly permuting the values has the effect of removing all predictive power for that variable. The accuracy is computed from the out-of-bag data (so this measure is effectively a cross-validated estimate). 
-2. By the mean decrease in the Gini impurity score (see “Measuring Homogeneity or Impurity”) for all of the nodes that were split on a variable (type=2). This measures how much improvement to the purity of the nodes that variable contributes. This measure is based on the training set, and therefore less reliable than a measure calculated on out-of-bag data.
-
-Ensemble models improve model accuracy by combining the results from many models. Bagging is a particular type of ensemble model based on fitting many models to bootstrapped samples of the data and averaging the models. Random forest is a special type of bagging applied to decision trees. In addition to resampling the data, the random forest algorithm samples the predictor variables when splitting the trees. A useful output from the random forest is a measure of variable importance that ranks the predictors in terms of their contribution to model accuracy. The random forest has a set of hyperparameters that should be tuned using cross-validation to avoid overfitting.
 
 
 
@@ -2263,83 +2188,7 @@ print(gs.best_params_)
 
 
 
-### Standardization and Normalization
 
-Normalization is the process of converting an actual range of values which a numerical feature can take, into a standard range of values, typically in the interval [-1, 1] or [0, 1].
-$$
-\bar x^{(j)} = \frac{x^{(j)} - min^{(j)}}{max^{(j)} - min^{(j)}}
-$$
-Standardization (or z-score normalization) is the procedure during which the feature values are rescaled so that they have the properties of a standard normal distribution with µ = 0 and ‡ = 1, where µ is the mean (the average value of the feature, averaged over all examples in the dataset) and ‡ is the standard deviation from the mean.
-$$
-\hat x^{(j)} = \frac{x^{(j)} - \mu^{(j)}}{\sigma^{(j)}}
-$$
- Usually, if your dataset is not too big and you have time, you can try both and see which one performs better for your task. If you don’t have time to run multiple experiments, as a rule of thumb:
-
-* unsupervised learning algorithms, in practice, more often benefit from standardization than from normalization; 
-* standardization is also preferred for a feature if the values this feature takes are distributed close to a normal distribution (so-called bell curve); 
-* again, standardization is preferred for a feature if it can sometimes have extremely high or low values (outliers); this is because normalization will “squeeze” the normal values into a very small range; 
-* in all other cases, normalization is preferable.
-
-### Data imputation
-
-1. One data imputation technique consists in replacing the missing value of a feature by an **average** value of this feature in the dataset. 
-
-   **Плюсы:**
-
-   - Просто и быстро.
-   - Хорошо работает на небольших наборах численных данных.
-
-   **Минусы:**
-
-   - Значения вычисляются независимо для каждого столбца, так что корреляции между параметрами не учитываются.
-   - Не работает с качественными переменными.
-   - Метод не особенно точный.
-   - Никак не оценивается погрешность импутации.
-
-2. Another technique is to replace the missing value by a **value outside the normal range of values**. For example, if the normal range is [0, 1], then you can set the missing value to 2 or -1. The idea is that the learning algorithm will learn what is best to do when the feature has a value significantly different from regular values. 
-
-3. Alternatively, you can replace the missing value by a **value in the middle of the range**. For example, if the range for a feature is [-1, 1], you can set the missing value to be equal to 0. Here, the idea is that the value in the middle of the range will not significantly affect the prediction. 
-
-4. A more advanced technique is to use the missing value as the target variable for a **regression** problem. You can use all remaining features [x(1) i , x(2) i ,...,x(j≠1) i , x(j+1) i ,...,x(D) i ] to form a feature vector xˆi, set yˆi Ω x(j) , where j is the feature with a missing value. Then you build a regression model to predict yˆ from xˆ. Of course, to build training examples (xˆ, yˆ), you only use those examples from the original dataset, in which the value of feature j is present. 
-
-5. Способ четвёртый: импутация данных с помощью **k-NN**
-
-   Он использует сходство точек, чтобы предсказать недостающие значения на основании *k* ближайших точек, у которых это значение есть. Иными словами, выбирается *k* точек, которые больше всего похожи на рассматриваемую, и уже на их основании выбирается значение для пустой ячейки.
-
-   ```python
-   import sys
-   from impyute.imputation.cs import fast_knn
-   # Увеличиваем максимальную глубину рекурсии
-   sys.setrecursionlimit(100000)
-   # начинаем тренировку KNN
-   imputed_training=fast_knn(train.values, k=30)
-   ```
-
-   Алгоритм сперва проводит импутацию простым средним, потом на основании получившегося набора данных строит дерево и использует его для поиска ближайших соседей. Взвешенное среднее их значений и вставляется в исходный набор данных вместо недостающего.
-
-   **Плюсы:**
-
-   - На некоторых датасетах может быть точнее среднего/медианы или константы.
-   - Учитывает корреляцию между параметрами.
-
-   **Минусы:**
-
-   - Вычислительно дороже, так как требует держать весь набор данных в памяти.
-   - Важно понимать, какая метрика дистанции используется для поиска соседей. Имплементация в impyute [поддерживает только манхэттенскую и евклидову дистанцию](https://impyute.readthedocs.io/en/master/api/cross_sectional_imputation.html), так что анализ соотношений (скажем, количества входов на сайты людей разных возрастов) может потребовать предварительной нормализации.
-   - Чувствителен к выбросам в данных (в отличие от SVM).
-
-6. Finally, if you have a significantly large dataset and just a few features with missing values, you can increase the dimensionality of your feature vectors by adding a **binary indicator** feature for each feature with missing values. Let’s say feature j = 12 in your D-dimensional dataset has missing values. For each feature vector x, you then add the feature j = D + 1 which is equal to 1 if the value of feature 12 is present in x and 0 otherwise. The missing feature value then can be replaced by 0 or any number of your choice.
-
-
-
-### Linear and Logistic Regression: Similarities and Differences
-
-
-
-Multiple linear regression and logistic regression share many commonalities. Both assume a parametric linear form relating the predictors with the response. Exploring and finding the best model are done in very similar ways. Generalities to the linear model to use a spline transform of the predictor are equally applicable in the logistic regression setting. Logistic regression differs in two fundamental ways: 
-
-* The way the model is fit (least squares is not applicable)  - Linear regression is fit using least squares, and the quality of the fit is evaluated using RMSE and R-squared statistics. In logistic regression (unlike in linear regression), there is no closed-form solution and the model must be fit using maximum likelihood estimation (MLE). Maximum likelihood estimation is a process that tries to find the model that is most likely to have produced the data we see.
-* The nature and analysis of the residuals from the model
 
 
 
@@ -2595,9 +2444,158 @@ $$
 
 
 
+# Working with data
 
 
-## Regression
+
+### Data imputation
+
+1. One data imputation technique consists in replacing the missing value of a feature by an **average** value of this feature in the dataset. 
+
+   **Плюсы:**
+
+   - Просто и быстро.
+   - Хорошо работает на небольших наборах численных данных.
+
+   **Минусы:**
+
+   - Значения вычисляются независимо для каждого столбца, так что корреляции между параметрами не учитываются.
+   - Не работает с качественными переменными.
+   - Метод не особенно точный.
+   - Никак не оценивается погрешность импутации.
+
+2. Another technique is to replace the missing value by a **value outside the normal range of values**. For example, if the normal range is [0, 1], then you can set the missing value to 2 or -1. The idea is that the learning algorithm will learn what is best to do when the feature has a value significantly different from regular values. 
+
+3. Alternatively, you can replace the missing value by a **value in the middle of the range**. For example, if the range for a feature is [-1, 1], you can set the missing value to be equal to 0. Here, the idea is that the value in the middle of the range will not significantly affect the prediction. 
+
+4. A more advanced technique is to use the missing value as the target variable for a **regression** problem. You can use all remaining features [x(1) i , x(2) i ,...,x(j≠1) i , x(j+1) i ,...,x(D) i ] to form a feature vector xˆi, set yˆi Ω x(j) , where j is the feature with a missing value. Then you build a regression model to predict yˆ from xˆ. Of course, to build training examples (xˆ, yˆ), you only use those examples from the original dataset, in which the value of feature j is present. 
+
+5. Способ четвёртый: импутация данных с помощью **k-NN**
+
+   Он использует сходство точек, чтобы предсказать недостающие значения на основании *k* ближайших точек, у которых это значение есть. Иными словами, выбирается *k* точек, которые больше всего похожи на рассматриваемую, и уже на их основании выбирается значение для пустой ячейки.
+
+   ```python
+   import sys
+   from impyute.imputation.cs import fast_knn
+   # Увеличиваем максимальную глубину рекурсии
+   sys.setrecursionlimit(100000)
+   # начинаем тренировку KNN
+   imputed_training=fast_knn(train.values, k=30)
+   ```
+
+   Алгоритм сперва проводит импутацию простым средним, потом на основании получившегося набора данных строит дерево и использует его для поиска ближайших соседей. Взвешенное среднее их значений и вставляется в исходный набор данных вместо недостающего.
+
+   **Плюсы:**
+
+   - На некоторых датасетах может быть точнее среднего/медианы или константы.
+   - Учитывает корреляцию между параметрами.
+
+   **Минусы:**
+
+   - Вычислительно дороже, так как требует держать весь набор данных в памяти.
+   - Важно понимать, какая метрика дистанции используется для поиска соседей. Имплементация в impyute [поддерживает только манхэттенскую и евклидову дистанцию](https://impyute.readthedocs.io/en/master/api/cross_sectional_imputation.html), так что анализ соотношений (скажем, количества входов на сайты людей разных возрастов) может потребовать предварительной нормализации.
+   - Чувствителен к выбросам в данных (в отличие от SVM).
+
+6. Finally, if you have a significantly large dataset and just a few features with missing values, you can increase the dimensionality of your feature vectors by adding a **binary indicator** feature for each feature with missing values. Let’s say feature j = 12 in your D-dimensional dataset has missing values. For each feature vector x, you then add the feature j = D + 1 which is equal to 1 if the value of feature 12 is present in x and 0 otherwise. The missing feature value then can be replaced by 0 or any number of your choice.
+
+
+
+### Standardization and Normalization
+
+Normalization is the process of converting an actual range of values which a numerical feature can take, into a standard range of values, typically in the interval [-1, 1] or [0, 1].
+$$
+\bar x^{(j)} = \frac{x^{(j)} - min^{(j)}}{max^{(j)} - min^{(j)}}
+$$
+Standardization (or z-score normalization) is the procedure during which the feature values are rescaled so that they have the properties of a standard normal distribution with µ = 0 and ‡ = 1, where µ is the mean (the average value of the feature, averaged over all examples in the dataset) and ‡ is the standard deviation from the mean.
+$$
+\hat x^{(j)} = \frac{x^{(j)} - \mu^{(j)}}{\sigma^{(j)}}
+$$
+Usually, if your dataset is not too big and you have time, you can try both and see which one performs better for your task. If you don’t have time to run multiple experiments, as a rule of thumb:
+
+* unsupervised learning algorithms, in practice, more often benefit from standardization than from normalization; 
+* standardization is also preferred for a feature if the values this feature takes are distributed close to a normal distribution (so-called bell curve); 
+* again, standardization is preferred for a feature if it can sometimes have extremely high or low values (outliers); this is because normalization will “squeeze” the normal values into a very small range; 
+* in all other cases, normalization is preferable.
+
+
+
+### Feature Selection
+
+A classic sequential feature selection algorithm is sequential backward selection (SBS), which aims to reduce the dimensionality of the initial feature subspace with a minimum decay in the performance of the classifier to improve upon computational efficiency.
+
+The idea behind the SBS algorithm is quite simple: SBS sequentially removes features from the full feature subset until the new feature subspace contains the desired number of features. In order to determine which feature is to be removed at each stage, we need to define the criterion function, J, that we want to minimize. 
+
+The criterion calculated by the criterion function can simply be the difference in performance of the classifier before and after the removal of a particular feature. Then, the feature to be removed at each stage can simply be defined as the feature that maximizes this criterion; or in more simple terms, at each stage we eliminate the feature that causes the least performance loss after removal. Based on the preceding definition of SBS, we can outline the algorithm in four simple steps: 
+
+1. Initialize the algorithm with k = d, where d is the dimensionality of the full feature space, 𝑿𝑑. 
+2. Determine the feature, 𝒙−, that maximizes the criterion: 𝒙− = argmax 𝐽(𝑿𝑘 − 𝒙), where 𝒙 ∈ 𝑿𝑘. 
+3. Remove the feature, 𝒙−, from the feature set: 𝑿𝑘−1 = 𝑿𝑘 − 𝒙− ; 𝑘 = 𝑘 − 1. 
+4. Terminate if k equals the number of desired features; otherwise, go to step 2
+
+Also we can select features use random forest importance, l1 regularization.
+
+### Feature Extraction
+
+For the feature extraction you can use:
+
+* Principal component analysis (PCA) for unsupervised data compression 
+* Linear discriminant analysis (LDA) as a supervised dimensionality reduction technique for maximizing class separability 
+* Nonlinear dimensionality reduction via kernel principal component analysis (KPCA)
+
+### Feature importance
+
+There are two ways to measure variable importance: 
+
+1. By the decrease in accuracy of the model if the values of a variable are randomly permuted (type=1). Randomly permuting the values has the effect of removing all predictive power for that variable. The accuracy is computed from the out-of-bag data (so this measure is effectively a cross-validated estimate). 
+2. By the mean decrease in the Gini impurity score (see “Measuring Homogeneity or Impurity”) for all of the nodes that were split on a variable (type=2). This measures how much improvement to the purity of the nodes that variable contributes. This measure is based on the training set, and therefore less reliable than a measure calculated on out-of-bag data.
+
+Ensemble models improve model accuracy by combining the results from many models. Bagging is a particular type of ensemble model based on fitting many models to bootstrapped samples of the data and averaging the models. Random forest is a special type of bagging applied to decision trees. In addition to resampling the data, the random forest algorithm samples the predictor variables when splitting the trees. A useful output from the random forest is a measure of variable importance that ranks the predictors in terms of their contribution to model accuracy. The random forest has a set of hyperparameters that should be tuned using cross-validation to avoid overfitting.
+
+
+
+### Strategies for Imbalance Data
+
+* Undersample - Use fewer of the prevalent class records in the classification model.
+
+* Oversample - Use more of the rare class records in the classification model, bootstrapping if necessary.
+
+* Up weight or down weight - Attach more (or less) weight to the rare (or prevalent) class in the model.
+
+* Data generation - Like bootstrapping, except each new bootstrapped record is slightly different from its source.
+
+* Z-score - The value that results after standardization.
+
+  
+
+A variation of upsampling via bootstrapping (see “Undersampling”) is data generation by perturbing existing records to create new records. The intuition behind this idea is that since we only observe a limited set of instances, the algorithm doesn’t have a rich set of information to build classification “rules.” By creating new records that are similar but not identical to existing records, the algorithm has a chance to learn a more robust set of rules.
+
+Highly imbalanced data (i.e., where the interesting outcomes, the 1s, are rare) are problematic for classification algorithms. One strategy is to balance the training data via undersampling the abundant case (or oversampling the rare case). If using all the 1s still leaves you with too few 1s, you can bootstrap the rare cases, or use SMOTE to create synthetic data similar to existing rare cases. Imbalanced data usually indicates that correctly classifying one class (the 1s) has higher value, and that value ratio should be built into the assessment metric.
+
+
+
+One way to deal with imbalanced class proportions during model fitting is to assign a larger penalty to wrong predictions on the minority class. Via scikit-learn, adjusting such a penalty is as convenient as setting the class_weight parameter to class_weight='balanced', which is implemented for most classifiers.
+
+Other popular strategies for dealing with class imbalance include upsampling the minority class, downsampling the majority class, and the generation of synthetic training examples.
+
+```python
+from sklearn.utils import resample
+X_upsampled, y_upsampled = resample(
+									X_imb[y_imb == 1],
+									y_imb[y_imb == 1],
+									replace=True,
+									n_samples=X_imb[y_imb == 0].shape[0],
+									random_state=123)
+```
+
+Similarly, we could downsample the majority class by removing training examples from the dataset. To perform downsampling using the resample function, we could simply swap the class 1 label with class 0 in the previous code example and vice versa.
+
+There are two popular algorithms that oversample the minority class by creating synthetic examples: the **synthetic minority oversampling technique** (SMOTE) and the **adaptive synthetic sampling method** (ADASYN).
+
+SMOTE and ADASYN work similarly in many ways. For a given example xi of the minority class, they pick k nearest neighbors of this example (let’s denote this set of k examples Sk) and then create a synthetic example xnew as xi + (xzi - xi), where xzi is an example of the minority class chosen randomly from Sk. The interpolation hyperparameter is a random number in the range [0, 1]. Both SMOTE and ADASYN randomly pick all possible xi in the dataset. In ADASYN, the number of synthetic examples generated for each xi is proportional to the number of examples in Sk which are not from the minority class. Therefore, more synthetic examples are generated in the area where the examples of the minority class are rare.
+
+
+
+# Machine learning models
 
 
 
@@ -2628,75 +2626,17 @@ So the task is to compute vector **a**, we can do this in different ways:
    w = (x^Tx)^{-1}x^Ty
    $$
 
-   ```python
-   X_b = np.c_[np.ones((100, 1)), X] #add x0 = 1 to each instance
-   theta_test = np.linalg.inv(X_b.T.dot(X_b)).dot(X_b.T).dot(y) #inv() - the inverse matrix, dot() - multiplicate 
-   print(theta_test) #print vector a, containing bias term
-   ```
-
    The computational complexity of this approach is between O(n<sup>2.4</sup>) and O(n<sup>3</sup>).
 
-2. Gradient Descent
+2. Using optimization methods such as Gradient Descent, SGD, Mini-batch GD.
 
-### Using regularized methods for regression
+**Implementation of linear regression can be found in python-playground/mini_projects/ml_models_implementations/linear_models.py**
 
-The most popular approaches to regularized linear regression are the so-called Ridge Regression, least absolute shrinkage and selection operator (LASSO), and elastic Net.
 
-Ridge Regression is an L2 penalized model where we simply add the squared sum of the weights to our least-squares cost function:
-$$
-J(\bold w)_{Ridge} = \sum_{i=1}^n (y^{(i)} - \hat y^{(i)})^2 +\lambda ||\bold w||_2^2
-\\
-||\bold w||_2^2 = \sum_{j=1}^{m} w_j^2
-$$
-
-```python
-#with closed form solution:
-from sklearn.linear_model import Ridge
-ridge = Ridge(alpha=1, solver="cholevsky")
-ridge.fit(X_train, y_train)
-
-#with SGD
-sgd_reg = SGDRegressor(penalty="l2") #ridge
-sgd_reg.fit(X_train, y_train.ravel())
-sgd_reg.predict([[1.5]])
-```
-
-By increasing the value of hyperparameter 𝜆, we increase the regularization strength and thereby shrink the weights of our model. Please note that we don't regularize the intercept term, 𝑤0.
-
-An alternative approach that can lead to sparse models is LASSO. Depending on the regularization strength, certain weights can become zero, which also makes LASSO useful as a supervised feature selection technique:
-$$
-J(\bold w)_{Lasso} = \sum_{i=1}^n (y^{(i)} - \hat y^{(i)})^2 +\lambda ||\bold w||_1
-\\
-||\bold w||_1 = \sum_{j=1}^{m} |w_j|
-$$
-
-```python
-from sklearn.linear_model import Lasso
-lasso_reg = Lasso(alpha=0.1)
-lasso_reg.fit(X, y)
-
-#SGD
-sgd_reg = SGDRegressor(penalty="l1")
-sgd_reg.fit(X, y)
-sgd_reg.predict([[1.5]])
-```
-
-However, a limitation of LASSO is that it selects at most n features if m > n, where n is the number of training examples. In practice, however, this property of LASSO is often an advantage because it avoids saturated models. Saturation of a model occurs if the number of training examples is equal to the number of features, which is a form of overparameterization. As a consequence, a saturated model can always fit the training data perfectly but is merely a form of interpolation and thus is not expected to generalize well.
-
-A compromise between Ridge Regression and LASSO is elastic net, which has an L1 penalty to generate sparsity and an L2 penalty such that it can be used for selecting more than n features if m > n:
-$$
-J(\bold w)_{ElasticNet} = \sum_{i=1}^n (y^{(i)} - \hat y^{(i)})^2 + \lambda_1\sum_{j=1}^{m} w_j^2 + \lambda_2 \sum_{j=1}^{m} |w_j|
-$$
-
-```python 
-from sklearn.linear_model import ElasticNet
-model = ElasticNet(alpha=0.1, l1_ratio=0.5)
-model.fit(X,y)
-```
 
 ### Polynomial Regression
 
-It is linear regression with powers of each features as a new feature. 
+It is linear regression with powers of each features as a new feature. Polynomial Regression can fit non-linear relationship in data.
 
 ```python
 from sklearn.preprocessing import PolynomialFeatures 
@@ -2707,15 +2647,62 @@ lin_reg = LinearRegression()
 lin_reg.fit(X_poly)
 ```
 
-Also PolynomialFeatures() is capable of finding relationships between features, because it adds all coombination of features up to the given degree. PolynomialFeatures() transform array that containing **n** features to array containing **(n+degree)! / (d! n!)** features. 
+Also PolynomialFeatures() is capable of finding relationships between features, because it adds all combination of features up to the given degree. PolynomialFeatures() transform array that containing **n** features to array containing **(n+degree)! / (d! n!)** features. 
 
-### Splines
+
+
+### RANSAC
+
+Linear regression models can be heavily impacted by the presence of outliers. In certain situations, a very small subset of our data can have a big effect on the estimated model coefficients. There are many statistical tests that can be used to detect outliers. However, removing outliers always requires our own judgment as data scientists as well as our domain knowledge. As an alternative to throwing out outliers, we will look at a robust method of regression using the RANdom SAmple Consensus (RANSAC) algorithm, which fits a regression model to a subset of the data, the so-called inliers. We can summarize the iterative RANSAC algorithm as follows:
+
+1. Select a random number of examples to be inliers and fit the model. 
+2. Test all other data points against the fitted model and add those points that fall within a user-given tolerance to the inliers. 
+3. Refit the model using all inliers. 
+4. Estimate the error of the fitted model versus the inliers. 
+5. Terminate the algorithm if the performance meets a certain user-defined threshold or if a fixed number of iterations were reached; go back to step 1 otherwise.
 
 
 
 ### Generalized Additive Models
 
 Suppose you suspect a nonlinear relationship between the response and a predictor variable, either by a priori knowledge or by examining the regression diagnostics. Polynomial terms may not flexible enough to capture the relationship, and spline terms require specifying the knots. Generalized additive models, or GAM, are a technique to automatically fit a spline regression.
+
+
+
+
+
+### Logistic regression
+
+**Logistic regression is a special instance of a generalized linear model** (GLM) developed to extend linear regression to other settings.
+
+In linear regression, we minimized the empirical risk which was defined as the average squared error loss, also known as the mean squared error or MSE. 
+
+In logistic regression, on the other hand, we maximize the likelihood of our training set according to the model. In statistics, the likelihood function defines how likely the observation (an example) is according to our model. **Likelihood, L:**
+$$
+L(\bold w) = P(\bold y | \bold{x;w}) = \prod_{i=1}^{n} P(y^{(i)} | x^{(i)}; \bold w) = \prod_{i=1}^{n} (\phi(z^{i}))^{y^{(i)}} (1 - \phi (z^{(i)}))^{1-y^{(i)}}
+$$
+We used the product operator in the objective function instead of the sum operator which was used in linear regression. It’s because the likelihood of observing N labels for N examples is the product of likelihoods of each observation (assuming that all observations are independent of one another, which is the case).
+
+In practice, it is easier to maximize the (natural) log of this equation, which is called the **log-likelihood function**:
+$$
+l(\bold w) = logL(\bold w) = \sum_{i=1}^{n} [y^{(i)}log(\phi(z^{(i)})) + (1-y^{(i)})log(1-\phi(z^{(i)}))] \\ 
+\\
+J(\bold w) = \sum_{i=1}^{n} [-y^{(i)}log(\phi(z^{(i)})) - (1-y^{(i)})log(1-\phi(z^{(i)}))]
+$$
+Since maximizing the log-likelihood is equal to minimizing the cost function, J, that we defined earlier, we can write the gradient descent update rule as follows:
+$$
+\bold w = \bold w + (-\eta \frac{dJ}{dw_j}) = \bold w + \eta \sum_{i=1}^{n} (y^{(i)} - \phi(z^{(i)}))x_j^{(i)}
+$$
+
+The logit function takes input values in the range 0 to 1 and transforms them to values over the entire real-number range, which we can use to express a linear relationship between feature values and the log-odds:
+$$
+logit(p(y=1|\bold x)) = \sum_{i=0}^{m}w_ix_i = \bold w^T \bold x 
+$$
+Now, we are actually interested in predicting the probability that a certain example belongs to a particular class, which is the inverse form of the logit function.  It is also called the logistic sigmoid function, which is sometimes simply abbreviated to sigmoid function due to its characteristic S-shape:
+$$
+\phi(z) = \frac{1}{1+e^{-z}}
+$$
+**Implementation of logistic regression can be found in python-playground/mini_projects/ml_models_implementations/linear_models.py**
 
 
 
@@ -2730,124 +2717,17 @@ Logistic regression is by far the most common form of GLM. A data scientist will
 
 
 
-### Confidence and Prediction Intervals
-
-Confidence intervals quantify uncertainty around regression coefficients. Prediction intervals quantify uncertainty in individual predictions.
-
-Here is a bootstrap algorithm for generating confidence intervals for regression parameters (coefficients) for a data set with P predictors and n records (rows): 
-
-1. Consider each row (including outcome variable) as a single “ticket” and place all the n tickets in a box. 
-2. Draw a ticket at random, record the values, and replace it in the box. 
-3. Repeat step 2 n times; you now have one bootstrap resample. 
-4. Fit a regression to the bootstrap sample, and record the estimated coefficients.  
-5. Repeat steps 2 through 4, say, 1,000 times. 
-6. You now have 1,000 bootstrap values for each coefficient; find the appropriate percentiles for each one (e.g., 5th and 95th for a 90% confidence interval).
-
-The bootstrap algorithm for modeling both the regression model error and the individual data point error would look as follows: 
-
-1. Take a bootstrap sample from the data (spelled out in greater detail earlier).
-2. Fit the regression, and predict the new value. 
-3. Take a single residual at random from the original regression fit, add it to the predicted value, and record the result. 
-4. Repeat steps 1 through 3, say, 1,000 times. 
-5. Find the 2.5th and the 97.5th percentiles of the results.
-
-A prediction interval pertains to uncertainty around a single value, while a confidence interval pertains to a mean or other statistic calculated from multiple values. Thus, a prediction interval will typically be much wider than a confidence interval for the same value. We model this individual value error in the bootstrap model by selecting an individual residual to tack on to the predicted value. Which should you use? That depends on the context and the purpose of the analysis, but, in general, data scientists are interested in specific individual predictions, so a prediction interval would be more appropriate. Using a confidence interval when you should be using a prediction interval will greatly underestimate the uncertainty in a given predicted value.
-
-### Factor (categorical) variables in Regression
-
-* Dummy variables - Binary 0-1 variables derived by recording factor data for use in regression and other models.
-* Reference coding - The most common type of coding used by statisticians, in which one level of a factor is used as a reference and other factors are compared to that level
-* One hot encoder - A common type of coding used in machine learning community in which all factors levels are retained. While useful for a certain machine learning algorithms, this approach is not appropriate for multiple linear regression.
-* Deviation coding - A type of coding that compares each level against the overall mean as opposed to the reference level.
-
-Factor variables need to be converted into numeric variables for use in a regression. The most common method to encode a factor variable with P distinct values is to represent them using P-1 dummy variables. A factor variable with many levels, even in very big data sets, may need to be consolidated into a variable with fewer levels. Some factors have levels that are ordered and can be represented as a single numeric variable.
-
-Because of correlation between predictors, care must be taken in the interpretation of the coefficients in multiple linear regression. Multicollinearity can cause numerical instability in fitting the regression equation. A confounding variable is an important predictor that is omitted from a model and can lead to a regression equation with spurious relationships. An interaction term between two variables is needed if the relationship between the variables and the response is interdependent.
-
-### Testing the Assumptions: Regression Diagnostics
-
-* Influential value - A value or record whose presence or absence makes a big difference in the regression equation.
-
-* Leverage - The degree of influence that a single record has on a regression equation. 
-
-  A common measure of leverage is the hat-value; values above 2(P+1)/n indicate a high-leverage data value. 
-
-  Another metric is Cook’s distance, which defines influence as a combination of leverage and residual size. A rule of thumb is that an observation has high influence if Cook’s distance exceeds 4/(n - P -1)
-
-  An influence plot or bubble plot combines standardized residuals, the hat-value, and Cook’s distance in a single plot.
-
-* Non-normal residuals - Non-normally distributed residuals can invalidate some technical requirements of regression, but are usually not a concern in data science.
-
-* Heteroskedasticity - When some ranges of the outcome experience residuals with higher variance. It y is the lack of constant residual variance across the range of the predicted values. In other words, errors are greater for some portions of the range than for others. Heteroskedasticity indicates that prediction errors differ for different ranges of the predicted value, and may suggest an incomplete model. 
-
-Partial residual plots are a way to visualize how well the estimated fit explains the relationship between a predictor and the outcome. Along with detection of outliers, this is probably the most important diagnostic for data scientists. The basic idea of a partial residual plot is to isolate the relationship between a predictor variable and the response, taking into account all of the other predictor variables. A partial residual might be thought of as a “synthetic outcome” value, combining the prediction based on a single predictor with the actual residual from the full regression equation. A partial residual for predictor X_i is the ordinary residual plus the regression term associated with X_i.
-
-While outliers can cause problems for small data sets, the primary interest with outliers is to identify problems with the data, or locate anomalies. Single records (including regression outliers) can have a big influence on a regression equation with small data, but this effect washes out in big data. If the regression model is used for formal inference (p-values and the like), then certain assumptions about the distribution of the residuals should be checked. In general, however, the distribution of residuals is not critical in data science. The partial residuals plot can be used to qualitatively assess the fit for each regression term, possibly leading to alternative model specification.
-
-Outliers in a regression are records with a large residual. Multicollinearity can cause numerical instability in fitting the regression equation. A confounding variable is an important predictor that is omitted from a model and can lead to a regression equation with spurious relationships. An interaction term between two variables is needed if the effect of one variable depends on the level of the other. Polynomial regression can fit nonlinear relationships between predictors and the outcome variable. Splines are series of polynomial segments strung together, joining at knots. Generalized additive models (GAM) automate the process of specifying the knots in splines.
-
-### RANSAC
-
-Linear regression models can be heavily impacted by the presence of outliers. In certain situations, a very small subset of our data can have a big effect on the estimated model coefficients. There are many statistical tests that can be used to detect outliers, which are beyond the scope of the book. However, removing outliers always requires our own judgment as data scientists as well as our domain knowledge. As an alternative to throwing out outliers, we will look at a robust method of regression using the RANdom SAmple Consensus (RANSAC) algorithm, which fits a regression model to a subset of the data, the so-called inliers. We can summarize the iterative RANSAC algorithm as follows:
-
-1. Select a random number of examples to be inliers and fit the model. 
-2. Test all other data points against the fitted model and add those points that fall within a user-given tolerance to the inliers. 
-3. Refit the model using all inliers. 
-4. Estimate the error of the fitted model versus the inliers. 
-5. Terminate the algorithm if the performance meets a certain user-defined threshold or if a fixed number of iterations were reached; go back to step 1 otherwise.
-
-### Residual plots
-
-Since our model uses multiple explanatory variables, we can't visualize the linear regression line (or hyperplane, to be precise) in a two-dimensional plot, but we can plot the residuals (the differences or vertical distances between the actual and predicted values) versus the predicted values to diagnose our regression model. Residual plots are a commonly used graphical tool for diagnosing regression models. They can help to detect nonlinearity and outliers, and check whether the errors are randomly distributed.
-
-```python
-plt.scatter(y_train_pred, y_train_pred - y_train,
-			c='steelblue', marker='o', edgecolor='white',
-			label='Training data')
-plt.scatter(y_test_pred, y_test_pred - y_test,
-			c='limegreen', marker='s', edgecolor='white',
-			label='Test data')
-plt.xlabel('Predicted values')
-plt.ylabel('Residuals')
-plt.legend(loc='upper left')
-plt.hlines(y=0, xmin=-10, xmax=50, color='black', lw=2)
-plt.xlim([-10, 50])
-plt.show()
-```
-
-![](D:/Github/Study/buf/img/residual plot.png)
-
-In the case of a perfect prediction, the residuals would be exactly zero, which we will probably never encounter in realistic and practical applications. However, for a good regression model, we would expect the errors to be randomly distributed and the residuals to be randomly scattered around the centerline. If we see patterns in a residual plot, it means that our model is unable to capture some explanatory information, which has leaked into the residuals, as you can slightly see in our previous residual plot. Furthermore, we can also use residual plots to detect outliers, which are represented by the points with a large deviation from the centerline.
-
-
-
-### Approaches to fit ml models
-
-
-
-1. Ordinal least squares. 
-2. Maximum likelihood. 
-3. Maximum a posteriori (map) estimation. 
-
-OLS is special case of maximum likelihood. Maximum likelihood is special case of MAP.
-
-**Measures of fit**
-
-1. R^2 - coefficient of determination
-2. Likelihood ratio - AIC, BIC
-3. Chi-square - deviation between two datasets (observed and expected values)
-
-## Support Vector Machine
+### Support Vector Machine
 
 Another powerful and widely used learning algorithm is the support vector machine (SVM), which can be considered an extension of the perceptron. Using the perceptron algorithm, we minimized misclassification errors. However, in SVMs our optimization objective is to maximize the margin. The margin is defined as the distance between the separating hyperplane (decision boundary) and the training examples that are closest to this hyperplane, which are the so-called support vectors. 
 
-The basic idea behind **kernel methods** to deal with such linearly inseparable data is to create nonlinear combinations of the original features to project them onto a higher-dimensional space via a mapping function, 𝜙𝜙, where the data becomes linearly separable. 
+The basic idea behind **kernel methods** to deal with such linearly inseparable data is to create nonlinear combinations of the original features to project them onto a higher-dimensional space via a mapping function, 𝜙, where the data becomes linearly separable. 
 
-To solve a nonlinear problem using an SVM, we would transform the training data into a higher-dimensional feature space via a mapping function, 𝜙𝜙, and train a linear SVM model to classify the data in this new feature space. Then, we could use the same mapping function, 𝜙𝜙, to transform new, unseen data to classify it using the linear SVM model. 
+To solve a nonlinear problem using an SVM, we would transform the training data into a higher-dimensional feature space via a mapping function, 𝜙, and train a linear SVM model to classify the data in this new feature space. Then, we could use the same mapping function, 𝜙, to transform new, unseen data to classify it using the linear SVM model. 
 
 However, one problem with this mapping approach is that the construction of the new features is computationally very expensive, especially if we are dealing with high-dimensional data. This is where the so-called kernel trick comes into play. 
 
- In order to save the expensive step of calculating this dot product between two points explicitly, we define a so-called kernel function:
+In order to save the expensive step of calculating this dot product between two points explicitly, we define a so-called kernel function:
 $$
 k(\bold x^{(i)}, \bold x^{(j)}) = \phi(x^{(i)})^T\phi(x^{(j)})
 $$
@@ -2860,10 +2740,7 @@ or
 k(\bold x^{(i)}, \bold x^{(j)}) = exp(-\gamma||x^{(i)}- x^{(j)}||^2)
 $$
 
-
-## 
-
-SVM use *kernel trick*. The kernel trick consist of observing that many machine leraning algorithms can be re-written exclusively in terms of dot products between examples. For example, it can be shown that linear function used by the SVM can be re-written as:
+For example, it can be shown that linear function used by the SVM can be re-written as:
 $$
 \bold w^T \bold x + b = b + \sum_{i=1}^m \alpha_i \bold x^T \bold x
 $$
@@ -2871,29 +2748,19 @@ where \alpha is a vector coefficients. Rewriting the learning algorithm this way
 $$
 f(x) = b + \sum_{i} \alpha_i k(x, x^{(i)})
 $$
-The most commonly used kernel is *Gaussian kernel* or *radial basis function*:
-$$
-k(\bold u, \bold v) = N(\bold {u - v}; 0,\sigma^2 \bold I)
-$$
-
-
-
-
-
-## Classification
-
 
 
 ### Naive Bayes
 
-
-
-The naive Bayes algorithm uses the probability of observing predictor values, given an outcome, to estimate the probability of observing outcome Y = i, given a set of predictor values.
-
 * Conditional probability - The probability of observing some event (say X = i) given some other event (say Y = i) written as P(X_i | Y_i)
+
 * Posterior probability - The probability of an outcome after the predictor information has been incorporated (in contrast to the prior probability of outcomes, not taking predictor information into account)
 
-To understand Bayesian classification, we can start out by imagining “nonnaive” Bayesian classification. For each record to be classified: 
+  
+
+The Naive Bayes algorithm uses the probability of observing predictor values, given an outcome, to estimate the probability of observing outcome Y = i, given a set of predictor values.
+
+To understand Bayesian classification, we can start out by imagining “non-naive” Bayesian classification. For each record to be classified: 
 
 1. Find all the other records with the same predictor profile (i.e., where the predictor values are the same). 
 2. Determine what classes those records belong to and which class is most prevalent (i.e., probable). 
@@ -2916,21 +2783,6 @@ From the definition, we see that the Bayesian classifier works only with categor
 
 Naive Bayes works with categorical (factor) predictors and outcomes. It asks, “Within each outcome category, which predictor categories are most probable?” That information is then inverted to estimate probabilities of outcome categories, given predictor values.
 
-
-
-Naive Bayes classifiers are built on Bayesian classification methods. These rely on Bayes’s theorem, which is an equation describing the relationship of conditional probabilities of statistical quantities. In Bayesian classification, we’re interested in finding the probability of a label given some observed features, which we can write as P(L|features) . Bayes’s theorem tells us how to express this in terms of quantities we can compute more directly:
-$$
-P(L|features) = \frac{P(features| L)P(L)}{P(features)}
-$$
-If we are trying to decide between two labels—let’s call them L1 and L2 —then one way to make this decision is to compute the ratio of the posterior probabilities for each label:
-$$
-\frac{P(L_1|features)}{P(L_2|features)} = \frac{P(L_1|features)P(L_1)}{P(L_2|features)P(L_2)}
-$$
-All we need now is some model by which we can compute P features Li for each label. Such a model is called a generative model because it specifies the hypothetical random process that generates the data. Specifying this generative model for each label is the main piece of the training of such a Bayesian classifier. The general ver‐ sion of such a training step is a very difficult task, but we can make it simpler through the use of some simplifying assumptions about the form of this model. This is where the “naive” in “naive Bayes” comes in: if we make very naive assump‐ tions about the generative model for each label, we can find a rough approximation of the generative model for each class, and then proceed with the Bayesian classification. Different types of naive Bayes classifiers rest on different naive assumptions about the data:
-
-* Gaussian Naive Bayes -  the assumption is that data from each label is drawn from a simple Gaussian distribution.
-* Multinomial Naive Bayes - the features are assumed to be generated from a simple multinomial distribution.
-
 **When to Use Naive Bayes** 
 
 Because naive Bayesian classifiers make such stringent assumptions about data, they will generally not perform as well as a more complicated model. That said, they have several advantages:
@@ -2948,33 +2800,19 @@ Naive Bayes classifiers tend to perform especially well in one of the following 
 
 **Пример**
 
-Как же использовать закон Байеса для создания хорошего фильтра спама? Подумайте об этом следующим образом: появление слова viagra увеличит вероятность того, что письмо — спам. Но это еще не окончательно. Нам нужно узнать остальное содержание данного письма. Для начала будем сосредотачиваться только на одном слове за раз, его мы обозначим как word. Затем, применив закон Байеса, мы получим:
+Появление слова viagra увеличит вероятность того, что письмо — спам. Но это еще не окончательно. Нам нужно узнать остальное содержание данного письма. Для начала будем сосредотачиваться только на одном слове за раз, его мы обозначим как word. Затем, применив закон Байеса, мы получим:
 $$
 p(spam|word) = \frac{p(word|spam)p(spam)}{p(word)}
 \\
 p(word) = p(word|spam)p(spam) + p(word|ham)p(ham)
 $$
-Другими словами, мы упростили все до алгебраического упражнения: p(spam) подсчитывает сообщения со спамом в сравнении со всеми сообщениями, p(word |spam) — преобладание сообщений со спамом, включающих word, а p(word | ham) считает преобладание сообщений о ветчине, содержащих word.
-
-Рассмотрим некоторые основные статистические данные об электронном письме случайного сотрудника Enron. Мы можем насчитать 1500 сообщений со спамом и 3672 сообщения о ветчине, поэтому уже знаем p(spam) и p(ham). Используя инструменты командной строки, мы также можем подсчитать количество экземпляров слова meeting в папке со спамом: 16. Проделав то же самое для папки ham, мы получим 153. Теперь можно вычислить вероятность того, что письмо является спамом, зная только о наличии в его содержании слова meeting:
-$$
-\hat p(spam) = 1500/(1500+3672) = 0.29
-\\
-\hat p(ham) = 1 - p(spam) = 0.71
-\\
-\hat p(meeting|spam) = 16/1500 = 0.0106
-\\
-\hat p(meeting|ham) = 153 / 3672 = 0.0416
-\\
-\hat p(spam|meeting) = \hat p(meeting|spam) \hat p (spam) / \hat p (meeting) = (0.0106*0.29)/(0.0106*0.29 + 0.0416*0.71) = 0.09 
-$$
-**Коомбинация слов**
-
 Мы моделируем слова независимо от других слов (это также называется «независимые испытания»), так что берем результат в правой части предыдущей формулы и не подсчитываем, сколько раз встречаются эти слова. Вот почему данный метод называется наивным: мы знаем, что на самом деле есть определенные слова, которые, как правило, появляются вместе, но мы игнорируем данный факт.
+
+
 
 ### Not so Naive Bayes
 
-For naive Bayes, the generative model is a simple axis-aligned Gaussian. With a density estimation algorithm like KDE, we can remove the “naive” element and perform the same classification with a more sophisti‐ cated generative model for each class. It’s still Bayesian classification, but it’s no longer naive. 
+For naive Bayes, the generative model is a simple axis-aligned Gaussian. With a density estimation algorithm like KDE, we can remove the “naive” element and perform the same classification with a more sophisticated generative model for each class. It’s still Bayesian classification, but it’s no longer naive. 
 
 The general approach for generative classification is this: 
 
@@ -2983,188 +2821,32 @@ The general approach for generative classification is this:
 3. From the number of examples of each class in the training set, compute the class prior, P(y) . 
 4. For an unknown point x, the posterior probability for each class is P(y|x) ֣~P(x|y)P(y). The class that maximizes this posterior is the label assigned to the point.
 
-```python
-from sklearn.base import BaseEstimator, ClassifierMixin
+One benefit of such a generative classifier is interpretability of results: for each unknown sample, we not only get a probabilistic classification, but a full model of the distribution of points we are comparing it to! If desired, this offers an intuitive window into the reasons for a particular classification that algorithms like SVMs and random forests tend to obscure.
 
-class KDEClassifier(BaseEstimator, ClassifierMixin):
-	"""Bayesian generative classification based on KDE
-	Parameters
-	----------
-	bandwidth : float
-	the kernel bandwidth within each class
-	kernel : str
-	the kernel name, passed to KernelDensity
-	"""
-	def __init__(self, bandwidth=1.0, kernel='gaussian'):
-		self.bandwidth = bandwidth
-		self.kernel = kernel
-        
-	def fit(self, X, y):
-		self.classes_ = np.sort(np.unique(y))
-		training_sets = [X[y == yi] for yi in self.classes_]
-		self.models_ = [KernelDensity(bandwidth=self.bandwidth,
-                                      kernel=self.kernel).fit(Xi)
-                        for Xi in training_sets]
-		self.logpriors_ = [np.log(Xi.shape[0] / X.shape[0])
-                           for Xi in training_sets]
-		return self
-    
-	def predict_proba(self, X):
-		logprobs = np.array([model.score_samples(X)
-                             for model in self.models_]).T
-		result = np.exp(logprobs + self.logpriors_)   
-		return result / result.sum(1, keepdims=True)
-    
-	def predict(self, X):
-		return self.classes_[np.argmax(self.predict_proba(X), 1)]	
-```
-
-One benefit of such a generative classifier is interpretability of results: for each unknown sample, we not only get a probabilistic classification, but a full model of the distribution of points we are comparing it to! If desired, this offers an intuitive win‐ dow into the reasons for a particular classification that algorithms like SVMs and ran‐ dom forests tend to obscure.
+**Implementation can be found in python-playground/mini_projects/ml_models_implementations/kde_classifier.py**
 
 
 
-### Discriminant Analysis
+### K-Nearest Neighboors
+
+The idea behind K-Nearest Neighbors (KNN) is very simple. For each record to be classified or predicted: 
+
+1. Find K records that have similar features (i.e., similar predictor values). 
+2. For classification: Find out what the majority class is among those similar records, and assign that class to the new record. 
+3. For prediction (also called KNN regression): Find the average among those similar records, and predict that average for the new record.
+
+KNN as feature engine:
+
+1. KNN is run on the data, and for each record, a classification (or quasiprobability of a class) is derived. 
+2. That result is added as a new feature to the record, and another classification method is then run on the data. The original predictor variables are thus used twice.
 
 
 
-* Covariance - A measure of the extent to which one variable varies in concert with another.
-
-* Discriminant function - The function that, when applied to the predictor variables, maximizes the separation of the classes.
-
-* Discriminant weights - The scores that result from the application of the discriminant function, and are used to estimate probabilities of belonging to one class or another.
-
-  
-
-*Covariance* measures the relationship between two variables x and z. The covariance is given by:
-$$
-s_{x,z}  = \frac{\sum_{i=1}^{n}(x_i - \bar x)(z_i - \bar z)}{n-1}
-$$
-Covariance evaluates how the mean values of two variables move together. If stock A's return moves higher whenever stock B's return moves higher and the same relationship is found when each stock's return decreases, then these stocks are said to have positive covariance. In finance, covariances are calculated to help [diversify](https://www.investopedia.com/terms/d/diversification.asp) security holdings.
 
 
-
-Fisher’s linear discriminant distinguishes variation between groups, on the one hand, from variation within groups on the other. Specifically, seeking to divide the records into two groups, LDA focuses on maximizing the “between” sum of squares ss_between (measuring the variation between the two groups) relative to the “within” sum of squares ss_within(measuring the within-group variation).
-
-Discriminant analysis works with continuous or categorical predictors, as well as categorical outcomes. Using the covariance matrix, it calculates a linear discriminant function, which is used to distinguish records belonging to one class from those belonging to another. This function is applied to the records to derive weights, or scores, for each record (one weight for each possible class) that determines its estimated class.
+### Decision Tree
 
 
-
-### Logistic regression
-
-**Logistic regression is a special instance of a generalized linear model** (GLM) developed to extend linear regression to other settings.
-
-In linear regression, we minimized the empirical risk which was defined as the average squared error loss, also known as the mean squared error or MSE. In logistic regression, on the other hand, we maximize the likelihood of our training set according to the model. In statistics, the likelihood function defines how likely the observation (an example) is according to our model.
-
-The optimization criterion in logistic regression is called maximum likelihood. Instead of minimizing the average loss, like in linear regression, we now maximize the likelihood of the training data according to our model.
-
-The logit function takes input values in the range 0 to 1 and transforms them to values over the entire real-number range, which we can use to express a linear relationship between feature values and the log-odds:
-$$
-logit(p(y=1|\bold x)) = \sum_{i=0}^{m}w_ix_i = \bold w^T \bold x 
-$$
-Now, we are actually interested in predicting the probability that a certain example belongs to a particular class, which is the inverse form of the logit function.  It is also called the logistic sigmoid function, which is sometimes simply abbreviated to sigmoid function due to its characteristic S-shape:
-$$
-\phi(z) = \frac{1}{1+e^{-z}}
-$$
-Let's first define the **likelihood**, L, that we want to maximize when we build a logistic regression model, assuming that the individual examples in our dataset are independent of one another. The formula is as follows:
-$$
-L(\bold w) = P(\bold y | \bold{x;w}) = \prod_{i=1}^{n} P(y^{(i)} | x^{(i)}; \bold w) = \prod_{i=1}^{n} (\phi(z^{i}))^{y^{(i)}} (1 - \phi (z^{(i)}))^{1-y^{(i)}}
-$$
-You may have noticed that we used the product operator in the objective function instead of the sum operator which was used in linear regression. It’s because the likelihood of observing N labels for N examples is the product of likelihoods of each observation (assuming that all observations are independent of one another, which is the case).
-
-In practice, it is easier to maximize the (natural) log of this equation, which is called the **log-likelihood function**:
-$$
-l(\bold w) = logL(\bold w) = \sum_{i=1}^{n} [y^{(i)}log(\phi(z^{(i)})) + (1-y^{(i)})log(1-\phi(z^{(i)}))] \\ 
-\\
-J(\bold w) = \sum_{i=1}^{n} [-y^{(i)}log(\phi(z^{(i)})) - (1-y^{(i)})log(1-\phi(z^{(i)}))]
-$$
-J(w) - cost function.  Since maximizing the log-likelihood is equal to minimizing the cost function, J, that we defined earlier, we can write the gradient descent update rule as follows:
-$$
-\bold w = \bold w + (-\eta \frac{dJ}{dw_j}) = \bold w + \eta \sum_{i=1}^{n} (y^{(i)} - \phi(z^{(i)}))x_j^{(i)}
-$$
-
-* Logit - The function that maps the probability of belonging to a class with a range +- inf.
-
-* Odds - The ratio of 1 and 0
-
-  
-
-
-Logistic regression is like linear regression, except that the outcome is a binary variable. Several transformations are needed to get the model into a form that can be fit as a linear model, with the log of the odds ratio as the response variable. After the linear model is fit (by an iterative process), the log odds is mapped back to a probability. Logistic regression is popular because it is computationally fast, and produces a model that can be scored to new data without recomputation.
-
-The precision measures the accuracy of a predicted positive outcome. The recall, also known as sensitivity, measures the strength of the model to predict a positive outcome—the proportion of the 1s that it correctly identifies. Another metric used is specificity, which measures a model’s ability to predict a negative outcome:
-$$
-precision = \frac{\sum TruePositive}{\sum TruePositive + \sum FalsePostitive} \\
-recall = \frac{\sum TruePositive}{\sum TruePositive + \sum FalseNegative} \\
-specificity = \frac{\sum True Negative}{\sum TrueNegative + \sum FalseNegative}
-$$
-The metric that captures precision-recall tradeoff is the “Receiver Operating Characteristics” curve, usually referred to as the ROC curve. The ROC curve plots recall (sensitivity) on the y-axis against specificity on the x-axis. The process to compute the ROC curve is: 
-
-1. Sort the records by the predicted probability of being a 1, starting with the most probable and ending with the least probable. 
-2. Compute the cumulative specificity and recall based on the sorted records.
-
-The ROC curve can be used, however, to produce the area underneath the curve (AUC) metric. AUC is simply the total area under the ROC curve. The larger the value of AUC, the more effective the classifier. 
-
-Accuracy (the percent of predicted classifications that are correct) is but a first step in evaluating a model. Other metrics (recall, specificity, precision) focus on more specific performance characteristics (e.g., recall measures how good a model is at correctly identifying 1s). AUC (area under the ROC curve) is a common metric for the ability of a model to distinguish 1s from 0s. Similarly, lift measures how effective a model is in identifying the 1s, and it is often calculated decile by decile, starting with the most probable 1s.
-
-```python
-class LogisticRegression():
-    def __init__(self, eta=0.001, epochs=50, random_state=1):
-        self.eta = eta
-        self.epochs = epochs
-        self.random_state = random_state
-    
-    def fit(self, X, y):
-        rgen = np.random.RandomState(self.random_state)
-        self.w_ = rgen.normal(loc=0, scale=0.1, size=X.shape[1] + 1)
-        self.loss_ = {}
-        for i in range(self.epochs):
-            predicitons = self.predict(X)
-            error = (y - predicitons)
-            self.w_[0] += self.eta * error.sum()
-            self.w_[1:] += self.eta * X.T.dot(error)
-            
-            self.loss_[i] = self.loss(predicitons, y)
-        return self.w_
-    
-    def predict(self, X):
-        predict = np.dot(X, self.w_[1:]) + self.w_[0]
-        return self.sigmoid(predict)
-    
-    def sigmoid(self, predictions):
-        return 1 / (1 + np.exp(-predictions))
-    
-    
-    def loss(self, prediction, y):
-        return -np.dot(y, np.log(prediction)) - np.dot((1-y), np.log(1-prediction))
-```
-
-### One class classification
-
-Sometimes we only have examples of one class and we want to train a model that would distinguish examples of this class from everything else. One-class classification, also known as unary classification or class modeling, tries to identify objects of a specific class among all objects, by learning from a training set containing only the objects of that class. 
-
-There are several one-class learning algorithms. The most widely used in practice are one-class Gaussian, one-class k-means, one-class kNN, and one-class SVM.
-
-The idea behind the **one-class gaussian** is that we model our data as if it came from a Gaussian distribution, more precisely multivariate normal distribution (MND). The probability density function (pdf) for MND is given by the following equation:
-$$
-f_{\mu, \sum}(x) = \frac{exp(-\frac{1}{2} (x - \mu)^T\sum^{-1}(x - \mu))}{\sqrt{(2\pi)^D|\sum|}}
-$$
-Probability density can be interpreted as the likelihood that example x was drawn from the probability distribution we model as an MND. Values µ (a vector) and  (a matrix) are the parameters we have to learn. The maximum likelihood criterion (similarly to how we solved the logistic regression learning problem) is optimized to find the optimal values for these two parameters. || def = det  is the determinant of the matrix ; the notation -1 means the inverse of the matrix .
-
-**One-class k-means** and one-class kNN are based on a similar principle as that of one-class Gaussian: build some model of the data and then define a threshold to decide whether our new feature vector looks similar to other examples according to the model. In the former, all training examples are clustered using the k-means clustering algorithm and, when a new example x is observed, the distance d(x) is calculated as the minimum distance between x and the center of each cluster. If d(x) is less than a particular threshold, then x belongs to the class.
-
-**One-class SVM**, depending on formulation, tries either 1) to separate all training examples from the origin (in the feature space) and maximize the distance from the hyperplane to the origin, or 2) to obtain a spherical boundary around the data by minimizing the volume of this hypersphere. I leave the description of the one-class kNN algorithm, as well as the details of the one-class k-means and one-class SVM for the complementary reading.
-
-### Multilabel classification
-
-In some situations, more than one label is appropriate to describe an example from the dataset. In this case, we talk about the multi-label classification
-
-If the number of possible values for labels is high, but they are all of the same nature, like tags, we can transform each labeled example into several labeled examples, one per label. These new examples all have the same feature vector and only one label. That becomes a multiclass classification problem. . We can solve it using the one versus rest strategy. The only difference with the usual multiclass problem is that now we have a new hyperparameter: threshold. If the prediction score for some label is above the threshold, this label is predicted for the input feature vector. In this scenario, multiple labels can be predicted for one feature vector. The value of the threshold is chosen using the validation set.
-
-Analogously, algorithms that naturally can be made multiclass (decision trees, logistic regression and neural networks among others) can be applied to multi-label classification problems. Because they return the score for each class, we can define a threshold and then assign multiple labels to one feature vector if the threshold is above some value.
-
-
-
-## Tree Models
 
 * Recursive partitioning - Repeatedly dividing and subdividing the data with the goal of making the outcome in each final subdivision as homogenous as possible.
 * Split value - A predictor value that divides the records into those where that predictor is less than the split value, and those there it is more.
@@ -3224,20 +2906,13 @@ $$
 
 **CART** - tree for regression.
 
-![](D:/Github/Study/DS and ML book notes/img/decision-tree-cost.png)
+![](img/decision-tree-cost.png)
 
 **Pruning**
 
 Pruning consists of going back through the tree once it’s been created and removing branches that don’t contribute significantly enough to the error reduction by replacing them with leaf nodes.
 
-**Measuring homogeneity or impurity**.
 
-*Gini impurity * (1) (*not to be confused with the Gini coefficient*) and entropy(2):
-$$
-I(A) = p(1 - p)
-\\
-I(A) = -plog_2(p) - (1-p)log_2(1-p)
-$$
 
 
 ### Random Forest
@@ -3270,167 +2945,152 @@ The random forest algorithm can be summarized in four simple steps:
 3. Repeat the steps 1-2 k times. 
 4. Aggregate the prediction by each tree to assign the class label by majority vote.
 
-### Dealing with nonlinear relationships using random forests
 
-When we used decision trees for classification, we defined entropy as a measure of impurity to determine which feature split maximizes the information gain (IG). we discussed Gini impurity and entropy as measures of impurity, which are both useful criteria for classification. To use a decision tree for regression, however, we need an impurity metric that is suitable for continuous variables, so we define the impurity measure of a node, t, as the MSE instead:
+
+### K-means
+
+The k-means algorithm belongs to the category of prototype-based clustering. 
+
+Prototype-based clustering means that each cluster is represented by a prototype, which is usually either the centroid (average) of similar points with continuous features, or the medoid (the most representative or the point that minimizes the distance to all other points that belong to a particular cluster) in the case of categorical features. 
+
+Thus, our goal is to group the examples based on their feature similarities, which can be achieved using the k-means algorithm, as summarized by the following four steps: 
+
+1. Randomly pick k centroids from the examples as initial cluster centers. 
+2. Assign each example to the nearest centroid, 𝜇(𝑗) ,𝑗 ∈ {1, … , 𝑘}. 
+3. Move the centroids to the center of the examples that were assigned to it. 
+4. Repeat steps 2 and 3 until the cluster assignments do not change or a user defined tolerance or maximum number of iterations is reached.
+
+K-Means also can be described as a E-M algorithm.
+
+Expectation–maximization (E–M) is a powerful algorithm that comes up in a variety of contexts within data science. k-means is a particularly simple and easy-to understand application of the algorithm, and we will walk through it briefly here. In short, the expectation–maximization approach consists of the following procedure: 
+
+1. Guess some cluster centers 
+
+2. Repeat until converged 
+
+   * E-Step: assign points to the nearest cluster center 
+
+   * M-Step: set the cluster centers to the mean
+
+     
+
+### K-means++
+
+So far, we have discussed the classic k-means algorithm, which uses a random seed to place the initial centroids, which can sometimes result in bad clustering or slow convergence if the initial centroids are chosen poorly. One way to address this issue is to run the k-means algorithm multiple times on a dataset and choose the best performing model in terms of the SSE. 
+
+Another strategy is to place the initial centroids far away from each other via the k-means++ algorithm, which leads to better and more consistent results than the classic k-means.
+
+The initialization in k-means++ can be summarized as follows:
+
+1. Initialize an empty set, M, to store the k centroids being selected. 
+
+2. Randomly choose the first centroid, 𝝁(𝑗) , from the input examples and assign it to M. 
+
+3. For each example, 𝒙(𝑖) , that is not in M, find the minimum squared distance, 𝑑(𝒙(𝑖) , 𝚳)^2 , to any of the centroids in M. 
+
+4. To randomly select the next centroid, 𝝁^(𝑝) , use a weighted probability distribution equal to
+   $$
+   \frac{d(\bold \mu^{(p)}, \bold M)^2}{\sum_i d(\bold x^{(i)}, \bold M)^2}
+   $$
+
+5. Repeat steps 2 and 3 until k centroids are chosen. 
+
+6. Proceed with the classic k-means algorithm.
+
+
+
+
+
+### Hierarchical Clustering
+
+* Dendrogram - A visual representation of the records and the hierarchy of clusters to which they belong.
+
+* Dissimilarity - A measure of how close one cluster is to another.
+
+Hierarchical clustering starts by setting each record as its own cluster and iterates to combine the least dissimilar clusters. The main algorithm for hierarchical clustering is the agglomerative algorithm, which iteratively merges similar clusters. 
+
+The main steps of the agglomerative algorithm are: 
+
+1. Create an initial set of clusters with each cluster consisting of a single record for all records in the data. 
+2. Compute the dissimilarity D(C_k, C_l) between all pairs of clusters k, l. 
+3. Merge the two clusters C_k and C_l that are least dissimilar as measured by D(C_k, C_l). 
+4. If we have more than one cluster remaining, return to step 2. Otherwise, we are done.
+
+There are four common measures of dissimilarity: complete linkage(1), single linkage(2), average linkage, and minimum variance.
 $$
-I(t) = MSE(t) = \frac{1}{N_t} \sum_{i э D_t} (y^{(i)} - \hat y ^{(i)})^2
+D(A, B) = max(d(a_i, b_i)) for:i,j
 \\
-IG(D_p, x_i) = I(D_p) - \frac{N_{left}}{N_p}I(D_{left}) - \frac{N_{right}}{N_p}I(D_{right})\\
-\hat y_t = \frac{1}{N_t}\sum y^{(i)}
+D(A, B) = min(d(a_i, b_i)) for:i,j
+\\
 $$
-Here, 𝑁𝑁𝑡𝑡 is the number of training examples at node t, 𝐷𝐷𝑡𝑡 is the training subset at node t, 𝑦𝑦(𝑖𝑖) is the true target value, and 𝑦𝑦̂𝑡𝑡 is the predicted target value.
+The average linkage method is the average of all distance pairs and represents a compromise between the single and complete linkage methods. Finally, the minimum variance method, also referred to as Ward’s method, is similar to K-means since it minimizes the within-cluster sum of squares.
 
-In the context of decision tree regression, the MSE is often referred to as within node variance, which is why the splitting criterion is also better known as variance reduction.
+Start with every record in its own cluster. Progressively, clusters are joined to nearby clusters until all records belong to a single cluster (the agglomerative algorithm). The agglomeration history is retained and plotted, and the user (without specifying the number of clusters beforehand) can visualize the number and structure of clusters at different stages. Inter-cluster distances are computed in different ways, all relying on the set of all inter-record distances.
 
+The two main approaches to hierarchical clustering are agglomerative and divisive hierarchical clustering. In divisive hierarchical clustering, we start with one cluster that encompasses the complete dataset, and we iteratively split the cluster into smaller clusters until each cluster only contains one example. In this section, we will focus on agglomerative clustering, which takes the opposite approach. We start with each example as an individual cluster and merge the closest pairs of clusters until only one cluster remains.
 
-
-## K-Nearest Neighboors
-
-The idea behind K-Nearest Neighbors (KNN) is very simple. For each record to be classified or predicted: 
-
-1. Find K records that have similar features (i.e., similar predictor values). 
-2. For classification: Find out what the majority class is among those similar records, and assign that class to the new record. 
-3. For prediction (also called KNN regression): Find the average among those similar records, and predict that average for the new record.
-
-KNN as feature engine:
-
-1. KNN is run on the data, and for each record, a classification (or quasiprobability of a class) is derived. 
-2. That result is added as a new feature to the record, and another classification method is then run on the data. The original predictor variables are thus used twice.
+The two standard algorithms for agglomerative hierarchical clustering are single linkage and complete linkage. Using single linkage, we compute the distances between the most similar members for each pair of clusters and merge the two clusters for which the distance between the most similar members is the smallest. The complete linkage approach is similar to single linkage but, instead of comparing the most similar members in each pair of clusters, we compare the most dissimilar members to perform the merge. 
 
 
 
-## Ensemble models
+### Locating regions of high density via DBSCAN
 
-### Bagging
+Density-based spatial clustering of applications with noise (DBSCAN), which does not make assumptions about spherical clusters like k-means, nor does it partition the dataset into hierarchies that require a manual cut-off point. As its name implies, density-based clustering assigns cluster labels based on dense regions of points. In DBSCAN, the notion of density is defined as the number of points within a specified radius, 𝜀𝜀.
 
-The simple version of ensembles is as follows: 
+According to the DBSCAN algorithm, a special label is assigned to each example (data point) using the following criteria: 
 
-1. Develop a predictive model and record the predictions for a given data set. 
-2. Repeat for multiple models, on the same data. 
-3. For each record to be predicted, take an average (or a weighted average, or a majority vote) of the predictions.
+* A point is considered a core point if at least a specified number (MinPts) of neighboring points fall within the specified radius, 𝜀𝜀. 
+* A border point is a point that has fewer neighbors than MinPts within ε, but lies within the 𝜀𝜀 radius of a core point. 
+* All other points that are neither core nor border points are considered noise points.
 
-Bagging, which stands for “bootstrap aggregating,” was introduced by Leo Breiman in 1994. Suppose we have a response Y and P predictor variables X = X1, X2, ..., Xp with n records. Bagging is like the basic algorithm for ensembles, except that, instead of fitting the various models to the same data, each new model is fit to a bootstrap resample. Here is the algorithm presented more formally: 
+After labeling the points as core, border, or noise, the DBSCAN algorithm can be summarized in two simple steps: 
 
-1. Initialize M, the number of models to be fit, and n, the number of records to choose (n < N). Set the iteration m = 1. 
-2. Take a bootstrap resample (i.e., with replacement) of n records from the training data to form a subsample Ym and Xm (the bag). 
-3. Train a model using Ym and Xm to create a set of decision rules f. 
-4. Increment the model counter m = m + 1. If m <= M, go to step 1. 
+1. Form a separate cluster for each core point or connected group of core points. (Core points are connected if they are no farther away than 𝜀𝜀.) 
+2. Assign each border point to the cluster of its corresponding core point.
 
-In the case where f predicts the probability Y = 1, the bagged estimate is given by:
-$$
-\hat f = \frac{1}{M}(\hat f_1(X) + \hat f_2(X) + ... + \hat f_M(X))
-$$
+With an increasing number of features in our dataset—assuming a fixed number of training examples—the negative effect of the curse of dimensionality increases. This is especially a problem if we are using the Euclidean distance metric. However, the problem of the curse of dimensionality is not unique to DBSCAN: it also affects other clustering algorithms that use the Euclidean distance metric, for example, k-means and hierarchical clustering algorithms. In addition, we have two hyperparameters in DBSCAN (MinPts and 𝜀𝜀) that need to be optimized to yield good clustering results. Finding a good combination of MinPts and 𝜀𝜀 can be problematic if the density differences in the dataset are relatively large.
 
-### Boosting
-
-The basic idea behind the various boosting algorithms is essentially the same. The easiest to understand is Adaboost, which proceeds as follows: 
-
-1. Initialize M, the maximum number of models to be fit, and set the iteration counter m = 1. Initialize the observation weights w_i = 1/N for i = 1, 2, 3 ... N. Initialize the ensemble model \hat F_0 = 0. 
-
-2. Train a model f_m using the observation weights w1, w2, w3, ..., wn that minimizes the weighted error e defined by summing the weights for the misclassified observations. 
-
-3. Add the model to the ensemble:
-   $$
-   \hat F_m = \hat F_{m-1} + \alpha_m f_m \\ where\\
-   \alpha_m = \frac{log1-e_m}{e_m}
-   $$
-
-4. Update the weights w1, w2, ..., wn, so that the weights are increased for the observations that were misclassified. The size of the increase depends on alpha_m with larger values of alpha_m leading to bigger weights. 
-
-5. Increment the model counter m = m + 1. If m <= M, go to step 1.
-
-The boosted estimate is given by:
-$$
-\hat F =  \alpha_1 \hat f_1 + \alpha_2 \hat f_2 + ... + \alpha_M \hat f_M
-$$
+DBSCAN is a density-based clustering algorithm. Instead of guessing how many clusters you need, by using DBSCAN, you define two hyperparameters: ‘ and n. You start by picking an example x from your dataset at random and assign it to cluster 1. Then you count how many examples have the distance from x less than or equal to ‘. If this quantity is greater than or equal to n, then you put all these ‘-neighbors to the same cluster 1. You then examine each member of cluster 1 and find their respective ‘-neighbors. If some member of cluster 1 has n or more ‘-neighbors, you expand cluster 1 by putting those ‘-neighbors to the cluster. You continue expanding cluster 1 until there are no more examples to put in it. In the latter case, you pick from the dataset another example not belonging to any cluster and put it to cluster 2. You continue like this until all examples either belong to some cluster or are marked as outliers. An outlier is an example whose ‘-neighborhood contains less than n examples.
 
 
 
-In contrast to bagging, the initial formulation of the boosting algorithm uses random subsets of training examples drawn from the training dataset without replacement; the original boosting procedure can be summarized in the following fou2r key steps: 
+### Gaussian Mixture Models
 
-1. Draw a random subset (sample) of training examples, 𝑑𝑑1, without replacement from the training dataset, D, to train a weak learner, 𝐶𝐶1. 
-2. Draw a second random training subset, 𝑑𝑑2, without replacement from the training dataset and add 50 percent of the examples that were previously misclassified to train a weak learner, 𝐶𝐶2. 
-3. Find the training examples, 𝑑𝑑3, in the training dataset, D, which 𝐶𝐶1 and 𝐶𝐶2 disagree upon, to train a third weak learner, 𝐶𝐶3. 
-4. Combine the weak learners 𝐶𝐶1, 𝐶𝐶2, and 𝐶𝐶3 via majority voting.
+A Gaussian mixture model (GMM) attempts to find a mixture of multidimensional Gaussian probability distributions that best model any input dataset.  In the simplest case, GMMs can be used for finding clusters in the same manner as k-means.
 
-Now that we have a better understanding of the basic concept of AdaBoost, let's take a more detailed look at the algorithm using pseudo code. For clarity, we will denote element-wise multiplication by the cross symbol (×) and the dot-product between two vectors by a dot symbol (∙):
+Under the hood, a Gaussian mixture model is very similar to k-means: it uses an expectation–maximization approach that qualitatively does the following: 
 
-1. Set the weight vector, **w**, to uniform weights, where sum of weights = 1
+1. Choose starting guesses for the location and shape 
+2. Repeat until converged: 
+   * E-step: for each point, find weights encoding the probability of membership in each cluster
+   * M-step: for each cluster, update its location, normalization, and shape based on all data points, making use of the weights
 
-2. For j in m boosting rounds do following:
+The result of this is that each cluster is associated not with a hard-edged sphere, but with a smooth Gaussian model. Just as in the k-means expectation–maximization approach, this algorithm can sometimes miss the globally optimal solution, and thus in practice multiple random initializations are used.
 
-   * Train a weighted weak learner:  C_j = train(X, y, w)
+**GMM as Density Estimation Though** 
 
-   * Predict class labels: y^hat = predict(C_j, X)
+GMM is often categorized as a clustering algorithm, fundamentally it is an algorithm for density estimation. That is to say, the result of a GMM fit to some data is technically not a clustering model, but a generative probabilistic model describing the distribution of the data.
 
-   * Compute weighted error rate: 
-     $$
-     \epsilon = w * (\hat y != y)
-     $$
+**How many components?** 
 
-   * Compute coefficient:
-     $$
-     \alpha_j = 0.5 log(\frac{1 - \epsilon}{\epsilon})
-     $$
+The fact that GMM is a generative model gives us a natural means of determining the optimal number of components for a given dataset. A generative model is inherently a probability distribution for the dataset, and so we can simply evaluate the likelihood of the data under the model, using cross-validation to avoid overfitting. Another means of correcting for overfitting is to adjust the model likelihoods using some analytic criterion such as the Akaike information criterion (AIC) or the Bayesian information criterion (BIC). Scikit-Learn’s GMM estimator actually includes built-in methods that compute both of these, and so it is very easy to operate on this approach.
 
-   * Update weights:
-     $$
-     w := w×exp(-\alpha_j × \hat y × y)
-     $$
+Notice the important point: this choice of number of components measures how well GMM works as a density estimator, not how well it works as a clustering algorithm. 
 
-   * Normalize weights to sum to 1:
-     $$
-     w := \frac{w}{\sum_i w_i}
-     $$
+### Кластеризация с помощью минимального остовного дерева
 
-3. Compute the final prediction:
-   $$
-   \hat y = (\sum_{j=1}^{m}(\alpha_j × predict(C_j, X)) > 0)
-   $$
+1. Строим взвешенный граф, где веса ребер - расстояния между объектами.
+2. Строим минимальное отсовное дерево (алгоритм Крускала) для этого графа
+3. Удаляем К-1 ребро с максимальным весом
+4. Получаем К компонент связности, которые интерпретируем как кластеры
 
-Note that the expression (𝒚̂ ≠ 𝒚) in step 2c refers to a binary vector consisting of 1s and 0s, where a 1 is assigned if the prediction is incorrect and 0 is assigned otherwise.
 
-### Combining models
 
-There are three typical ways to combine models:
 
-1. **Averaging** works for regression as well as those classification models that return classification scores. You simply apply all your models, let’s call them base models, to the input x and then average the predictions. To see if the averaged model works better than each individual algorithm, you test it on the validation set using a metric of your choice. 
-2. **Blending** - all models predictions have weights, then averaging predictions * weights
-3. **Majority vote** works for classification models. You apply all your base models to the input x and then return the majority class among all predictions. In the case of a tie, you either randomly pick one of the classes, or, you return an error message (if the fact of misclassifying would incur a significant cost). 
-4. **Stacking** consists of building a meta-model that takes the output of base models as input. Let’s say you want to combine classifiers f1 and f2, both predicting the same set of classes. To create a training example (xˆi, yˆi) for the stacked model, set xˆi = [f1(x), f2(x)] and yˆi = yi.
-
-## Dimensionality Reduction
 
 ### Principal Components Analysis
 
 
-
-* Loadings - the weights that transform the predictors into components.
-
-
-The full process can be described as follows: 
-
-1. In creating the first principal component, PCA arrives at the linear combination of predictor variables that maximizes the percent of total variance explained. 
-2. This linear combination then becomes the first “new” predictor, Z_1. 
-3. PCA repeats this process, using the same variables, with different weights to create a second new predictor, Z_2. The weighting is done such that Z_1 and Z_2 are uncorrelated. 
-4. The process continues until you have as many new variables, or components, Z_i as original variables X_i. 
-5. Choose to retain as many components as are needed to account for most of the variance. 
-6. The result so far is a set of weights for each component. The final step is to convert the original data into new principal component scores by applying the weights to the original values. These new scores can then be used as the reduced set of predictor variables.
-
-Principal components are linear combinations of the predictor variables (numeric data only). They are calculated so as to minimize correlation between components, reducing redundancy. A limited number of components will typically explain most of the variance in the outcome variable. The limited set of principal components can then be used in place of the (more numerous) original predictors, reducing dimensionality.
-
-
-
-If we use PCA for dimensionality reduction, we construct a 𝑑𝑑 × 𝑘𝑘-dimensional transformation matrix, W, that allows us to map a vector, x, the features of a training example, onto a new k-dimensional feature subspace that has fewer dimensions than the original d-dimensional feature space. For instance, the process is as follows. Suppose we have a feature vector, x: x = [x_1, x_2, ..., x_d] which is then transformed by a transformation matrix,
-$$
-\bold {xW} = \bold z
-$$
-resulting in the output vector: z = [z_1, z_2, ..., z_k]
-
-As a result of transforming the original d-dimensional data onto this new k-dimensional subspace (typically k << d), the first principal component will have the largest possible variance. All consequent principal components will have the largest variance given the constraint that these components are uncorrelated (orthogonal) to the other principal components—even if the input features are correlated, the resulting principal components will be mutually orthogonal (uncorrelated). Note that the PCA directions are highly sensitive to data scaling, and we need to standardize the features prior to PCA if the features were measured on different scales and we want to assign equal importance to all features.
-
-Before looking at the PCA algorithm for dimensionality reduction in more detail, let's summarize the approach in a few simple steps: 
 
 1. Standardize the d-dimensional dataset. 
 
@@ -3476,7 +3136,7 @@ c1 = Vt.T[:, 0]
 c2 = Vt.T[:, 1]
 ```
 
-Можно разложить матрицу с помощью сингулярного разложения и взять перsвые n собственных векторов.
+
 
 ### Linear Discriminant Analysis
 
@@ -3653,107 +3313,326 @@ $$
 
 
 
+
+
+
+## Regression
+
+
+
+### Using regularized methods for regression
+
+The most popular approaches to regularized linear regression are the so-called Ridge Regression, least absolute shrinkage and selection operator (LASSO), and elastic Net.
+
+Ridge Regression is an L2 penalized model where we simply add the squared sum of the weights to our least-squares cost function:
+$$
+J(\bold w)_{Ridge} = \sum_{i=1}^n (y^{(i)} - \hat y^{(i)})^2 +\lambda ||\bold w||_2^2
+\\
+||\bold w||_2^2 = \sum_{j=1}^{m} w_j^2
+$$
+
+By increasing the value of hyperparameter 𝜆, we increase the regularization strength and thereby shrink the weights of our model. Please note that we don't regularize the intercept term, 𝑤0.
+
+An alternative approach that can lead to sparse models is LASSO. Depending on the regularization strength, certain weights can become zero, which also makes LASSO useful as a supervised feature selection technique:
+$$
+J(\bold w)_{Lasso} = \sum_{i=1}^n (y^{(i)} - \hat y^{(i)})^2 +\lambda ||\bold w||_1
+\\
+||\bold w||_1 = \sum_{j=1}^{m} |w_j|
+$$
+
+However, a limitation of LASSO is that it selects at most n features if m > n, where n is the number of training examples. In practice, however, this property of LASSO is often an advantage because it avoids saturated models. Saturation of a model occurs if the number of training examples is equal to the number of features, which is a form of overparameterization. As a consequence, a saturated model can always fit the training data perfectly but is merely a form of interpolation and thus is not expected to generalize well.
+
+A compromise between Ridge Regression and LASSO is elastic net, which has an L1 penalty to generate sparsity and an L2 penalty such that it can be used for selecting more than n features if m > n:
+$$
+J(\bold w)_{ElasticNet} = \sum_{i=1}^n (y^{(i)} - \hat y^{(i)})^2 + \lambda_1\sum_{j=1}^{m} w_j^2 + \lambda_2 \sum_{j=1}^{m} |w_j|
+$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Confidence and Prediction Intervals
+
+Confidence intervals quantify uncertainty around regression coefficients. Prediction intervals quantify uncertainty in individual predictions.
+
+Here is a bootstrap algorithm for generating confidence intervals for regression parameters (coefficients) for a data set with P predictors and n records (rows): 
+
+1. Consider each row (including outcome variable) as a single “ticket” and place all the n tickets in a box. 
+2. Draw a ticket at random, record the values, and replace it in the box. 
+3. Repeat step 2 n times; you now have one bootstrap resample. 
+4. Fit a regression to the bootstrap sample, and record the estimated coefficients.  
+5. Repeat steps 2 through 4, say, 1,000 times. 
+6. You now have 1,000 bootstrap values for each coefficient; find the appropriate percentiles for each one (e.g., 5th and 95th for a 90% confidence interval).
+
+The bootstrap algorithm for modeling both the regression model error and the individual data point error would look as follows: 
+
+1. Take a bootstrap sample from the data (spelled out in greater detail earlier).
+2. Fit the regression, and predict the new value. 
+3. Take a single residual at random from the original regression fit, add it to the predicted value, and record the result. 
+4. Repeat steps 1 through 3, say, 1,000 times. 
+5. Find the 2.5th and the 97.5th percentiles of the results.
+
+A prediction interval pertains to uncertainty around a single value, while a confidence interval pertains to a mean or other statistic calculated from multiple values. Thus, a prediction interval will typically be much wider than a confidence interval for the same value. We model this individual value error in the bootstrap model by selecting an individual residual to tack on to the predicted value. Which should you use? That depends on the context and the purpose of the analysis, but, in general, data scientists are interested in specific individual predictions, so a prediction interval would be more appropriate. Using a confidence interval when you should be using a prediction interval will greatly underestimate the uncertainty in a given predicted value.
+
+### Factor (categorical) variables in Regression
+
+* Dummy variables - Binary 0-1 variables derived by recording factor data for use in regression and other models.
+* Reference coding - The most common type of coding used by statisticians, in which one level of a factor is used as a reference and other factors are compared to that level
+* One hot encoder - A common type of coding used in machine learning community in which all factors levels are retained. While useful for a certain machine learning algorithms, this approach is not appropriate for multiple linear regression.
+* Deviation coding - A type of coding that compares each level against the overall mean as opposed to the reference level.
+
+Factor variables need to be converted into numeric variables for use in a regression. The most common method to encode a factor variable with P distinct values is to represent them using P-1 dummy variables. A factor variable with many levels, even in very big data sets, may need to be consolidated into a variable with fewer levels. Some factors have levels that are ordered and can be represented as a single numeric variable.
+
+Because of correlation between predictors, care must be taken in the interpretation of the coefficients in multiple linear regression. Multicollinearity can cause numerical instability in fitting the regression equation. A confounding variable is an important predictor that is omitted from a model and can lead to a regression equation with spurious relationships. An interaction term between two variables is needed if the relationship between the variables and the response is interdependent.
+
+### Testing the Assumptions: Regression Diagnostics
+
+* Influential value - A value or record whose presence or absence makes a big difference in the regression equation.
+
+* Leverage - The degree of influence that a single record has on a regression equation. 
+
+  A common measure of leverage is the hat-value; values above 2(P+1)/n indicate a high-leverage data value. 
+
+  Another metric is Cook’s distance, which defines influence as a combination of leverage and residual size. A rule of thumb is that an observation has high influence if Cook’s distance exceeds 4/(n - P -1)
+
+  An influence plot or bubble plot combines standardized residuals, the hat-value, and Cook’s distance in a single plot.
+
+* Non-normal residuals - Non-normally distributed residuals can invalidate some technical requirements of regression, but are usually not a concern in data science.
+
+* Heteroskedasticity - When some ranges of the outcome experience residuals with higher variance. It y is the lack of constant residual variance across the range of the predicted values. In other words, errors are greater for some portions of the range than for others. Heteroskedasticity indicates that prediction errors differ for different ranges of the predicted value, and may suggest an incomplete model. 
+
+Partial residual plots are a way to visualize how well the estimated fit explains the relationship between a predictor and the outcome. Along with detection of outliers, this is probably the most important diagnostic for data scientists. The basic idea of a partial residual plot is to isolate the relationship between a predictor variable and the response, taking into account all of the other predictor variables. A partial residual might be thought of as a “synthetic outcome” value, combining the prediction based on a single predictor with the actual residual from the full regression equation. A partial residual for predictor X_i is the ordinary residual plus the regression term associated with X_i.
+
+While outliers can cause problems for small data sets, the primary interest with outliers is to identify problems with the data, or locate anomalies. Single records (including regression outliers) can have a big influence on a regression equation with small data, but this effect washes out in big data. If the regression model is used for formal inference (p-values and the like), then certain assumptions about the distribution of the residuals should be checked. In general, however, the distribution of residuals is not critical in data science. The partial residuals plot can be used to qualitatively assess the fit for each regression term, possibly leading to alternative model specification.
+
+Outliers in a regression are records with a large residual. Multicollinearity can cause numerical instability in fitting the regression equation. A confounding variable is an important predictor that is omitted from a model and can lead to a regression equation with spurious relationships. An interaction term between two variables is needed if the effect of one variable depends on the level of the other. Polynomial regression can fit nonlinear relationships between predictors and the outcome variable. Splines are series of polynomial segments strung together, joining at knots. Generalized additive models (GAM) automate the process of specifying the knots in splines.
+
+
+
+### Residual plots
+
+Since our model uses multiple explanatory variables, we can't visualize the linear regression line (or hyperplane, to be precise) in a two-dimensional plot, but we can plot the residuals (the differences or vertical distances between the actual and predicted values) versus the predicted values to diagnose our regression model. Residual plots are a commonly used graphical tool for diagnosing regression models. They can help to detect nonlinearity and outliers, and check whether the errors are randomly distributed.
+
+```python
+plt.scatter(y_train_pred, y_train_pred - y_train,
+			c='steelblue', marker='o', edgecolor='white',
+			label='Training data')
+plt.scatter(y_test_pred, y_test_pred - y_test,
+			c='limegreen', marker='s', edgecolor='white',
+			label='Test data')
+plt.xlabel('Predicted values')
+plt.ylabel('Residuals')
+plt.legend(loc='upper left')
+plt.hlines(y=0, xmin=-10, xmax=50, color='black', lw=2)
+plt.xlim([-10, 50])
+plt.show()
+```
+
+![](img/residual plot.png)
+
+In the case of a perfect prediction, the residuals would be exactly zero, which we will probably never encounter in realistic and practical applications. However, for a good regression model, we would expect the errors to be randomly distributed and the residuals to be randomly scattered around the centerline. If we see patterns in a residual plot, it means that our model is unable to capture some explanatory information, which has leaked into the residuals, as you can slightly see in our previous residual plot. Furthermore, we can also use residual plots to detect outliers, which are represented by the points with a large deviation from the centerline.
+
+
+
+
+
+
+
+## Classification
+
+
+
+
+
+
+
+
+
+### Discriminant Analysis
+
+
+
+* Covariance - A measure of the extent to which one variable varies in concert with another.
+
+* Discriminant function - The function that, when applied to the predictor variables, maximizes the separation of the classes.
+
+* Discriminant weights - The scores that result from the application of the discriminant function, and are used to estimate probabilities of belonging to one class or another.
+
+  
+
+*Covariance* measures the relationship between two variables x and z. The covariance is given by:
+$$
+s_{x,z}  = \frac{\sum_{i=1}^{n}(x_i - \bar x)(z_i - \bar z)}{n-1}
+$$
+Covariance evaluates how the mean values of two variables move together. If stock A's return moves higher whenever stock B's return moves higher and the same relationship is found when each stock's return decreases, then these stocks are said to have positive covariance. In finance, covariances are calculated to help [diversify](https://www.investopedia.com/terms/d/diversification.asp) security holdings.
+
+
+
+Fisher’s linear discriminant distinguishes variation between groups, on the one hand, from variation within groups on the other. Specifically, seeking to divide the records into two groups, LDA focuses on maximizing the “between” sum of squares ss_between (measuring the variation between the two groups) relative to the “within” sum of squares ss_within(measuring the within-group variation).
+
+Discriminant analysis works with continuous or categorical predictors, as well as categorical outcomes. Using the covariance matrix, it calculates a linear discriminant function, which is used to distinguish records belonging to one class from those belonging to another. This function is applied to the records to derive weights, or scores, for each record (one weight for each possible class) that determines its estimated class.
+
+
+
+
+
+### Multilabel classification
+
+In some situations, more than one label is appropriate to describe an example from the dataset. In this case, we talk about the multi-label classification
+
+If the number of possible values for labels is high, but they are all of the same nature, like tags, we can transform each labeled example into several labeled examples, one per label. These new examples all have the same feature vector and only one label. That becomes a multiclass classification problem. . We can solve it using the one versus rest strategy. The only difference with the usual multiclass problem is that now we have a new hyperparameter: threshold. If the prediction score for some label is above the threshold, this label is predicted for the input feature vector. In this scenario, multiple labels can be predicted for one feature vector. The value of the threshold is chosen using the validation set.
+
+Analogously, algorithms that naturally can be made multiclass (decision trees, logistic regression and neural networks among others) can be applied to multi-label classification problems. Because they return the score for each class, we can define a threshold and then assign multiple labels to one feature vector if the threshold is above some value.
+
+
+
+4. 
+
+### Dealing with nonlinear relationships using random forests
+
+When we used decision trees for classification, we defined entropy as a measure of impurity to determine which feature split maximizes the information gain (IG). we discussed Gini impurity and entropy as measures of impurity, which are both useful criteria for classification. To use a decision tree for regression, however, we need an impurity metric that is suitable for continuous variables, so we define the impurity measure of a node, t, as the MSE instead:
+$$
+I(t) = MSE(t) = \frac{1}{N_t} \sum_{i э D_t} (y^{(i)} - \hat y ^{(i)})^2
+\\
+IG(D_p, x_i) = I(D_p) - \frac{N_{left}}{N_p}I(D_{left}) - \frac{N_{right}}{N_p}I(D_{right})\\
+\hat y_t = \frac{1}{N_t}\sum y^{(i)}
+$$
+Here, 𝑁𝑁𝑡𝑡 is the number of training examples at node t, 𝐷𝐷𝑡𝑡 is the training subset at node t, 𝑦𝑦(𝑖𝑖) is the true target value, and 𝑦𝑦̂𝑡𝑡 is the predicted target value.
+
+In the context of decision tree regression, the MSE is often referred to as within node variance, which is why the splitting criterion is also better known as variance reduction.
+
+
+
+
+
+
+
+## Ensemble models
+
+### Bagging
+
+The simple version of ensembles is as follows: 
+
+1. Develop a predictive model and record the predictions for a given data set. 
+2. Repeat for multiple models, on the same data. 
+3. For each record to be predicted, take an average (or a weighted average, or a majority vote) of the predictions.
+
+Bagging, which stands for “bootstrap aggregating,” was introduced by Leo Breiman in 1994. Suppose we have a response Y and P predictor variables X = X1, X2, ..., Xp with n records. Bagging is like the basic algorithm for ensembles, except that, instead of fitting the various models to the same data, each new model is fit to a bootstrap resample. Here is the algorithm presented more formally: 
+
+1. Initialize M, the number of models to be fit, and n, the number of records to choose (n < N). Set the iteration m = 1. 
+2. Take a bootstrap resample (i.e., with replacement) of n records from the training data to form a subsample Ym and Xm (the bag). 
+3. Train a model using Ym and Xm to create a set of decision rules f. 
+4. Increment the model counter m = m + 1. If m <= M, go to step 1. 
+
+In the case where f predicts the probability Y = 1, the bagged estimate is given by:
+$$
+\hat f = \frac{1}{M}(\hat f_1(X) + \hat f_2(X) + ... + \hat f_M(X))
+$$
+
+### Boosting
+
+The basic idea behind the various boosting algorithms is essentially the same. The easiest to understand is Adaboost, which proceeds as follows: 
+
+1. Initialize M, the maximum number of models to be fit, and set the iteration counter m = 1. Initialize the observation weights w_i = 1/N for i = 1, 2, 3 ... N. Initialize the ensemble model \hat F_0 = 0. 
+
+2. Train a model f_m using the observation weights w1, w2, w3, ..., wn that minimizes the weighted error e defined by summing the weights for the misclassified observations. 
+
+3. Add the model to the ensemble:
+   $$
+   \hat F_m = \hat F_{m-1} + \alpha_m f_m \\ where\\
+   \alpha_m = \frac{log1-e_m}{e_m}
+   $$
+
+4. Update the weights w1, w2, ..., wn, so that the weights are increased for the observations that were misclassified. The size of the increase depends on alpha_m with larger values of alpha_m leading to bigger weights. 
+
+5. Increment the model counter m = m + 1. If m <= M, go to step 1.
+
+The boosted estimate is given by:
+$$
+\hat F =  \alpha_1 \hat f_1 + \alpha_2 \hat f_2 + ... + \alpha_M \hat f_M
+$$
+
+
+
+In contrast to bagging, the initial formulation of the boosting algorithm uses random subsets of training examples drawn from the training dataset without replacement; the original boosting procedure can be summarized in the following fou2r key steps: 
+
+1. Draw a random subset (sample) of training examples, 𝑑𝑑1, without replacement from the training dataset, D, to train a weak learner, 𝐶𝐶1. 
+2. Draw a second random training subset, 𝑑𝑑2, without replacement from the training dataset and add 50 percent of the examples that were previously misclassified to train a weak learner, 𝐶𝐶2. 
+3. Find the training examples, 𝑑𝑑3, in the training dataset, D, which 𝐶𝐶1 and 𝐶𝐶2 disagree upon, to train a third weak learner, 𝐶𝐶3. 
+4. Combine the weak learners 𝐶𝐶1, 𝐶𝐶2, and 𝐶𝐶3 via majority voting.
+
+Now that we have a better understanding of the basic concept of AdaBoost, let's take a more detailed look at the algorithm using pseudo code. For clarity, we will denote element-wise multiplication by the cross symbol (×) and the dot-product between two vectors by a dot symbol (∙):
+
+1. Set the weight vector, **w**, to uniform weights, where sum of weights = 1
+
+2. For j in m boosting rounds do following:
+
+   * Train a weighted weak learner:  C_j = train(X, y, w)
+
+   * Predict class labels: y^hat = predict(C_j, X)
+
+   * Compute weighted error rate: 
+     $$
+     \epsilon = w * (\hat y != y)
+     $$
+
+   * Compute coefficient:
+     $$
+     \alpha_j = 0.5 log(\frac{1 - \epsilon}{\epsilon})
+     $$
+
+   * Update weights:
+     $$
+     w := w×exp(-\alpha_j × \hat y × y)
+     $$
+
+   * Normalize weights to sum to 1:
+     $$
+     w := \frac{w}{\sum_i w_i}
+     $$
+
+3. Compute the final prediction:
+   $$
+   \hat y = (\sum_{j=1}^{m}(\alpha_j × predict(C_j, X)) > 0)
+   $$
+
+Note that the expression (𝒚̂ ≠ 𝒚) in step 2c refers to a binary vector consisting of 1s and 0s, where a 1 is assigned if the prediction is incorrect and 0 is assigned otherwise.
+
+### Combining models
+
+There are three typical ways to combine models:
+
+1. **Averaging** works for regression as well as those classification models that return classification scores. You simply apply all your models, let’s call them base models, to the input x and then average the predictions. To see if the averaged model works better than each individual algorithm, you test it on the validation set using a metric of your choice. 
+
+2. **Blending** - all models predictions have weights, then averaging predictions * weights
+
+3. **Majority vote** works for classification models. You apply all your base models to the input x and then return the majority class among all predictions. In the case of a tie, you either randomly pick one of the classes, or, you return an error message (if the fact of misclassifying would incur a significant cost). 
+
+4. **Stacking** consists of building a meta-model that takes the output of base models as input. Let’s say you want to combine classifiers f1 and f2, both predicting the same set of classes. To create a training example (xˆi, yˆi) for the stacked model, set xˆi = [f1(x), f2(x)] and yˆi = yi.
+
+   
+
+## Dimensionality Reduction
+
+
+
+
+
+
+
 ## Clustering
 
-### K means
 
-The k-means algorithm belongs to the category of prototype-based clustering. 
-
-Prototype-based clustering means that each cluster is represented by a prototype, which is usually either the centroid (average) of similar points with continuous features, or the medoid (the most representative or the point that minimizes the distance to all other points that belong to a particular cluster) in the case of categorical features. 
-
-Thus, our goal is to group the examples based on their feature similarities, which can be achieved using the k-means algorithm, as summarized by the following four steps: 
-
-1. Randomly pick k centroids from the examples as initial cluster centers. 
-2. Assign each example to the nearest centroid, 𝜇(𝑗) ,𝑗 ∈ {1, … , 𝑘}. 
-3. Move the centroids to the center of the examples that were assigned to it. 
-4. Repeat steps 2 and 3 until the cluster assignments do not change or a user defined tolerance or maximum number of iterations is reached.
-
-K-Means also can be described as a E-M algorithm.
-
-Expectation–maximization (E–M) is a powerful algorithm that comes up in a variety of contexts within data science. k-means is a particularly simple and easy-tounderstand application of the algorithm, and we will walk through it briefly here. In short, the expectation–maximization approach consists of the following procedure: 
-
-1. Guess some cluster centers 
-2. Repeat until converged 
-   * E-Step: assign points to the nearest cluster center 
-   * M-Step: set the cluster centers to the mean
-
-```python
-from sklearn.metrics import pairwise_distances_argmin
-
-def find_clusters(X, n_clusters, rseed=2):
- # 1. Randomly choose clusters
- rng = np.random.RandomState(rseed)
- i = rng.permutation(X.shape[0])[:n_clusters]
- centers = X[i]
- while True:
- 	# 2a. Assign labels based on closest center
- 	labels = pairwise_distances_argmin(X, centers)
- 	# 2b. Find new centers from means of points
- 	new_centers = np.array([X[labels == i].mean(0) for i in range(n_clusters)])
- 	# 2c. Check for convergence
- 	if np.all(centers == new_centers):
- 		break
- centers = new_centers
- return centers, labels
-```
-
-**K-means for color compression**
-
-```python
-from sklearn.cluster import MiniBatchKMeans
-
-kmeans = MiniBatchKMeans(16)
-kmeans.fit(data)
-new_colors = kmeans.cluster_centers_[kmeans.predict(data)]
-
-china_recolored = new_colors.reshape(china.shape)
-```
-
-**Plot K-Means with circles**
-
-```python
-from sklearn.cluster import KMeans
-from scipy.spatial.distance import cdist
-
-def plot_kmeans(kmeans, X, n_clusters=4, rseed=0, ax=None):
-	labels = kmeans.fit_predict(X)
-    
-	# plot the input data
-	ax = ax or plt.gca()
-	ax.axis('equal')
-	ax.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap='viridis', zorder=2)
-    
-	# plot the representation of the k-means model
-	centers = kmeans.cluster_centers_
-	radii = [cdist(X[labels == i], [center]).max() for i, center in enumerate(centers)]
-	for c, r in zip(centers, radii):
-		ax.add_patch(plt.Circle(c, r, fc='#CCCCCC', lw=3, alpha=0.5, zorder=1))
-```
-
-
-
-### K means++
-
-So far, we have discussed the classic k-means algorithm, which uses a random seed to place the initial centroids, which can sometimes result in bad clustering or slow convergence if the initial centroids are chosen poorly. One way to address this issue is to run the k-means algorithm multiple times on a dataset and choose the best performing model in terms of the SSE. 
-
-Another strategy is to place the initial centroids far away from each other via the k-means++ algorithm, which leads to better and more consistent results than the classic k-means.
-
-The initialization in k-means++ can be summarized as follows:
-
-1. Initialize an empty set, M, to store the k centroids being selected. 
-
-2. Randomly choose the first centroid, 𝝁(𝑗) , from the input examples and assign it to M. 
-
-3. For each example, 𝒙(𝑖) , that is not in M, find the minimum squared distance, 𝑑(𝒙(𝑖) , 𝚳)^2 , to any of the centroids in M. 
-
-4. To randomly select the next centroid, 𝝁^(𝑝) , use a weighted probability distribution equal to
-   $$
-   \frac{d(\bold \mu^{(p)}, \bold M)^2}{\sum_i d(\bold x^{(i)}, \bold M)^2}
-   $$
-
-5. Repeat steps 2 and 3 until k centroids are chosen. 
-
-6. Proceed with the classic k-means algorithm.
 
 ### Hard versus soft clustering
 
@@ -3770,7 +3649,7 @@ The objective function of FCM—we abbreviate it as 𝐽𝑚—looks very simila
 $$
 J_m = \sum_{i=1}^n \sum_{j=1}^k w^{(i, j) ^m}||\bold x^{(i)} - \mu^{(j)}||^2_2
 $$
- However, note that the membership indicator, 𝑤𝑤(𝑖𝑖,𝑗𝑗) , is not a binary value as in k-means (𝑤𝑤(𝑖𝑖,𝑗𝑗) ∈ {0, 1}), but a real value that denotes the cluster membership probability (𝑤𝑤(𝑖𝑖,𝑗𝑗) ∈ [0, 1]). You also may have noticed that we added an additional exponent to 𝑤𝑤(𝑖𝑖,𝑗𝑗) ; the exponent m, any number greater than or equal to one (typically m = 2), is the so-called fuzziness coefficient (or simply fuzzifier), which controls the degree of fuzziness.
+However, note that the membership indicator, 𝑤𝑤(𝑖𝑖,𝑗𝑗) , is not a binary value as in k-means (𝑤𝑤(𝑖𝑖,𝑗𝑗) ∈ {0, 1}), but a real value that denotes the cluster membership probability (𝑤𝑤(𝑖𝑖,𝑗𝑗) ∈ [0, 1]). You also may have noticed that we added an additional exponent to 𝑤𝑤(𝑖𝑖,𝑗𝑗) ; the exponent m, any number greater than or equal to one (typically m = 2), is the so-called fuzziness coefficient (or simply fuzzifier), which controls the degree of fuzziness.
 
 The larger the value of m, the smaller the cluster membership, 𝑤𝑤(𝑖𝑖,𝑗𝑗) , becomes, which leads to fuzzier clusters. The cluster membership probability itself is calculated as follows:
 $$
@@ -3796,129 +3675,13 @@ Another intrinsic metric to evaluate the quality of a clustering is silhouette a
 
 The silhouette coefficient is bounded in the range –1 to 1. Based on the preceding equation, we can see that the silhouette coefficient is 0 if the cluster separation and cohesion are equal (𝑏𝑏(𝑖𝑖) = 𝑎𝑎(𝑖𝑖) ). Furthermore, we get close to an ideal silhouette coefficient of 1 if 𝑏𝑏(𝑖𝑖) ≫ 𝑎𝑎(𝑖𝑖) , since 𝑏𝑏(𝑖𝑖) quantifies how dissimilar an example is from other clusters, and 𝑎𝑎(𝑖𝑖) tells us how similar it is to the other examples in its own cluster.
 
-### Hierarchical Clustering
 
 
 
-* Dendrogram - A visual representation of the records and the hierarchy of clusters to which they belong.
-
-* Dissimilarity - A measure of how close one cluster is to another.
-
-Hierarchical clustering starts by setting each record as its own cluster and iterates to combine the least dissimilar clusters. The main algorithm for hierarchical clustering is the agglomerative algorithm, which iteratively merges similar clusters. 
-
-The main steps of the agglomerative algorithm are: 
-
-1. Create an initial set of clusters with each cluster consisting of a single record for all records in the data. 
-2. Compute the dissimilarity D(C_k, C_l) between all pairs of clusters k, l. 
-3. Merge the two clusters C_k and C_l that are least dissimilar as measured by D(C_k, C_l). 
-4. If we have more than one cluster remaining, return to step 2. Otherwise, we are done.
-
-There are four common measures of dissimilarity: complete linkage(1), single linkage(2), average linkage, and minimum variance.
-$$
-D(A, B) = max(d(a_i, b_i)) for:i,j
-\\
-D(A, B) = min(d(a_i, b_i)) for:i,j
-\\
-$$
-The average linkage method is the average of all distance pairs and represents a compromise between the single and complete linkage methods. Finally, the minimum variance method, also referred to as Ward’s method, is similar to K-means since it minimizes the within-cluster sum of squares.
 
 
 
-Start with every record in its own cluster. Progressively, clusters are joined to nearby clusters until all records belong to a single cluster (the agglomerative algorithm). The agglomeration history is retained and plotted, and the user (without specifying the number of clusters beforehand) can visualize the number and structure of clusters at different stages. Inter-cluster distances are computed in different ways, all relying on the set of all inter-record distances.
-
-
-
-The two main approaches to hierarchical clustering are agglomerative and divisive hierarchical clustering. In divisive hierarchical clustering, we start with one cluster that encompasses the complete dataset, and we iteratively split the cluster into smaller clusters until each cluster only contains one example. In this section, we will focus on agglomerative clustering, which takes the opposite approach. We start with each example as an individual cluster and merge the closest pairs of clusters until only one cluster remains.
-
-The two standard algorithms for agglomerative hierarchical clustering are single linkage and complete linkage. Using single linkage, we compute the distances between the most similar members for each pair of clusters and merge the two clusters for which the distance between the most similar members is the smallest. The complete linkage approach is similar to single linkage but, instead of comparing the most similar members in each pair of clusters, we compare the most dissimilar members to perform the merge. 
-
-```python
-import numpy as np
-import pandas as pd
-from scipy.spatial.distance import pdist, squareform
-from scipy.cluster.hierarchy import linkage
-from scipy.cluster.hierarchy import dendrogram
-import matplotlib.pyplot as plt
-
-variables = ['X', 'Y', 'Z']
-labels = ['ID_0', 'ID_1', 'ID_2', 'ID_3', 'ID_4']
-X = np.random.random_sample((5,3))*10
-df = pd.DataFrame(X, index=labels, columns=variables)
-
-row_clusters = linkage(pdist(df, metric='euclidean'), method='complete')
-df2 = pd.DataFrame(row_clusters, columns=['row label 1', 'row label 2', 'distance', 'no. of items in cluster'],
-                  index=['cluster %d'%(i+1) for i in range(row_clusters.shape[0])])
-
-row_dendr = dendrogram(row_clusters, labels=labels)
-plt.tight_layout()
-plt.ylabel('eucl distance')
-plt.show()
-```
-
-
-
-### Locating regions of high density via DBSCAN
-
-Density-based spatial clustering of applications with noise (DBSCAN), which does not make assumptions about spherical clusters like k-means, nor does it partition the dataset into hierarchies that require a manual cut-off point. As its name implies, density-based clustering assigns cluster labels based on dense regions of points. In DBSCAN, the notion of density is defined as the number of points within a specified radius, 𝜀𝜀.
-
-According to the DBSCAN algorithm, a special label is assigned to each example (data point) using the following criteria: 
-
-* A point is considered a core point if at least a specified number (MinPts) of neighboring points fall within the specified radius, 𝜀𝜀. 
-* A border point is a point that has fewer neighbors than MinPts within ε, but lies within the 𝜀𝜀 radius of a core point. 
-* All other points that are neither core nor border points are considered noise points.
-
-After labeling the points as core, border, or noise, the DBSCAN algorithm can be summarized in two simple steps: 
-
-1. Form a separate cluster for each core point or connected group of core points. (Core points are connected if they are no farther away than 𝜀𝜀.) 
-2. Assign each border point to the cluster of its corresponding core point.
-
-With an increasing number of features in our dataset—assuming a fixed number of training examples—the negative effect of the curse of dimensionality increases. This is especially a problem if we are using the Euclidean distance metric. However, the problem of the curse of dimensionality is not unique to DBSCAN: it also affects other clustering algorithms that use the Euclidean distance metric, for example, k-means and hierarchical clustering algorithms. In addition, we have two hyperparameters in DBSCAN (MinPts and 𝜀𝜀) that need to be optimized to yield good clustering results. Finding a good combination of MinPts and 𝜀𝜀 can be problematic if the density differences in the dataset are relatively large.
-
-
-
-DBSCAN is a density-based clustering algorithm. Instead of guessing how many clusters you need, by using DBSCAN, you define two hyperparameters: ‘ and n. You start by picking an example x from your dataset at random and assign it to cluster 1. Then you count how many examples have the distance from x less than or equal to ‘. If this quantity is greater than or equal to n, then you put all these ‘-neighbors to the same cluster 1. You then examine each member of cluster 1 and find their respective ‘-neighbors. If some member of cluster 1 has n or more ‘-neighbors, you expand cluster 1 by putting those ‘-neighbors to the cluster. You continue expanding cluster 1 until there are no more examples to put in it. In the latter case, you pick from the dataset another example not belonging to any cluster and put it to cluster 2. You continue like this until all examples either belong to some cluster or are marked as outliers. An outlier is an example whose ‘-neighborhood contains less than n examples.
-
-### Gaussian Mixture Models
-
-A Gaussian mixture model (GMM) attempts to find a mixture of multidimensional Gaussian probability distributions that best model any input dataset.  In the simplest case, GMMs can be used for finding clusters in the same manner as k-means.
-
-Under the hood, a Gaussian mixture model is very similar to k-means: it uses an expectation–maximization approach that qualitatively does the following: 
-
-1. Choose starting guesses for the location and shape 
-2. Repeat until converged: 
-   * E-step: for each point, find weights encoding the probability of membership in each cluster
-   * M-step: for each cluster, update its location, normalization, and shape based on all data points, making use of the weights
-
-The result of this is that each cluster is associated not with a hard-edged sphere, but with a smooth Gaussian model. Just as in the k-means expectation–maximization approach, this algorithm can sometimes miss the globally optimal solution, and thus in practice multiple random initializations are used.
-
-**GMM as Density Estimation Though** 
-
-GMM is often categorized as a clustering algorithm, fundamentally it is an algorithm for density estimation. That is to say, the result of a GMM fit to some data is technically not a clustering model, but a generative probabilistic model describing the distribution of the data.
-
-**How many components?** 
-
-The fact that GMM is a generative model gives us a natural means of determining the optimal number of components for a given dataset. A generative model is inherently a probability distribution for the dataset, and so we can simply evaluate the likelihood of the data under the model, using cross-validation to avoid overfitting. Another means of correcting for overfitting is to adjust the model likelihoods using some analytic criterion such as the Akaike information criterion (AIC) or the Bayesian information criterion (BIC). Scikit-Learn’s GMM estimator actually includes built-in methods that compute both of these, and so it is very easy to operate on this approach.
-
-Notice the important point: this choice of number of components measures how well GMM works as a density estimator, not how well it works as a clustering algorithm. 
-
-```python
-n_components = np.arange(1, 21)
-models = [GMM(n, covariance_type='full', random_state=0).fit(Xmoon) for n in n_components]
-
-plt.plot(n_components, [m.bic(Xmoon) for m in models], label='BIC')
-plt.plot(n_components, [m.aic(Xmoon) for m in models], label='AIC')
-plt.legend(loc='best')
-plt.xlabel('n_components');
-```
-
-
-
-### Кластеризация с помощью минимального остовного дерева
-
-1. Строим взвешенный граф, где веса ребер - расстояния между объектами.
-2. Строим минимальное отсовное дерево (алгоритм Крускала) для этого графа
-3. Удаляем К-1 ребро с максимальным весом
-4. Получаем К компонент связности, которые интерпретируем как кластеры
+4. 
 
 
 
@@ -3928,13 +3691,11 @@ plt.xlabel('n_components');
 
 
 
-### Deep Networks
+### MLP units choice
 
 
 
 #### Output units
-
-
 
 The choice of cost function is tightly coupled with the choice of output unit. Most of the time, we simply use the cross-entropy between the data distribution and the model distribution. The choice of how to represent the output then determines the form of the cross-entropy function.
 
@@ -3946,11 +3707,7 @@ J(\theta) = -logP(y|\bold x) = -log(\sigma((2y-1)z)) = \gamma ((1-2y)z)
 $$
 **Softmax unit** (n-classes classification) 
 
-
-
 #### Hidden units
-
-
 
 **Rectified Linear Units** (RELU) - best default choice. *g(z) = max{0, z}*. One drawback to relu is that they cannot learn via gradient based methods on examples for which their activation is zero.
 
@@ -3961,99 +3718,6 @@ Three generalization of relu are based on using non-zero slope \alpha_i when z_i
 **Leaky RELU** - fixes \alpha to a small value like 0.01 
 
 **Parametric RELU** - treat \alpha as a learnable parameter
-
-
-
-### Forward propagation
-
-**Require**: Network depth, l
-
-**Require**: W^{(i)}, the weight matrices of the model
-
-**Require**: b, the bias parameters of the model
-
-**Require**: x, the input to process
-
-**Require**: y = the target output
-
-![](DS and ML book notes/img/forwardprop.png)
-
-```pseudocode
-h[0] = x
-for k = 1, ..., l do
-	a[k] = b[k] + W[k]h[k-1]
-	h[k] = f(a[k])
-end for
-
-y_hat = h[l]
-J = L(y_hat, y) + regularizer
-```
-
-
-
-### Backward propagation
-
-```pseudocode
-g <- grad_y_hat(J) = grad_y_hat(L(y_hat, y))
-for k = 1, ..., l do
-	"Convert the gradient on the layer's output into a gradient into the
-    pre-nonlinearity activation (element-wise multiplication if f is element-wise):"
-	g <- grad_a_k(J) = g * f_deriv(a_k)
-	"Compute gradients on weights and biases (including the regularization term, then needed):"
-	grad_b_k(J) = g + lambda*grad_b_k*omega(theta)
-	grad_W_k(J) = g*h_prev.T + lambda*grad_W_k*omega(theta)
-	"Propagate the gradient w.r.t. the next lower-level hidden layer's activations:"
-	g <- grad_h_prev(J) = W_k.T * g
-end for
-```
-
-Each operation is responsible for knowing how to back-propagate through the edges in the graph that it participates in. For example, we might use a matrix multiplication operation to create a variable C = AB. Suppose the gradient of a scalar z with respect to C is given by G. If we call the bprop method to request the gradient with respect to A given that the gradient on the output is G, then the bprop method of matrix multiplication operation must state that the gradient with respect to A is given by G(B.T). Likewise to B - (A.T)G.
-
-**Require**: T, the target set of variables whose gradients must be computed
-
-**Require**: G, the computational graph
-
-**Require**: z, the variable to be differentiated
-
-```pseudocode
-"Lets G_prun be G pruned to contain only nodes that are ancestors of z
-and descendents of nodes in T.
-Initialize grad_table, a data structure associating tensors to their gradients"
-grad_table[z] <- 1
-for V in T do
-	build_grad(V, G, G_prun, grad_table)
-end for
-Return grad_table restricted to T
-```
-
-**build_grad function:**
-
-**Require**: V, the variable whose gradient should be added to G and grad_table
-
-**Require**: G, the graph to modify
-
-**Require**: G_prun, the restriction of G to nodes that paricipate in the gradient
-
-**Require**: grad_table, a data structure mapping nodes to their gradients
-
-```pseudocode
-if V is in grad_table then
-	Return grad_table[V]
-end if
-i <- 1
-for C in get_consumers(V, G_prun) do
-	op <- get_operation(C)
-	D <- build_grad(C, G, G_prun, grad_table)
-	G_i <- op.bprop(get_inputs(C, G_prun), V, D)
-	i <- i + 1
-end for
-G <- sum(G)
-grad_table[V] = G
-"Insert G and the operations creating it into G"
-Return G
-```
-
-
 
 
 
@@ -4115,135 +3779,15 @@ Let's summarize the MLP learning procedure in three simple steps:
    \\
    \bold W^{(l)} = \bold W^{(l)} - \eta∆ ^{(l)}
    $$
-   ![](D:/Github/Study/DS and ML book notes/img/backpropagation.png)
-
-```python
-class NeuralNetMLP(object):
-    
-    def __init__(self, n_hidden=30, l2=0., epochs=100, eta=0.1,
-                shuffle=True, minibatch_size=1, seed=None):
-        
-        self.random = np.random.RandomState(seed)
-        self.n_hidden = n_hidden
-        self.l2 = l2
-        self.epochs = epochs
-        self.eta = eta
-        self.shuffle = shuffle
-        self.minibatch_size = minibatch_size
-    
-    def _onehot(self, y, n_classes):
-        onehot = np.zeros((n_classes, y.shape[0]))
-        for idx, val in enumerate(y.astype(int)):
-            onehot[val, idx] = 1
-        return onehot.T
-    
-    def _sigmoid(self, z):
-        return 1./(1 + np.exp(-np.clip(z, -250, 250)))
-    
-    def _forward(self, X):
-        z_h = np.dot(X, self.w_h) + self.b_h
-        a_h = self._sigmoid(z_h)
-        
-        z_out = np.dot(a_h, self.w_out) + self.b_out
-        a_out = self._sigmoid(z_out)
-        
-        return z_h, a_h, z_out, a_out
-    
-    def _compute_cost(self, y_enc, output):
-        L2_term = (self.l2 * (np.sum(self.w_h ** 2.) + np.sum(self.w_out ** 2.)))
-        
-        term1 = - y_enc * (np.log(output))
-        term2 = (1. - y_enc)*(np.log(1. - output))
-        cost = np.sum(term1 - term2) + L2_term
-        return cost
-    
-    def predict(self, X):
-        z_h, a_h, z_out, a_out = self._forward(X)
-        
-        y_pred = np.argmax(z_out, axis=1)
-        return y_pred
-    
-    def fit(self, X_train, y_train, X_valid, y_valid):
-        n_output = np.unique(y_train).shape[0]
-        n_features = X_train.shape[1]
-        
-        self.b_h = np.zeros(self.n_hidden)
-        self.w_h = np.random.normal(loc=0.0, scale=0.1, size=(n_features, self.n_hidden))
-        
-        self.b_out = np.zeros(n_output)
-        self.w_out = np.random.normal(loc=0.0, scale=0.1, size=(self.n_hidden, n_output))
-        
-        epoch_strlen = len(str(self.epochs))
-        self.eval_ = {'cost':[], 'train_acc':[], 'valid_acc':[]}
-        
-        y_train_enc = self._onehot(y_train, n_output)
-        
-        for i in range(self.epochs):
-            indices = np.arange(X_train.shape[0])
-            
-            if self.shuffle:
-                self.random.shuffle(indices)
-            
-            for start_idx in range(0, indices.shape[0] - self.minibatch_size + 1, self.minibatch_size):
-                batch_idx = indices[start_idx:start_idx+self.minibatch_size]
-                
-                z_h, a_h, z_out, a_out = self._forward(X_train[batch_idx])
-                
-                #backpropogation
-                delta_out = a_out - y_train_enc[batch_idx]
-                
-                sigmoid_derivative_h = a_h * (1. - a_h)
-                
-                delta_h = (np.dot(delta_out, self.w_out.T)*sigmoid_derivative_h)
-                
-                grad_w_h = np.dot(X_train[batch_idx].T, delta_h)
-                grad_b_h = np.sum(delta_h, axis=0)
-                
-                grad_w_out = np.dot(a_h.T, delta_out)
-                grad_b_out = np.sum(delta_out, axis=0)
-                
-                delta_w_h = (grad_w_h + self.l2*self.w_h)
-                delta_b_h = grad_b_h
-                self.w_h -= self.eta * delta_w_h
-                self.b_h -= self.eta * delta_b_h
-                
-                
-                delta_w_out = (grad_w_out + self.l2*self.w_out)
-                delta_b_out = grad_b_out
-                self.w_out -= self.eta * delta_w_out
-                self.b_out -= self.eta * delta_b_out
-                
-
-
-            
-            #evaluation
-            
-            z_h, a_h, z_out, a_out = self._forward(X_train)
-            cost = self._compute_cost(y_enc=y_train_enc, output=a_out)
-            
-            y_train_pred = self.predict(X_train)
-            y_valid_pred = self.predict(X_valid)
-            
-            train_acc = ((np.sum(y_train == y_train_pred)).astype(np.float) /
-                         X_train.shape[0])
-            valid_acc = ((np.sum(y_valid == y_valid_pred)).astype(np.float) /
-                         X_valid.shape[0])
-            sys.stderr.write('\r%0*d/%d | Cost: %.2f '
-                             '| Train/Valid Acc.: %.2f%%/%.2f%% '%
-                             (epoch_strlen, i+1, self.epochs, cost,
-                              train_acc*100, valid_acc*100))
-            sys.stderr.flush()
-
-            self.eval_['cost'].append(cost)
-            self.eval_['train_acc'].append(train_acc)
-            self.eval_['valid_acc'].append(valid_acc)
-            
-        return self
-```
+   ![](img/backpropagation.png)
+   
+   Code for this implementation in python-playground/mini_projects/ml_models_implementations/neural_network.py
+   
+   
 
 ### Activation functions
 
-![](D:/Github/Study/DS and ML book notes/img/activation_func.png)
+![](img/activation_func.png)
 
 
 
@@ -4348,16 +3892,6 @@ One training step of a GAN model with such a value function requires two optimiz
 
 
 
-### Transposed convolution
-
-
-
- While a convolution operation is usually used to downsample the feature space, a transposed convolution operation is usually used for upsampling the feature space. Upsampling feature maps using transposed convolution works by inserting 0s between the elements of the input feature maps.
-
-![](img/transpose_conv.png)
-
-
-
 ### Batch Normalization
 
 One of the main ideas behind BatchNorm is normalizing the layer inputs and preventing changes in their distribution during training, which enables faster and better convergence.
@@ -4381,182 +3915,6 @@ Assume that we have the net preactivation feature maps obtained after a convolut
 
 
 
-
-### Markov decision processes
-
-
-
-The Markov decision process, or MDP, is simply a process that models how the AI interacts with the environment over time.
-
-The standard approach for solving MDP problems is by using dynamic programming, but RL offers some key advantages over dynamic programming.
-
-The types of problems that require learning an interactive and sequential decisionmaking process, where the decision at time step t affects the subsequent situations, are mathematically formalized as Markov decision processes (MDPs).
-$$
-p(s',r|s,a) =^{def} P(S_{t+1}=s', R_{t+1} = r | S_t = s, A_t = a) 
-$$
-Where p() - conditional probability over the preceding state S_t and taken action A_t.
-
-This probability distribution completely defines the dynamics of the environment (or model of the environment) because, based on this distribution, all transition probabilities of the environment can be computed. Therefore, the environment dynamics are a central criterion for categorizing different RL methods. The types of RL methods that require a model of the environment or try to learn a model of the environment (that is, the environment dynamics) are called model-based methods, as opposed to model-free methods.
-
-The environment dynamics can be considered deterministic if particular actions for given states are always or never taken, that is,p () ∈ {0,1}. Otherwise, in the more general case, the environment would have stochastic behavior.
-
-A Markov process can be represented as a directed cyclic graph in which the nodes in the graph represent the different states of the environment. The edges of the graph (that is, the connections between the nodes) represent the transition probabilities between the states.
-
-![](img\markov_process.png)
-
-As the agent interacts with the environment, the sequence of observations or states forms a trajectory. There are two types of trajectories. If an agent's trajectory can be divided into subparts such that each starts at time t = 0 and ends in a terminal state 𝑆_𝑇 (at t = T), the task is called an episodic task. On the other hand, if the trajectory is infinitely continuous without a terminal state, the task is called a continuing task. The task related to a learning agent for the game of chess is an episodic task, whereas a cleaning robot that is keeping a house tidy is typically performing a continuing task. 
-
-
-
-The so-called **return** at time t is the cumulated reward obtained from the entire duration of an episode. The return at time t can then be calculated from the immediate reward as well as the subsequent ones, as follows:
-$$
-G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + ... = \sum_{k=0}\gamma^k R_{t+k+1}
-$$
-Here, 𝛾𝛾 is the discount factor in range [0, 1]. The parameter 𝛾𝛾 indicates how much the future rewards are "worth" at the current moment (time t). Note that by setting 𝛾𝛾 = 0, we would imply that we do not care about future rewards
-
-A **policy** typically denoted by 𝜋𝜋(𝑎𝑎|𝑠𝑠) is a function that determines the next action to take, which can be either deterministic, or stochastic (that is, the probability for taking the next action). A stochastic policy then has a probability distribution over actions that an agent can take at a given state:
-$$
-\pi(a|s) = P[A=a|S=s]
-$$
-The **value function**, also referred to as the state-value function, measures the goodness of each state—in other words, how good or bad it is to be in a particular state. Now, based on the return 𝐺𝐺𝑡𝑡, we define the value function of state s as the expected return (the average return over all possible episodes) after following policy 𝜋𝜋:
-$$
-v_{\pi}(s) = E_{\pi}[G_t | S_t = s] = E_{\pi}[\sum_{k=0} \gamma^{k+1} R_{t+k+1} | S_t = s]
-$$
-Moreover, we can also define a value for each state-action pair, which is called the action-value function and is denoted by 𝑞𝑞𝜋𝜋(𝑠𝑠, 𝑎𝑎). The action-value function refers to the expected return 𝐺𝐺𝑡𝑡 when the agent is at state 𝑆𝑆𝑡𝑡 = 𝑠𝑠 and takes action 𝐴𝐴𝑡𝑡 = 𝑎𝑎. Extending the definition of state-value function to state-action pairs, we get the following:
-$$
-q_{\pi}(s, a) = E_{\pi}[G_t | S_t = s, A_t = a] = E_{\pi}[\sum_{k=0} \gamma^{k+1} R_{t+k+1} | S_t = s, A_t = a]
-$$
-In short, the return is the weighted sum of rewards for an entire episode, which would be equal to the discounted final reward in our chess example (since there is only one reward). The value function is the expectation over all possible episodes, which basically computes how "valuable" it is on average to make a certain move.
-
-
-
-### The Thompson Sampling model - multi arm bandit example
-
-
-
-Each slot machine has its own Beta distribution. Over the rounds, the Beta distribution of the slot machine with the highest conversion rate will be progressively shifted to the right, and the Beta distributions of the strategies with lower conversion rates will be progressively shifted to the left. Therefore,  the slot machine with the highest conversion rate will be selected more and more.
-
-```python
-# Importing the libraries
-import numpy as np
-
-# Setting conversion rates and the number of samples
-conversionRates = [0.15, 0.04, 0.13, 0.11, 0.05]
-N = 10000
-d = len(conversionRates)
-
-# Creating the dataset
-X = np.zeros((N, d))
-for i in range(N):
- for j in range(d):
- if np.random.rand() < conversionRates[j]:
- X[i][j] = 1
-
-# Making arrays to count our losses and wins
-nPosReward = np.zeros(d)
-nNegReward = np.zeros(d)
-
-# Taking our best slot machine through beta distribution and updating
-its losses and wins
-for i in range(N):
- selected = 0
- maxRandom = 0
-    
- for j in range(d):
- 	randomBeta = np.random.beta(nPosReward[j] + 1, nNegReward[j] + 1)
- 	if randomBeta > maxRandom:
- 		maxRandom = randomBeta
- 		selected = j
-        
- if X[i][selected] == 1:
- 	nPosReward[selected] += 1
- else:
- 	nNegReward[selected] += 1
-    
-# Showing which slot machine is considered the best
-nSelected = nPosReward + nNegReward
-for i in range(d):
- print('Machine number ' + str(i + 1) + ' was selected ' + str(nSelected[i]) + ' times')
-
-print('Conclusion: Best machine is machine number ' + str(np.argmax(nSelected) + 1))
-```
-
-
-
-
-
-
-
-### Dynamic programming using Bellman equation
-
-
-
-The Bellman equation simplifies the computation of the value function, such that rather than summing over multiple time steps, it uses a recursion that is similar to the recursion for computing the return:
-$$
-v_{\pi}(s) = E_{\pi}[G_t|S_t = s]  \\ = E_{\pi} [r + \gamma G_{t+1} | S_t = s]  \\ = r + \gamma E_{\pi}[G_{t+1} |S_t = s]
-$$
-Notice that the immediate reward r is taken out of the expectation since it is a constant and known quantity at time t.
-
-Similarly, for the action-value function, we could write:
-$$
-q_{\pi} (s,a) = E_{\pi} [G_t | S_t = s, A_t = a]  \\ = E_{\pi} [r + \gamma G_{t+1} | S_t = s, A_t = a]  \\ = r + \gamma E_{\pi} [G_{t+1} | S_t = s, A_t = a]
-$$
-Bellman equation:
-$$
-v_{\pi} (s) = \sum_a \pi(a|s) \sum_{s', r'} p(s', r'|s, a)[r' + \gamma v_{pi}(s')]
-$$
-
-
-### Dynamic programming
-
-* We have full knowledge about the environment dynamics; that is, all transition probabilities 𝑝𝑝(𝑠𝑠′ , 𝑟𝑟′ |𝑠𝑠, 𝑎𝑎) are known
-* The agent's state has the Markov property, which means that the next action and reward only depend on the current state and the choice of action we make at this moment or current time step.
-
-
-$$
-v^{<i+1>}(s) = \sum_a\pi(a|s) \sum_{s', r} p(s', r|s,a)[r+\gamma v^{<i>}(s')]
-$$
-
-Now that we have computed the value function 𝑣𝑣𝜋𝜋(𝑠𝑠) by following the existing policy, 𝜋𝜋, we want to use 𝑣𝑣𝜋𝜋(𝑠𝑠) and improve the existing policy, 𝜋𝜋.
-
- Now, in order to find 𝜋𝜋′ that always has a better or equal value for each state, we first compute the action-value function, 𝑞𝑞𝜋𝜋(𝑠𝑠, 𝑎𝑎), for each state, s, and action, a, based on the computed state value using the value function 𝑣𝑣𝜋𝜋(𝑠𝑠). We iterate through all the states, and for each state, s, we compare the value of the next state 𝑠𝑠′ , that would occur if action a was selected.
-
-After we have obtained the highest state value by evaluating all state-action pairs via 𝑞𝑞𝜋𝜋(𝑠𝑠, 𝑎𝑎), we can compare the corresponding action with the action selected by the current policy. If the action suggested by the current policy (that is, arg max  𝜋𝜋(𝑎𝑎|𝑠𝑠)) is different than the action suggested by the action-value function (that is, arg max  𝑞𝑞𝜋𝜋(𝑠𝑠, 𝑎𝑎)), then we can update the policy by reassigning the probabilities of actions to match the action that gives the highest action value, 𝑞𝑞𝜋𝜋(𝑠𝑠, 𝑎𝑎). This is called the policy improvement algorithm.
-
-
-
-
-
-However, it can be more efficient if we combine the two tasks of policy evaluation and policy improvement into a single step. The following equation updates the value function for iteration i + 1 (denoted by 𝑣𝑣⟨𝑖𝑖+1⟩ ) based on the action that maximizes the weighted sum of the next state value and its immediate reward (𝑟𝑟 + 𝛾𝛾𝑣𝑣⟨𝑖𝑖⟩ (𝑠𝑠′ )):
-$$
-v^{<i+1>}(s) = max \sum_{s', r}p(s', r | s, a) [r + \gamma v^{<i>}(s')]
-$$
-
-
-### Reinforcement Learning with Monte Carlo
-
-
-
-Moving away from the dynamic programming approach, we now assume that we do not have any knowledge about the environment dynamics. That is, we do not know the state-transition probabilities of the environment, and instead, we want the agent to learn through interacting with the environment. Using MC methods, the learning process is based on the so-called simulated experience.
-
-For MC-based RL, we define an agent class that follows a probabilistic policy, 𝜋𝜋, and based on this policy, our agent takes an action at each step. This results in a simulated episode.
-
-After generating a set of episodes, for each state, s, the set of episodes that all pass through state s is considered for calculating the value of state s. Let's assume that a lookup table is used for obtaining the value corresponding to the value function, 𝑉𝑉(𝑆𝑆𝑡𝑡 = 𝑠𝑠). MC updates for estimating the value function are based on the total return obtained in that episode starting from the first time that state s is visited. This algorithm is called first-visit Monte Carlo value prediction.
-
-MC control refers to the optimization procedure for improving a policy. Similar to the policy iteration approach in previous section (Dynamic programming), we can repeatedly alternate between policy evaluation and policy improvement until we reach the optimal policy. So, starting from a random policy, 𝜋𝜋0, the process of alternating between policy evaluation and policy improvement can be illustrated as follows:
-
-![](D:/Github/Study/DS and ML book notes/img/mc_control.png)
-
-Given an action-value function, q(s, a), we can generate a greedy (deterministic) policy as follows:
-$$
-\pi (s) = argmax(q (s,a))
-$$
-In order to avoid the lack-of-exploration problem, and to consider the non-visited state-action pairs as discussed earlier, we can let the non-optimal actions have a small chance (𝜖𝜖) to be chosen. This is called the 𝜖𝜖-greedy policy, according to which, all non-optimal actions at state s have a minimal (1)  probability of being selected (instead of 0), and the optimal action has a probability of (2) (instead of 1).
-$$
-\frac{\epsilon}{|A(s)|} (1)
-\\
-1 - \frac{(|A(s)| - 1)*\epsilon}{|A(s)|}(2)
-$$
 
 
 ### Temporal difference learning
@@ -4588,21 +3946,21 @@ Certain types of NNs, such as CNNs, are able to automatically learn the features
 
 #### **Discrete convolutions in one dimension**
 
-Let's start with some basic definitions and notations that we are going to use. A discrete convolution for two vectors, x and w, is denoted by 𝒚𝒚 = 𝒙𝒙 ∗ 𝒘𝒘, in which vector x is our input (sometimes called signal) and w is called the filter or kernel. A discrete convolution is mathematically defined as follows:
+A discrete convolution for two vectors, x and w, is denoted by 𝒚𝒚 = 𝒙𝒙 ∗ 𝒘𝒘, in which vector x is our input (sometimes called signal) and w is called the filter or kernel. A discrete convolution is mathematically defined as follows:
 $$
 y = x*w => y[i] = \sum_{k=-\inf}^{+\inf}x[i-k]w[k]
 $$
 The sum from -inf to +inf solves with padding:
 
-![](D:\Github\Study\DS and ML book notes/img/padding.png)
+![](img/padding.png)
 
-Let's assume that the original input, x, and filter, w, have n and m elements, respectively, where 𝑚𝑚 ≤ 𝑛𝑛. Therefore, the padded vector, 𝒙^𝑝, has size n + 2p. The practical formula for computing a discrete convolution will change to the following:
+Let's assume that the original input, x, and filter, w, have n and m elements, respectively, where 𝑚 ≤ 𝑛. Therefore, the padded vector, 𝒙^𝑝, has size n + 2p. The practical formula for computing a discrete convolution will change to the following:
 $$
 y = x*w =>y[i] = \sum_{k=0}^{k = m-1} x^p[i+m-k]w[k]
 $$
 Now that we have solved the infinite index issue, the second issue is indexing x with i + m – k. The important point to notice here is that x and w are indexed in different directions in this summation. Computing the sum with one index going in the reverse direction is equivalent to computing the sum with both indices in the forward direction after flipping one of those vectors, x or w, after they are padded. 
 
-![](D:/Github/Study/DS and ML book notes/img/1d_conv.png)
+![](img/1d_conv.png)
 
 There are three modes of padding that are commonly used in practice: full, same, and valid: 
 
@@ -4612,19 +3970,10 @@ There are three modes of padding that are commonly used in practice: full, same,
 
 In practice, it is recommended that you preserve the spatial size using same padding for the convolutional layers and decrease the spatial size via pooling layers instead.
 
-#### Determining the size of the convolution output
-
-The output size of a convolution is determined by the total number of times that we shift the filter, w, along the input vector. Let's assume that the input vector is of size n and the filter is of size m. Then, the size of the output resulting from 𝒚𝒚 = 𝒙𝒙 ∗ 𝒘𝒘, with padding, p, and stride, s, would be determined as follows:
-$$
-o = floor(\frac{n + 2p - m}{s}) + 1
-$$
-
 
 #### Performing a discrete convolution in 2D
 
-![](D:/Github/Study/DS and ML book notes/img/2d_conv.png)
-
-![](D:/Github/Study/DS and ML book notes/img/conv_example.png)
+![](img/2d_conv.png)
 
 
 
@@ -4651,19 +4000,36 @@ def conv2d(X, W, p=(0,0), s=(1,1)):
   return np.array(res)
 ```
 
+#### Determining the size of the convolution output
+
+The output size of a convolution is determined by the total number of times that we shift the filter, w, along the input vector. Let's assume that the input vector is of size n and the filter is of size m. Then, the size of the output resulting from 𝒚𝒚 = 𝒙𝒙 ∗ 𝒘𝒘, with padding, p, and stride, s, would be determined as follows:
+$$
+o = floor(\frac{n + 2p - m}{s}) + 1
+$$
+
+
+
+### Transposed convolution
+
+ While a convolution operation is usually used to downsample the feature space, a transposed convolution operation is usually used for upsampling the feature space. Upsampling feature maps using transposed convolution works by inserting 0s between the elements of the input feature maps.
+
+![](img/transpose_conv.png)
+
+
+
 #### Subsampling layers
 
 Subsampling is typically applied in two forms of pooling operations in CNNs: max-pooling and mean-pooling (also known as average-pooling).
 
-![](D:/Github/Study/DS and ML book notes/img/pooling.png)
+![](img/pooling.png)
 
 Traditionally, pooling is assumed to be nonoverlapping. Pooling is typically performed on nonoverlapping neighborhoods, which can be done by setting the stride parameter equal to the pooling size.
 
+
+
 #### Implementing CNN
 
-How can we incorporate multiple input channels in the convolution operation that we discussed in the previous sections? The answer is very simple: we perform the convolution operation for each channel separately and then add the results together using the matrix summation. 
-
-![](D:/Github/Study/DS and ML book notes/img/img_conv.png)
+![](img/img_conv.png)
 
 
 
@@ -4679,13 +4045,13 @@ Each training example is a matrix in which each row is a feature vector. For sim
 
 #### **Different architectures of RNN**
 
-![](D:/Github/Study/DS and ML book notes/img/rnn_architectures.png)
+![](img/rnn_architectures.png)
 
 * Many-to-one: The input data is a sequence, but the output is a fixed-size vector or scalar, not a sequence. For example, in sentiment analysis, the input is text-based (for example, a movie review) and the output is a class label (for example, a label denoting whether a reviewer liked the movie). 
 * One-to-many: The input data is in standard format and not a sequence, but the output is a sequence. An example of this category is image captioning— the input is an image and the output is an English phrase summarizing the content of that image
 * Many-to-many: Both the input and output arrays are sequences. This category can be further divided based on whether the input and output are synchronized. An example of a synchronized many-to-many modeling task is video classification, where each frame in a video is labeled. An example of a delayed many-to-many modeling task would be translating one language into another. For instance, an entire English sentence must be read and processed by a machine before its translation into German is produced.
 
-![](D:/Github/Study/DS and ML book notes/img/rnn_weights.png)
+![](img/rnn_weights.png)
 
 Each directed edge (the connections between boxes) in the representation of an RNN that we just looked at is associated with a weight matrix. Those weights do not depend on time, t; therefore, they are shared across the time axis. The different weight matrices in a single-layer RNN are as follows:
 
@@ -4712,15 +4078,15 @@ $$
 
 #### **Hidden-recurrence versus output-recurrence**
 
-![](D:/Github/Study/DS and ML book notes/img/output_rec_prop.png)
+![](img/output_rec_prop.png)
 
 #### LSTM
 
 The most effective recurrent neural network models used in practice are gated RNNs. These include the long short-term memory (LSTM) networks and networks based on the gated recurrent unit (GRU). The beauty of using gated units in RNNs is that such networks can store information in their units for future use, much like bits in a computer’s memory
 
-![](D:/Github/Study/DS and ML book notes/img/LSTM.png)
+![](img/LSTM.png)
 
-![](D:/Github/Study/DS and ML book notes/img/text.png)
+![](img/text.png)
 
 In an LSTM cell, there are three different types of gates, which are known as the forget gate, the input gate, and the output gate: 
 
@@ -4817,6 +4183,145 @@ model.fit(ds, epochs=20)
 ```
 
 Other important extensions to RNNs include bi-directional RNNs, RNNs with attention and sequence-to-sequence RNN models. The latter, in particular, are frequently used to build neural machine translation models and other models for text to text transformations. A generalization of an RNN is a recursive neural network.
+
+
+
+
+
+## Reinforcement Learning
+
+
+
+### Markov decision processes
+
+
+
+The Markov decision process, or MDP, is simply a process that models how the AI interacts with the environment over time.
+
+The standard approach for solving MDP problems is by using dynamic programming, but RL offers some key advantages over dynamic programming.
+
+The types of problems that require learning an interactive and sequential decision making process, where the decision at time step t affects the subsequent situations, are mathematically formalized as Markov decision processes (MDPs).
+$$
+p(s',r|s,a) =^{def} P(S_{t+1}=s', R_{t+1} = r | S_t = s, A_t = a) 
+$$
+Where p() - conditional probability over the preceding state S_t and taken action A_t.
+
+This probability distribution completely defines the dynamics of the environment (or model of the environment) because, based on this distribution, all transition probabilities of the environment can be computed. Therefore, the environment dynamics are a central criterion for categorizing different RL methods. The types of RL methods that require a model of the environment or try to learn a model of the environment (that is, the environment dynamics) are called model-based methods, as opposed to model-free methods.
+
+The environment dynamics can be considered deterministic if particular actions for given states are always or never taken, that is,p () ∈ {0,1}. Otherwise, in the more general case, the environment would have stochastic behavior.
+
+A Markov process can be represented as a directed cyclic graph in which the nodes in the graph represent the different states of the environment. The edges of the graph (that is, the connections between the nodes) represent the transition probabilities between the states.
+
+![](img\markov_process.png)
+
+As the agent interacts with the environment, the sequence of observations or states forms a trajectory. There are two types of trajectories. If an agent's trajectory can be divided into subparts such that each starts at time t = 0 and ends in a terminal state 𝑆_𝑇 (at t = T), the task is called an episodic task. On the other hand, if the trajectory is infinitely continuous without a terminal state, the task is called a continuing task. The task related to a learning agent for the game of chess is an episodic task, whereas a cleaning robot that is keeping a house tidy is typically performing a continuing task. 
+
+
+
+The so-called **return** at time t is the cumulated reward obtained from the entire duration of an episode. The return at time t can then be calculated from the immediate reward as well as the subsequent ones, as follows:
+$$
+G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + ... = \sum_{k=0}\gamma^k R_{t+k+1}
+$$
+Here, 𝛾𝛾 is the discount factor in range [0, 1]. The parameter 𝛾𝛾 indicates how much the future rewards are "worth" at the current moment (time t). Note that by setting 𝛾𝛾 = 0, we would imply that we do not care about future rewards
+
+A **policy** typically denoted by 𝜋𝜋(𝑎𝑎|𝑠𝑠) is a function that determines the next action to take, which can be either deterministic, or stochastic (that is, the probability for taking the next action). A stochastic policy then has a probability distribution over actions that an agent can take at a given state:
+$$
+\pi(a|s) = P[A=a|S=s]
+$$
+The **value function**, also referred to as the state-value function, measures the goodness of each state—in other words, how good or bad it is to be in a particular state. Now, based on the return 𝐺𝐺𝑡𝑡, we define the value function of state s as the expected return (the average return over all possible episodes) after following policy 𝜋𝜋:
+$$
+v_{\pi}(s) = E_{\pi}[G_t | S_t = s] = E_{\pi}[\sum_{k=0} \gamma^{k+1} R_{t+k+1} | S_t = s]
+$$
+Moreover, we can also define a value for each state-action pair, which is called the action-value function and is denoted by 𝑞𝑞𝜋𝜋(𝑠𝑠, 𝑎𝑎). The action-value function refers to the expected return 𝐺𝐺𝑡𝑡 when the agent is at state 𝑆𝑆𝑡𝑡 = 𝑠𝑠 and takes action 𝐴𝐴𝑡𝑡 = 𝑎𝑎. Extending the definition of state-value function to state-action pairs, we get the following:
+$$
+q_{\pi}(s, a) = E_{\pi}[G_t | S_t = s, A_t = a] = E_{\pi}[\sum_{k=0} \gamma^{k+1} R_{t+k+1} | S_t = s, A_t = a]
+$$
+In short, the return is the weighted sum of rewards for an entire episode, which would be equal to the discounted final reward in our chess example (since there is only one reward). The value function is the expectation over all possible episodes, which basically computes how "valuable" it is on average to make a certain move.
+
+
+
+### The Thompson Sampling model
+
+
+
+Each slot machine has its own Beta distribution. Over the rounds, the Beta distribution of the slot machine with the highest conversion rate will be progressively shifted to the right, and the Beta distributions of the strategies with lower conversion rates will be progressively shifted to the left. Therefore,  the slot machine with the highest conversion rate will be selected more and more.
+
+```python
+# Importing the libraries
+import numpy as np
+
+# Setting conversion rates and the number of samples
+conversionRates = [0.15, 0.04, 0.13, 0.11, 0.05]
+N = 10000
+d = len(conversionRates)
+
+# Creating the dataset
+X = np.zeros((N, d))
+for i in range(N):
+ for j in range(d):
+ if np.random.rand() < conversionRates[j]:
+ X[i][j] = 1
+
+# Making arrays to count our losses and wins
+nPosReward = np.zeros(d)
+nNegReward = np.zeros(d)
+
+# Taking our best slot machine through beta distribution and updating
+its losses and wins
+for i in range(N):
+ selected = 0
+ maxRandom = 0
+    
+ for j in range(d):
+ 	randomBeta = np.random.beta(nPosReward[j] + 1, nNegReward[j] + 1)
+ 	if randomBeta > maxRandom:
+ 		maxRandom = randomBeta
+ 		selected = j
+        
+ if X[i][selected] == 1:
+ 	nPosReward[selected] += 1
+ else:
+ 	nNegReward[selected] += 1
+    
+# Showing which slot machine is considered the best
+nSelected = nPosReward + nNegReward
+for i in range(d):
+ print('Machine number ' + str(i + 1) + ' was selected ' + str(nSelected[i]) + ' times')
+
+print('Conclusion: Best machine is machine number ' + str(np.argmax(nSelected) + 1))
+```
+
+
+
+### Reinforcement Learning with Monte Carlo
+
+For MC-based RL, we define an agent class that follows a probabilistic policy, 𝜋𝜋, and based on this policy, our agent takes an action at each step. This results in a simulated episode.
+
+After generating a set of episodes, for each state, s, the set of episodes that all pass through state s is considered for calculating the value of state s. Let's assume that a lookup table is used for obtaining the value corresponding to the value function, 𝑉𝑉(𝑆𝑆𝑡𝑡 = 𝑠𝑠). MC updates for estimating the value function are based on the total return obtained in that episode starting from the first time that state s is visited. This algorithm is called first-visit Monte Carlo value prediction.
+
+MC control refers to the optimization procedure for improving a policy. Similar to the policy iteration approach in previous section (Dynamic programming), we can repeatedly alternate between policy evaluation and policy improvement until we reach the optimal policy. So, starting from a random policy, 𝜋𝜋0, the process of alternating between policy evaluation and policy improvement can be illustrated as follows:
+
+![](img/mc_control.png)
+
+Given an action-value function, q(s, a), we can generate a greedy (deterministic) policy as follows:
+$$
+\pi (s) = argmax(q (s,a))
+$$
+In order to avoid the lack-of-exploration problem, and to consider the non-visited state-action pairs as discussed earlier, we can let the non-optimal actions have a small chance (𝜖𝜖) to be chosen. This is called the 𝜖𝜖-greedy policy, according to which, all non-optimal actions at state s have a minimal (1)  probability of being selected (instead of 0), and the optimal action has a probability of (2) (instead of 1).
+$$
+\frac{\epsilon}{|A(s)|} (1)
+\\
+1 - \frac{(|A(s)| - 1)*\epsilon}{|A(s)|}(2)
+$$
+
+
+### 
+
+
+
+### 
+
+
 
 
 
@@ -4932,24 +4437,7 @@ idf(t, d) = log(\frac{1 + n_d}{1 + df(d, t)})
 $$
 Here, nd is the total number of documents, and df(d, t) is the number of documents, d, that contain the term t. 
 
-```python
-import numpy as np
-from sklearn.feature_extraction.text import CountVectorizer
-count = CountVectorizer()
-docs = np.array(['The sun is shining', 
-                 'The weather is sweet',
-                 'The sun is shining, the weather is sweet,'
-                 'and one and one is two'])
-bag = count.fit_transform(docs)
 
-
-from sklearn.feature_extraction.text import TfidfTransformer
-tfidf = TfidfTransformer(use_idf=True,
-							norm='l2',
-							smooth_idf=True)
-np.set_printoptions(precision=2)
-print(tfidf.fit_transform(count.fit_transform(docs)).toarray())
-```
 
 To make sure that we understand how TfidfTransformer works, let's walk through an example and calculate the tf-idf of the word 'is' in the third document. The word 'is' has a term frequency of 3 (tf = 3) in the third document, and the document frequency of this term is 3 since the term 'is' occurs in all three documents (df = 3). Thus, we can calculate the inverse document frequency as follows:
 $$
