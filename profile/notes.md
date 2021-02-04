@@ -224,6 +224,7 @@
 * [Markov decision processes](#Markov-decision-processes)
 * [The Thompson Sampling model - multi arm bandit example](#The-Thompson-Sampling-model)
 * [Q-Learning](#Q-Learning)
+* [Deep Q-learning](#Deep-Q-learning)
 * [Reinforcement Learning with Monte Carlo](#Reinforcement Learning with Monte Carlo)
 
 
@@ -472,7 +473,7 @@ $$
 
 * **Probability mass function** - a function that gives the probability that a discrete random variable is exactly equal to some value. Probability mass function is the probability distribution of a discrete random variable, and provides the possible values and their associated probabilities.
 
-* **Cumulative distribution function** - function that maps from a value to its percentile rank. To evaluate CDF(x) for a particular value of x, we compute the fraction of values in the distribution less than or equal to x
+* **Cumulative distribution function** (функция распределения) - function that maps from a value to its percentile rank. To evaluate CDF(x) for a particular value of x, we compute the fraction of values in the distribution less than or equal to x
 
   ```python
   def eval_cdf(sample, x):
@@ -485,7 +486,7 @@ $$
       return prob
   ```
 
-* **Probability density function** - The derivative of a CDF. Evaluating a PDF for a particular value of x is usually not useful. The result is not a probability; it is a probability density.
+* **Probability density function** (функция плотности вероятности) - The derivative of a CDF. Evaluating a PDF for a particular value of x is usually not useful. The result is not a probability; it is a probability density.
 
   
 
@@ -4186,6 +4187,50 @@ Q-learning fundamentals:
 **Inference mode:**
 
 1. In state s_t perform action a_t, that has highest Q-value for state s_t.
+
+
+
+
+
+### Deep Q-learning
+
+Initialization: 
+
+1. Initialize the memory of the experience replay to an empty list M. 
+2. Choose a maximum size for the memory. 
+
+At each time t, we repeat the following process, until the end of the epoch: 
+
+1. Predict the Q-values of the current state s_t. 
+
+2. Perform the action selected by the Softmax method:
+   $$
+   a_t = Softmax(Q(s_t, a))
+   $$
+
+3. Get the reward R(s_t, a_t).
+
+4. Reach the next state s_t+1.
+
+5. Append the transition (s_t, a_t, r_t, s_t+1) to the memory M. 
+
+6. Take a random batch B ⊂ M of transitions. For all the transitions of batch B:
+
+   * Get the predictions: Q(s_tB, a_tB)
+
+   * Get the targets:
+     $$
+     R(s_t, a_t) + \gamma max_a(Q(s_{t_B}, a_{t_B}))
+     $$
+
+   * Compute the loss between the predictions and target, over whole batch B:
+     $$
+     Loss = \frac{1}{2} \sum_B (R(s_{t_B}, a_{t_B}) + \gamma max_a (Q(s_{t_B+1}, a)) - Q(s_{t_B}, a_{t_B}))^2 = \frac{1}{2} \sum_B TD_{t_B}(s_{t_B}, a_{t_B})^2
+     $$
+
+   * Back-propagate this loss error back into neural network, and through SGD update the weights according to how much contributed to the loss error.
+
+
 
 
 

@@ -2,27 +2,31 @@
 
 ### Books
 
-| Title                                        | Author                | Status        |
-| -------------------------------------------- | --------------------- | ------------- |
-| Python for Data Analysis                     | Wes McKinney          | **Completed** |
-| Data Science from Scratch                    | Joel Grus             | **Completed** |
-| Python Data Science handbook                 | Jake VanderPlas       | **Completed** |
-| The Hundred Page ML Book                     | Andriy Burkov         | **Completed** |
-| Think Stats                                  | Allen B. Downey       | **Completed** |
-| Data Science for Dummies                     | Lillian Pierson       | **Completed** |
-| Hands on ML with Scikit-Learn, Keras and TF  | Aurelien Geron        | **Completed** |
-| Deep Learning with Python                    | Francois Chollet      | **Completed** |
-| Practical Statistic for Data Scientist       | Peter & Andrew Bruces | **Completed** |
-| Python Machine Learning                      | Sebastian Raschka     | **Completed** |
-| Code Complete                                | Steve McConnell       | **Completed** |
-| Deep Learning                                | Ian Goodfellow        |               |
-| AI Crash Course                              | Hadelin de Ponteves   |               |
-| Introductory Statistics                      |                       | **Completed** |
-| Machine Learning a Probabilistic Perspective | Kevin P. Murphy       |               |
-| Machine Learning Refined                     | Jeremy Watt           |               |
-| Pattern Recognition and Machine Learning     | Christopher M. Bishop |               |
-| Building ML Systems with Python              | Willi Richert         | **Completed** |
-| AI Modern Approach                           | Stuart Russel         |               |
+| Title                                                        | Author                                | Status        |
+| ------------------------------------------------------------ | ------------------------------------- | ------------- |
+| Python for Data Analysis                                     | Wes McKinney                          | **Completed** |
+| Data Science from Scratch                                    | Joel Grus                             | **Completed** |
+| Python Data Science handbook                                 | Jake VanderPlas                       | **Completed** |
+| The Hundred Page ML Book                                     | Andriy Burkov                         | **Completed** |
+| Think Stats                                                  | Allen B. Downey                       | **Completed** |
+| Data Science for Dummies                                     | Lillian Pierson                       | **Completed** |
+| Hands on ML with Scikit-Learn, Keras and TF                  | Aurelien Geron                        | **Completed** |
+| Deep Learning with Python                                    | Francois Chollet                      | **Completed** |
+| Practical Statistic for Data Scientist                       | Peter & Andrew Bruces                 | **Completed** |
+| Python Machine Learning                                      | Sebastian Raschka                     | **Completed** |
+| Code Complete                                                | Steve McConnell                       | **Completed** |
+| Deep Learning                                                | Ian Goodfellow                        |               |
+| AI Crash Course                                              | Hadelin de Ponteves                   | **Completed** |
+| Introductory Statistics                                      |                                       | **Completed** |
+| Machine Learning a Probabilistic Perspective                 | Kevin P. Murphy                       |               |
+| Machine Learning Refined                                     | Jeremy Watt                           |               |
+| Pattern Recognition and Machine Learning                     | Christopher M. Bishop                 |               |
+| Building ML Systems with Python                              | Willi Richert                         | **Completed** |
+| AI Modern Approach                                           | Stuart Russel                         |               |
+| A Modern Introduction to Probability and Statistics          | Dekking, Kraaikamp, Lopuhaa, Meester  |               |
+| Advanced High School Statistics                              | Diez, Barr, Çetinkaya-Rundel, Dorazio |               |
+| Probability for Statistics and Machine Learning: Fundamentals and Advanced Topics | DasGupta                              |               |
+| Simultaneous Statistical Inference With Applications in the Life Sciences | Dickhaus                              |               |
 
 ### Courses and exams
 
