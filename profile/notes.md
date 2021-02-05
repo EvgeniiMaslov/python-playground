@@ -42,6 +42,12 @@
 * [Power and Sample Size](#Power-and-Sample-Size)
 * Experimental Design
 
+
+
+Probability
+
+
+
 * [Central limit theorem](#Central limit theorem)
 * [Bayesian curve fitting](#bayesian-curve-fitting)
 * Curse of dimensionality
@@ -1557,6 +1563,105 @@ Here’s a fairly intuitive alternative approach:
 5. Repeat the preceding two steps many times and determine how often the difference was significant—that’s the estimated power.
 
 Finding out how big a sample size you need requires thinking ahead to the statistical test you plan to conduct. You must specify the minimum size of the effect that you want to detect. You must also specify the required probability of detecting that effect size (power). Finally, you must specify the significance level (alpha) at which the test will be conducted.
+
+
+
+
+
+### Probability rules
+
+
+
+1. A probability function P on a finite sample space Ω assigns to each event A in Ω a number P(A) in [0,1] such that:
+   $$
+   P(\Omega) = 1
+   \\
+   P(A \cup B) = P(A) + P(B) \text{ - (any of events) if A and B disjoint}
+   \\
+   P(A \cup B) = P(A) + P(B) - P(A \cap B) \text{ - for any two events A and B}
+   $$
+
+2. The conditional probability of A given C is given by:
+   $$
+   P(A|C) = \frac{P(A\cap C)}{P(C)}
+   \\
+   P(A \cap C) = P(A|C) P(C)
+   $$
+
+3. **The law of total probability**. Suppose C1, C2, ..., Cm are disjoint events such that C1 ∪ C2 ∪···∪ Cm = Ω. The probability of an arbitrary event A can be expressed as:
+   $$
+   P(A) = P(A|C_1)P(C_1)+P(A|C_2)P(C_2) + ... + P(A|C_m)P(C_m)
+   $$
+   **Example: Testing for mad cow disease**
+
+   Let B denote the event “the cow has BSE” and T the event “the test comes up positive”.  An infected cow has a 70% chance of testing positive, and a healthy cow just 10%. 
+   $$
+   P(T|B) = 0.70
+   \\
+   P(T|\neg B) = 0.10
+   \\
+   P(B) = 0.02
+   $$
+   *Suppose we want to determine the probability P(T) that an arbitrary cow tests positive*. The tested cow is either infected or it is not: event T occurs in combination with B or with Bc (there are no other possibilities). In terms of events:
+   $$
+   T= (T \cap B)\cup(T \cap \neg B)
+   \\
+   P(T) = P(T \cap B) + P(T \cap \neg B)
+   $$
+   because T ∩B and T ∩Bc are disjoint. Next, apply the multiplication rule (in such a way that the known conditional probabilities appear!):
+   $$
+   P(T\cap B) = P(T|B)P(B)
+   \\
+   P(T \cap \neg B) = P(T| \neg B) P(\neg B)
+   \\
+   P(T) = P(T|B)P(B) + P(T| \neg B) P(\neg B) = 0.02 * 0.7 + (1 - 0.02)*0.1 = 0.112
+   \\
+   $$
+   
+
+   Another, perhaps more pertinent, question about the BSE test is the following: *suppose my cow tests positive; what is the probability it really has BSE*?
+   $$
+   P(B|T) = \frac{P(T \cap B)}{P(T)} = \frac{P(T|B)P(B)}{P(T|B)P(B) + P(T|\neg B)P(\neg B)} = \frac{0.7*0.02}{0.7*0.02+ 0.1*(1-0.02)} = 0.125
+   $$
+
+4. **Bayes’ rule**. Suppose the events C1, C2, ..., Cm are disjoint and C1 ∪ C2 ∪···∪ Cm = Ω. The conditional probability of Ci, given an arbitrary event A, can be expressed as:
+   $$
+   P(C_i|A) = \frac {P(A|C_i)P(C_i)}{P(A|C_1)P(C_1)+ P(A|C_2)P(C_2) + ... + P(A|C_m)P(C_m)}
+   $$
+
+5. An event A is called **independent** of B if:
+   $$
+   P(A|B)=P(A)
+   \\
+   P(B|A) = P(B)
+   \\
+   P(A \cap B) = P(A)P(B)
+   $$
+   To show that A and B are independent it suffices to prove just one of the statements.
+
+
+
+
+
+P(A) = sum of the throws equals 4
+
+P(B) = at least one of the throws is a 3
+
+
+$$
+P(B) = 1/6
+\\
+2+2
+1+3
+3+1
+\\
+P(A) = 3/12
+\\
+P(B|A) = \frac{P(B \cap A)}{P(A)} = 2/3
+\\
+P(A|B) = \frac{P(B|A)P(A)}{P(B|A)P(A) + P(B|\neg A)P(\neg A)} = \frac{2/3 * 3/12}{2/3*3/12 + 1/3 * 9/12} = \frac{2/12}{5/12} = 2/5
+$$
+
 
 
 
