@@ -1,4 +1,4 @@
-# TelegramBot
+# Caption generation bot
 
 What can he do:
 
@@ -17,4 +17,4 @@ How to use:
 ```
 updater = Updater("YOUR TOKEN HERE", use_context=True)
 ```
-4. Execute the code and write to the bot
+4. Execute the code and send image to the bot

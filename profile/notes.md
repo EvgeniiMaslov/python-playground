@@ -713,7 +713,7 @@ For any numerical data set,
 
 **Normal Distribution**
 $$
-PDF_{normal}(x) = \frac{1}{\sigma \sqrt{2 \pi}} [-\frac{1}{2}(\frac{x-\mu}{\sigma})^2]
+PDF_{normal}(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
 $$
 
 
@@ -728,8 +728,6 @@ For the exponential distribution, and a few others, there are simple transformat
 If the distribution of the sample is approximately normal, the result is a straight line with intercept mu and slope sigma.  (QQ plot).
 
 
-
-In a normal distribution, 68% of the data lies within one standard deviation of the mean, and 95% lies within two standard deviations.
 
 A QQ-Plot is used to visually determine how close a sample is to the normal distribution. The QQ-Plot orders the z-scores from low to high, and plots each value’s z-score (individual point standardizing) on the y-axis; the x-axis is the corresponding quantile of a normal distribution for that value’s rank. If the points roughly fall on the diagonal line, then the sample distribution can be considered close to normal.
 
@@ -755,6 +753,8 @@ If a sample is approximately lognormal and you plot its CDF on a log-x scale, it
 
 **The Pareto distribution**
 $$
+PDF(x) = \frac{\alpha}{x^{\alpha + 1}}
+\\
 CDF(x) = 1 - (\frac{x}{x_m})^{-\alpha}
 $$
 
@@ -781,8 +781,13 @@ Mean = n*p
 Variance = n*p(1-p)
 $$
 
-
 With large n, and provided p is not too close to 0 or 1, the binomial distribution can be approximated by the normal distribution.
+
+Binomial distribution:
+$$
+p_{X}(k) = P(X= k) = C_n^k p^k (1-p)^{n-k}   \text{ for k = 0, 1, 2, ..., n}
+$$
+
 
 **Poisson (Пуассона) and Related Distributions**
 
@@ -1638,29 +1643,6 @@ Finding out how big a sample size you need requires thinking ahead to the statis
    P(A \cap B) = P(A)P(B)
    $$
    To show that A and B are independent it suffices to prove just one of the statements.
-
-
-
-
-
-P(A) = sum of the throws equals 4
-
-P(B) = at least one of the throws is a 3
-
-
-$$
-P(B) = 1/6
-\\
-2+2
-1+3
-3+1
-\\
-P(A) = 3/12
-\\
-P(B|A) = \frac{P(B \cap A)}{P(A)} = 2/3
-\\
-P(A|B) = \frac{P(B|A)P(A)}{P(B|A)P(A) + P(B|\neg A)P(\neg A)} = \frac{2/3 * 3/12}{2/3*3/12 + 1/3 * 9/12} = \frac{2/12}{5/12} = 2/5
-$$
 
 
 

@@ -1,5 +1,23 @@
 
 
+## Profile
+
+
+
+This folder demonstrate my study process. Most important things:
+
+* Certificates folder consist of courses, competitions, private exams certificates what I earned to this moment
+* notes.md document with theoretical and practical explanations of different DS topics which are collected from various sources.
+* Tables bellow which demonstrates the books I read/courses I takes/lectures I watched. Also this is my study todo list.
+
+
+
+
+
+
+
+
+
 ### Books
 
 | Title                                                        | Author                                | Status        |
