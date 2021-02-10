@@ -1653,6 +1653,8 @@ Finding out how big a sample size you need requires thinking ahead to the statis
 
 https://www.youtube.com/watch?v=YAlJCEDH2uY
 
+For a large number of independent identically distributed random variables X1,...,Xn, with finite variance, the average X¯n approximately has a normal distribution, no matter what the distribution of the Xi is.
+
 One reason the normal distribution is so useful is the central limit theorem, which says (in essence) that a random variable defined as the average of a large number of independent and identically distributed random variables is itself approximately normally distributed.
 
 In particular, if x1, ..., xn are random variables with mean μ and standard deviation σ, and if n is large, then:
