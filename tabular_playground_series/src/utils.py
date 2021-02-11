@@ -1,5 +1,9 @@
 import numpy as np
 import pandas as pd
+import os
+
+DATA_PATH = 'data'
+
 
 def categorical_features_encoding(df):
     df_copy = df.copy()
@@ -17,18 +21,132 @@ def categorical_features_encoding(df):
 
     return df_copy
 
-def column_reorder(df):
+def column_reorder(df_train, df_test):
+    return df_train, df_test[df_train.columns]
+
+def remove_outliers(df):
     df_copy = df.copy()
+    numerical = ['cont'+str(i) for i in range(14)]
 
-    order = ['cat0', 'cat1', 'cat2', 'cont0', 'cont1', 'cont2', 'cont3',
-       'cont4', 'cont5', 'cont6', 'cont7', 'cont8', 'cont9', 'cont10',
-       'cont11', 'cont12', 'cont13', 'cat3_A', 'cat3_B', 'cat3_C',
-       'cat3_D', 'cat4_A', 'cat4_B', 'cat4_C', 'cat4_D', 'cat5_A', 'cat5_B',
-       'cat5_C', 'cat5_D', 'cat6_A', 'cat6_B', 'cat6_C', 'cat6_D', 'cat6_E',
-       'cat6_G', 'cat6_H', 'cat6_I', 'cat7_A', 'cat7_B', 'cat7_C', 'cat7_D',
-       'cat7_E', 'cat7_F', 'cat7_G', 'cat7_I', 'cat8_A', 'cat8_B', 'cat8_C',
-       'cat8_D', 'cat8_E', 'cat8_F', 'cat8_G', 'cat9_A', 'cat9_B', 'cat9_C',
-       'cat9_D', 'cat9_E', 'cat9_F', 'cat9_G', 'cat9_H', 'cat9_I', 'cat9_J',
-       'cat9_K', 'cat9_L', 'cat9_M', 'cat9_N', 'cat9_O']
+    outliers_count = 0
 
-    return df_copy[order]
+    for col in numerical:
+        mu = df_copy[col].mean()
+        std = df_copy[col].std()
+
+        bot_bound = mu - 3*std
+        up_bound = mu + 3*std
+
+        mask = df_copy[(df_copy[col] < bot_bound) | (df_copy[col] > up_bound)]
+        outliers_count += mask.shape[0]
+
+        df_copy.drop(mask.index, axis=0, inplace=True)
+
+    print('{} outliers removed'.format(outliers_count))
+    return df_copy
+
+
+def create_poly_features(df, degree=2):
+    df_copy = df.copy()
+    numerical = ['cont'+str(i) for i in range(14)]
+
+    for col in numerical:
+        new_col_name = col + '_degree' + str(degree)
+        df_copy[new_col_name] = df_copy[col] ** degree
+    return df_copy
+
+def mult_features(df):
+    df_copy = df.copy()
+    numerical = ['cont'+str(i) for i in range(14)]
+
+    for index1 in range(len(numerical)):
+        for index2 in range(index1+1, len(numerical)):
+            col1 = numerical[index1]
+            col2 = numerical[index2]
+
+            new_col_name = col1+'*'+col2
+            df_copy[new_col_name] = df_copy[col1] * df_copy[col2]
+    return df_copy
+
+def sum_features(df):
+    df_copy = df.copy()
+    numerical = ['cont'+str(i) for i in range(14)]
+
+    for index1 in range(len(numerical)):
+        for index2 in range(index1+1, len(numerical)):
+            col1 = numerical[index1]
+            col2 = numerical[index2]
+            
+            new_col_name = col1+'+'+col2
+            df_copy[new_col_name] = df_copy[col1] + df_copy[col2]
+    return df_copy
+
+def log_features(df):
+    df_copy = df.copy()
+    numerical = ['cont'+str(i) for i in range(14)]
+
+    for col in numerical:
+        if np.min(df_copy[col]) <= 0:
+            continue
+        new_col_name = 'log'+col
+        df_copy[new_col_name] = np.log(df_copy[col])
+    return df_copy
+
+
+def dif_features(df):
+    df_copy = df.copy()
+    numerical = ['cont'+str(i) for i in range(14)]
+
+    for index1 in range(len(numerical)):
+        for index2 in range(index1+1, len(numerical)):
+            col1 = numerical[index1]
+            col2 = numerical[index2]
+                
+            new_col_name = col1+'-'+col2
+            df_copy[new_col_name] = np.abs(df_copy[col1] - df_copy[col2])
+    return df_copy
+
+
+def save_data(X_train, X_valid, y_train, y_valid, X_test):
+
+    with open(os.path.join(DATA_PATH, 'X_train.npy'), 'wb') as f:
+        np.save(f, X_train.to_numpy())
+    with open(os.path.join(DATA_PATH, 'X_valid.npy'), 'wb') as f:
+        np.save(f, X_valid.to_numpy())
+    with open(os.path.join(DATA_PATH, 'y_train.npy'), 'wb') as f:
+        np.save(f, y_train.to_numpy())
+    with open(os.path.join(DATA_PATH, 'y_valid.npy'), 'wb') as f:
+        np.save(f, y_valid.to_numpy())
+    with open(os.path.join(DATA_PATH, 'X_test.npy'), 'wb') as f:
+        np.save(f, X_test.to_numpy())
+    
+    print('Saving complete')
+
+
+def load_data():
+
+    with open(os.path.join(DATA_PATH, 'X_train.npy'), 'rb') as f:
+        X_train = np.load(f)
+    with open(os.path.join(DATA_PATH, 'X_valid.npy'), 'rb') as f:
+        X_valid = np.load(f)
+    with open(os.path.join(DATA_PATH, 'y_train.npy'), 'rb') as f:
+        y_train = np.load(f)
+    with open(os.path.join(DATA_PATH, 'y_valid.npy'), 'rb') as f:
+        y_valid = np.load(f)
+    with open(os.path.join(DATA_PATH, 'X_test.npy'), 'rb') as f:
+        X_test = np.load(f)
+
+    print('Loading complete')
+    return X_train, X_valid, y_train, y_valid, X_test
+
+
+def make_submission(predictions):
+
+    submission = pd.read_csv(os.path.join(DATA_PATH, 'sample_submission.csv'))
+
+    submission['target'] = predictions
+
+    sub_path = os.path.join(DATA_PATH, 'submit.csv')
+    submission.to_csv(sub_path, index=False)
+
+    print('Submission saved at {}'.format(sub_path))

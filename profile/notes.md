@@ -598,6 +598,72 @@ One easy and effective way to estimate the sampling distribution of a statistic,
 
 #### Confidence interval
 
+
+
+Suppose a dataset x1,...,xn is given, modeled as realization of random variables X1,...,Xn. Let θ be the parameter of interest, and γ a number between 0 and 1. If there exist sample statistics Ln = g(X1,...,Xn) and Un = h(X1,...,Xn) such that:
+$$
+P(L_n < \theta < U_n) = \gamma \text{ for every value of } \theta \text{, then}
+\\
+(l_n, u_n), 
+$$
+where ln = g(x1,...,xn) and un = h(x1,...,xn), is called a 100γ% confidence interval for θ. The number γ is called the confidence level.
+
+**Normal distribution confidence interval for the mean:**
+
+1. Variance known. If X1,...,Xn is a random sample from an N(µ, σ2) distribution, then X¯n has an N(µ, σ2/n) distribution, and from the properties of the normal distribution (see page 106), we know that:
+   $$
+   \frac{\bar X_n - \mu}{\sigma / \sqrt{n}} \text{ has an N(0, 1) distribution}
+   $$
+   If cl and cu are chosen such that P(c_l < Z < c_u) = \gamma for an N(0, 1) distributed random variable Z, then:
+   $$
+   \gamma = P(c_l < \frac{\bar X_n - \mu}{\sigma / \sqrt{n}} < c_u)
+   \\
+   = P(c_l \frac{\sigma}{\sqrt{n}}< \bar X_n - \mu < c_u \frac{\sigma}{\sqrt{n}})
+   \\
+   = P(\bar X_n - c_u \frac{\sigma}{\sqrt{n}} < \mu < \bar X_n - c_l \frac{\sigma}{\sqrt{n}})
+   $$
+   A common choice is to divide α = 1 − γ evenly between the tails,2 that is, solve cl and cu so that cu = zα/2 and cl = z1−α/2 = −zα/2 (z - critical value). Summarizing, the 100(1 − α)% confidence interval for µ is:
+   $$
+   (\bar x_n - z_{\alpha/2} \frac{\sigma}{\sqrt n}, \bar x_n + z_{\alpha/2} \frac{\sigma}{\sqrt n})
+   $$
+
+2. Variance unknown. If we substitute the estimator Sn for σ, the resulting random variable:
+   $$
+   \frac{\bar X_n - \mu}{S_n / \sqrt n}
+   $$
+   has a distribution that only depends on n and not on µ or σ. Moreover, its density can be given explicitly. A continuous random variable has a t-distribution with parameter m, where m ≥ 1 is an integer, if its probability density is given by:
+   $$
+   f(x) = k_m (1 + \frac{x^2}{m})^{- \frac{m+1}2} \text{ for } -\inf < x < \inf
+   \\
+   k_m = Γ(\frac{m+1}{2}) / (Γ(\frac{m}{2})\sqrt{mn})
+   $$
+   This distribution is denoted by t(m) and is referred to as the t-distribution with m degrees of freedom. The critical value tm,p is the number satisfying:
+   $$
+   P(T >= t_{m,p}) = p
+   $$
+   where T is a t(m) distributed random variable. Because the t-distribution is symmetric around zero, using the same reasoning as for the critical values of the standard normal distribution, we find that t_{m, 1-p} = - t_{m,p}
+
+   For a random sample X1,...,Xn from an N(µ, σ2) distribution, the studentized mean has a t(n − 1) distribution, regardless of the values of µ and σ. From this fact and using critical values of the t-distribution, we derive that:
+   $$
+   P(-t_{n-1, \alpha/2} < \frac{\bar X_n - \mu}{S_n / \sqrt n} < t_{n-1, \alpha/2}) = 1 - \alpha 
+   $$
+   and in the same way as when σ is known it now follows that a 100(1 − α)% confidence interval for µ is given by:
+   $$
+   (\bar x - t_{n-1, \alpha/2}\frac{s_n}{\sqrt n}, \bar x + t_{n-1, \alpha/2}\frac{s_n}{\sqrt n})
+   $$
+
+3. Variance unknown, large samples. If n is large enough, we may use:
+   $$
+   (\bar x_n - z_{\alpha/2} \frac{s_n}{\sqrt n}, \bar x_n + z_{\alpha/2} \frac{s_n}{\sqrt n})
+   $$
+   
+
+
+
+
+
+
+
 An x% confidence interval around a sample estimate should, on average, contain similar sample estimates x% of the time.
 
 Given a sample of size n, and a sample statistic of interest, the algorithm for a bootstrap confidence interval is as follows:
@@ -609,33 +675,6 @@ Given a sample of size n, and a sample statistic of interest, the algorithm for 
 5. The trim points are endpoints of an x% bootstrap confidence interval. 
 
 **The lower the level of confidence you can tolerate, the narrower the confidence interval will be.**
-
-For example, we can estimate the probability of the unfair coin by looking at the average value of the Bernoulli variables corresponding to each flip— 1 if heads, 0 if tails. If we observe 525 heads out of 1,000 flips, then we estimate p equals 0.525.
-
-How confident can we be about this estimate? Well, if we knew the exact value of p, the central limit theorem (recall “The Central Limit Theorem”) tells us that the average of those Bernoulli variables should be approximately normal, with mean p and standard deviation:
-
-```python
-math.sqrt(p * (1 - p) / 1000)
-```
-
-Here we don’t know p, so instead we use our estimate:
-
-```python
-p_hat = 525 / 1000
-mu = p_hat
-sigma = math.sqrt(p_hat * (1 - p_hat) / 1000) # 0.0158
-```
-
-This is not entirely justified, but people seem to do it anyway. Using the normal approximation, we conclude that we are “95% confident” that the following interval contains the true parameter p:
-
-```python
-# function from scratch
-normal_two_sided_bounds(0.95, mu, sigma) # [0.4940, 0.5560] 
-```
-
-This is a statement about the interval, not about p. You should understand it as the assertion that if you were to repeat the experiment many times, 95% of the time the “true” parameter (which is the same every time) would lie within the observed confidence interval (which might be different every time).
-
-
 
 **Here is a bootstrap algorithm for generating confidence intervals for regression parameters** (coefficients) for a data set with P predictors and n records (rows): 
 
@@ -658,6 +697,38 @@ $$
 \\
 s_p^2 = \frac{(n_1 - 1) s^2_1 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}
 $$
+
+
+
+**Example:**
+
+Suppose the estimator T is unbiased for the speed of light θ. For the moment, also suppose that T has standard deviation σT = 100 km/sec (we shall drop this unrealistic assumption shortly). Then, applying formula, which was derived from Chebyshev’s inequality, we find:
+$$
+P(|T- \theta| < 2\sigma_T) >= 3/4
+$$
+In words this reads: with probability at least 75%, the estimator T is within 2σT = 200 of the true speed of light θ. We could rephrase this as:
+$$
+T ∈(\theta - 200, \theta + 200) \text{ with probability at least 75%}
+$$
+However, if I am near the city of Paris, then the city of Paris is near me: the statement “T is within 200 of θ” is the same as “θ is within 200 of T ,” and we could equally well rephrase as:
+$$
+\theta ∈ (T - 200, T + 200) \text{ with probability at least 75%}
+$$
+Note that of the last two equations the first is a statement about a random variable T being in a fixed interval, whereas in the second equation the interval is random and the statement is about the probability that the random interval covers the fixed but unknown θ. The interval (T − 200, T + 200) is sometimes called an interval estimator, and its realization is an interval estimate. Evaluating T for the Michelson data we find as its realization t = 299 852.4, and this yields the statement:
+$$
+\theta ∈ (299652.4 , 300052.4) \text{ with probability at least 75%}
+$$
+
+
+
+
+
+
+
+
+
+
+
 
 #### Skewness
 
@@ -3113,6 +3184,14 @@ Maximizing likelihood corresponds exactly to minimizing the cross-entropy betwee
 The likelihood function indicates how likely the observed sample is as a function of possible parameter values. Therefore, maximizing the likelihood function determines the parameters that are most likely to produce the observed data. From a statistical point of view, MLE is usually recommended for large samples because it is versatile, applicable to most models and different types of data, and produces the most precise estimates.
 
 Least squares estimates are calculated by fitting a regression line to the points from a data set that has the minimal sum of the deviations squared (least square error). In reliability analysis, the line and the data are plotted on a probability plot.
+
+**Maximum likelihood properties**
+
+1. If T is the maximum likelihood estimator of parameter \theta and g(\theta) is an invertible function of \theta then g(T) is the maximum likelihood estimator of g(\theta).
+2. The maximum likelihood estimator T may be biased. But asymptotically (as the size n of the dataset goes to infinity) maximum likelihood estimators are unbiased.
+3. Maximum likelihood estimators have asymptotically the smallest variance among unbiased estimators.
+
+
 
 **Для регрессии** 
 
