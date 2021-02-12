@@ -41,7 +41,7 @@ This folder demonstrate my study process. Most important things:
 | Pattern Recognition and Machine Learning                     | Christopher M. Bishop                 |               |
 | Building ML Systems with Python                              | Willi Richert                         | **Completed** |
 | AI Modern Approach                                           | Stuart Russel                         |               |
-| A Modern Introduction to Probability and Statistics          | Dekking, Kraaikamp, Lopuhaa, Meester  |               |
+| A Modern Introduction to Probability and Statistics          | Dekking, Kraaikamp, Lopuhaa, Meester  | **Completed** |
 | Advanced High School Statistics                              | Diez, Barr, Çetinkaya-Rundel, Dorazio |               |
 | Probability for Statistics and Machine Learning: Fundamentals and Advanced Topics | DasGupta                              |               |
 | Simultaneous Statistical Inference With Applications in the Life Sciences | Dickhaus                              |               |

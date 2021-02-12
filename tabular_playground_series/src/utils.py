@@ -1,15 +1,21 @@
 import numpy as np
 import pandas as pd
 import os
+from sklearn.preprocessing import LabelEncoder
 
 DATA_PATH = 'data'
 
+N_CAT = 10
+N_NUM = 14
+
+CATEGORICAL = ['cat'+str(i) for i in range(N_CAT)]
+NUMERICAL = ['cont'+str(i) for i in range(N_NUM)]
 
 def categorical_features_encoding(df):
     df_copy = df.copy()
 
-    label_enc_fet = ['cat'+str(i) for i in range(3)]
-    onehot_enc_fet = ['cat'+str(i) for i in range(3, 10)]
+    label_enc_fet = CATEGORICAL[:3]
+    onehot_enc_fet = CATEGORICAL[3:]
 
     mapping = {'A':0, 'B':1}
     for col in label_enc_fet:
@@ -26,11 +32,10 @@ def column_reorder(df_train, df_test):
 
 def remove_outliers(df):
     df_copy = df.copy()
-    numerical = ['cont'+str(i) for i in range(14)]
 
     outliers_count = 0
 
-    for col in numerical:
+    for col in NUMERICAL:
         mu = df_copy[col].mean()
         std = df_copy[col].std()
 
@@ -45,24 +50,21 @@ def remove_outliers(df):
     print('{} outliers removed'.format(outliers_count))
     return df_copy
 
-
 def create_poly_features(df, degree=2):
     df_copy = df.copy()
-    numerical = ['cont'+str(i) for i in range(14)]
 
-    for col in numerical:
+    for col in NUMERICAL:
         new_col_name = col + '_degree' + str(degree)
         df_copy[new_col_name] = df_copy[col] ** degree
     return df_copy
 
 def mult_features(df):
     df_copy = df.copy()
-    numerical = ['cont'+str(i) for i in range(14)]
 
-    for index1 in range(len(numerical)):
-        for index2 in range(index1+1, len(numerical)):
-            col1 = numerical[index1]
-            col2 = numerical[index2]
+    for index1 in range(len(NUMERICAL)):
+        for index2 in range(index1+1, len(NUMERICAL)):
+            col1 = NUMERICAL[index1]
+            col2 = NUMERICAL[index2]
 
             new_col_name = col1+'*'+col2
             df_copy[new_col_name] = df_copy[col1] * df_copy[col2]
@@ -70,12 +72,11 @@ def mult_features(df):
 
 def sum_features(df):
     df_copy = df.copy()
-    numerical = ['cont'+str(i) for i in range(14)]
 
-    for index1 in range(len(numerical)):
-        for index2 in range(index1+1, len(numerical)):
-            col1 = numerical[index1]
-            col2 = numerical[index2]
+    for index1 in range(len(NUMERICAL)):
+        for index2 in range(index1+1, len(NUMERICAL)):
+            col1 = NUMERICAL[index1]
+            col2 = NUMERICAL[index2]
             
             new_col_name = col1+'+'+col2
             df_copy[new_col_name] = df_copy[col1] + df_copy[col2]
@@ -83,24 +84,21 @@ def sum_features(df):
 
 def log_features(df):
     df_copy = df.copy()
-    numerical = ['cont'+str(i) for i in range(14)]
 
-    for col in numerical:
+    for col in NUMERICAL:
         if np.min(df_copy[col]) <= 0:
             continue
         new_col_name = 'log'+col
         df_copy[new_col_name] = np.log(df_copy[col])
     return df_copy
 
-
 def dif_features(df):
     df_copy = df.copy()
-    numerical = ['cont'+str(i) for i in range(14)]
 
-    for index1 in range(len(numerical)):
-        for index2 in range(index1+1, len(numerical)):
-            col1 = numerical[index1]
-            col2 = numerical[index2]
+    for index1 in range(len(NUMERICAL)):
+        for index2 in range(index1+1, len(NUMERICAL)):
+            col1 = NUMERICAL[index1]
+            col2 = NUMERICAL[index2]
                 
             new_col_name = col1+'-'+col2
             df_copy[new_col_name] = np.abs(df_copy[col1] - df_copy[col2])
@@ -122,7 +120,6 @@ def save_data(X_train, X_valid, y_train, y_valid, X_test):
     
     print('Saving complete')
 
-
 def load_data():
 
     with open(os.path.join(DATA_PATH, 'X_train.npy'), 'rb') as f:
@@ -138,7 +135,6 @@ def load_data():
 
     print('Loading complete')
     return X_train, X_valid, y_train, y_valid, X_test
-
 
 def make_submission(predictions):
 
