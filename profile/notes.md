@@ -44,7 +44,7 @@
 
 
 
-Probability
+[Probability](#Probability)
 
 
 
@@ -156,8 +156,8 @@ Probability
 [**Models fitting and estimating**](#Models-fitting-and-estimating)
 
 * [Train/validation split](#Train/validation-split)
-
 * [Maximum Likelihood](#Maximum Likelihood)
+* [Maximum a Posteriori Estimation](#Maximum-a-Posteriori-Estimation)
 * Gradient Descent
 * [Iteratively Reweighted Least Squares](#Iteratively-Reweighted-Least-Squares)
 * [Regression metrics](#Regression metrics)
@@ -1644,7 +1644,7 @@ Finding out how big a sample size you need requires thinking ahead to the statis
 
 
 
-### Probability rules
+### Probability
 
 
 
@@ -3226,6 +3226,30 @@ $$
 
 
 
+###  Maximum a Posteriori Estimation
+
+
+
+While the most principled approach is to make predictions using the full Bayesian posterior distribution over the parameter θ, it is still often desirable to have a single point estimate. One common reason for desiring a point estimate is that most operations involving the Bayesian posterior for most interesting models are intractable, and a point estimate offers a tractable approximation. Rather than simply returning to the maximum likelihood estimate, we can still gain some of the benefit of the Bayesian approach by allowing the prior to influence the choice of the point estimate.
+
+The MAP estimate chooses the point of maximal posterior probability (or maximal probability density in the more common case of continuous θ):
+$$
+\theta_{MAP} = argmax_{\theta} p(\theta | x) = argmax_{\theta}p(x|\theta) + log(p(\theta))
+$$
+As with full Bayesian inference, MAP Bayesian inference has the advantage of leveraging information that is brought by the prior and cannot be found in the training data. This additional information helps to reduce the variance in the MAP point estimate (in comparison to the ML estimate). However, it does so at the price of increased bias. Many regularized estimation strategies, such as maximum likelihood learning regularized with weight decay, can be interpreted as making the MAP approximation to Bayesian inference.
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Gradient Descent
 
 
@@ -3751,7 +3775,98 @@ Let's summarize the MLP learning procedure in three simple steps:
    $$
    ![](img/backpropagation.png)
    
+   **Forward propagation algorithm:**
+   
+   ```pseudocode
+   for i = 1, 2, ..., n_i do
+   	u[i] = x[i]
+   end for
+   
+   for i = n_i + 1, ..., n do
+   	A[i] = {u[j]|j ∈ Pa(u[i])}
+   	u[i] = f(A[i])
+   end for
+   
+   return u[n]
+   ```
+   
+   * u[n] - scalar is the quantity whose gradient we want to obtain, with respect to the n_i input nodes u[1] to u[n_i].
+   * A[i] - is the set of all nodes that are parents of u[i]
+   
+   **Simplified version of the backprop algorithm:**
+   
+   1. Run forward propagation to obtain the activations of the network
+   2. Initialize grad_table, a data structure that will store the derivatives that have been computed.
+   
+   ```pseudocode
+   grad_table[u[n]] = 1
+   for j = n-1 down to 1 do
+   	The next line computes du[n]/du[j] = \sum_{i:j∈Pa(u[i])} du[n]/du[i] * du[i]/du[j] using stored 		values:
+   	grad_table[u[j]] = \sum_{i:j∈Pa(u[i])} grad_table[u[i]] * du[i]/du[j]
+   end for
+   return {grad_table[u[i]] | i = 1, ..., n}
+   ```
+   
+   **General backprop algorithm:**
+   
+   **Require:** T, the target set of variables whose gradient must be computed.
+   
+   **Require:** G, the computational graph
+   
+   **Require:** z, the variable to be differentiated
+   
+   Let G' be G pruned to contain only nodes that ancestors of z and descendants of nodes in T.
+   
+   Initialize grad_table, a data structure associating tensors to their gradients
+   
+   ```pseudocode
+   grad_table[z] = 1
+   for V in T do
+   	build_grad(V, G, G`, grad_table)
+   end for
+   return grad_table
+   ```
+   
+    **build_grad function:**
+   
+   **Require:** V, the variable whose gradient should be added to G and grad_table. 
+   
+   **Require:** G, the graph to modify. 
+   
+   **Require:** G 0, the restriction of G to nodes that participate in the gradient. 
+   
+   **Require:** grad_table, a data structure mapping nodes to their gradients
+   
+   ```pseudocode
+   if V is in grad_table then
+   	return grad_table[V]
+   end if
+   
+   i = 1
+   for C in get_consumers(V, G`) do
+   	op = get_operation(C)
+   	D = build_grad(C, G, G`, grad_table)
+   	g[i] = op.bprop(get_inputs(C, G`), V, D)
+   	i = i + 1
+   end for
+   
+   g = sum(g[i])
+   grad_table[V] = g[i]
+   insert g and the operations created it into G
+   return G
+   ```
+   
+   * get_operation - This returns the operation that computes V, represented by the edges coming into V in the computational graph.
+   * get_consumers - This returns the list of variables that are children of V in the computational graph G.
+   * get_inputs - This returns the list of variables that are parents of V in the computational graph G.
+   
+   
+   
+   
+   
    **Code for this implementation in python-playground/mini_projects/ml_models_implementations/neural_network.py**
+   
+   
    
    
 
