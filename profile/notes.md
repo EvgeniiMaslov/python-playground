@@ -3478,7 +3478,19 @@ p(w;C) = \frac{1}{(2C)^{n}}exp(-\frac{||w||}{C})
 $$
 Где С - гиперпараметр, 1/С - коэффициент регуляризации.
 
+**Another regularization techniques: ** 
 
+1. Injecting noise at the input
+
+2. Injecting noise at the output. For example, label smoothing regularizes a model based on a softmax with k output values by replacing the hard 0 and 1 classification targets with targets of:
+   $$
+   \frac{\epsilon}{k}
+   \\
+   1 - \frac{k - 1}k \epsilon
+   $$
+   respectively.
+
+3. Semi-supervised learning. In the paradigm of semi-supervised learning, both unlabeled examples from P(x) and labeled examples from P(x, y) are used to estimate P(y | x) or predict y from x.  In the context of deep learning, semi-supervised learning usually refers to learning a representation h = f(x). The goal is to learn a representation so that examples from the same class have similar representations.
 
 **For neural network:**
 
