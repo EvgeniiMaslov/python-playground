@@ -98,6 +98,10 @@
 
 
 
+3. Computer Vision
+
+* [Contrast Normalization](#Contrast Normalization)
+
 
 
 [**Machine learning models**](#Machine-learning-models)
@@ -178,6 +182,8 @@
 * [Combining models](#Combining-models)
 
 
+
+**[Practical methodology](#Practical-methodology)**
 
 
 
@@ -2385,6 +2391,20 @@ Coming up with such vectors for a large vocabulary of words is a difficult under
 
 
 
+
+
+### Contrast Normalization
+
+
+
+One of the most obvious sources of variation that can be safely removed for many tasks is the amount of contrast in the image. Contrast simply refers to the magnitude of the difference between the bright and the dark pixels in an image.
+
+Global contrast normalization (GCN) aims to prevent images from having varying amounts of contrast by subtracting the mean from each image, then rescaling it so that the standard deviation across its pixels is equal to some constant s. This approach is complicated by the fact that no scaling factor can change the contrast of a zero-contrast image (one whose pixels all have equal intensity). Images with very low but non-zero contrast often have little information content. Dividing by the true standard deviation usually accomplishes nothing more than amplifying sensor noise or compression artifacts in such cases.
+
+
+
+
+
 # Machine learning models
 
 
@@ -3685,9 +3705,91 @@ There are three typical ways to combine models:
 
 
 
+## Practical methodology
 
 
 
+We recommend the following practical design process: 
+
+* Determine your goals—what error metric to use, and your target value for this error metric. These goals and error metrics should be driven by the problem that the application is intended to solve. 
+* Establish a working end-to-end pipeline as soon as possible, including the estimation of the appropriate performance metrics. 
+* Instrument the system well to determine bottlenecks in performance. Diagnose which components are performing worse than expected and whether it is due to overfitting, underfitting, or a defect in the data or software. 
+* Repeatedly make incremental changes such as gathering new data, adjusting hyperparameters, or changing algorithms, based on specific findings from your instrumentation.
+
+
+
+#### Performance metrics
+
+
+
+How can one determine a reasonable level of performance to expect? Typically, in the academic setting, we have some estimate of the error rate that is attainable based on previously published benchmark results. In the real-word setting, we have some idea of the error rate that is necessary for an application to be safe, cost-effective, or appealing to consumers.
+
+Another important consideration besides the target value of the performance metric is the choice of which metric to use. Several different performance metrics may be used to measure the effectiveness of a complete application that includes machine learning components. These performance metrics are usually different from the cost function used to train the model.
+
+
+
+#### Default Baseline Models
+
+
+
+Depending on the complexity of your problem, you may even want to begin without using deep learning. If your problem has a chance of being solved by just choosing a few linear weights correctly, you may want to begin with a simple statistical model like logistic regression.
+
+First, choose the general category of model based on the structure of your data. If you want to perform supervised learning with fixed-size vectors as input, use a feedforward network with fully connected layers. If the input has known topological structure (for example, if the input is an image), use a convolutional network. In these cases, you should begin by using some kind of piecewise linear unit (ReLUs or their generalizations like Leaky ReLUs, PreLus and maxout). If your input or output is a sequence, use a gated recurrent net (LSTM or GRU).
+
+A reasonable choice of optimization algorithm is SGD with momentum with a decaying learning rate (popular decay schemes that perform better or worse on different problems include decaying linearly until reaching a fixed minimum learning rate, decaying exponentially, or decreasing the learning rate by a factor of 2-10 each time validation error plateaus). Another very reasonable alternative is Adam. Batch normalization can have a dramatic effect on optimization performance, especially for convolutional networks and networks with sigmoidal nonlinearities. While it is reasonable to omit batch normalization from the very first baseline, it should be introduced quickly if optimization appears to be problematic. 
+
+
+
+#### Determining Whether to Gather More Data
+
+
+
+First, determine whether the performance on the training set is acceptable. If performance on the training set is poor, the learning algorithm is not using the training data that is already available, so there is no reason to gather more data. Instead, try increasing the size of the model by adding more layers or adding more hidden units to each layer. Also, try improving the learning algorithm, for example by tuning the learning rate hyperparameter. If large models and carefully tuned optimization algorithms do not work well, then the problem might be the quality of the training data. The data may be too noisy or may not include the right inputs needed to predict the desired outputs. This suggests starting over, collecting cleaner data or collecting a richer set of features. 
+
+If you find that the gap between train and test performance is still unacceptable even after tuning the regularization hyperparameters, then gathering more data is advisable.
+
+If gathering much more data is not feasible, the only other way to improve generalization error is to improve the learning algorithm itself. This becomes the domain of research and not the domain of advice for applied practitioners.
+
+
+
+#### Selecting Hyperparameters
+
+
+
+There are two basic approaches to choosing these hyperparameters: choosing them manually and choosing them automatically.
+
+To set hyperparameters **manually**, one must understand the relationship between hyperparameters, training error, generalization error and computational resources (memory and runtime).
+
+| Hyperparameter           | Increases capacity when. . . | Reason                                                       | Caveats                                                      |
+| ------------------------ | ---------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Number of hid- den units | increased                    | Increasing the number of hidden units increases the representational capacity of the model. | Increasing the number of hidden units increases both the time and memory cost of essentially every operation on the model. |
+| Learning rate            | tuned optimally              | An improper learning rate, whether too high or too low, results in a model with low effective capacity due to optimization failure |                                                              |
+| Convolution kernel width | increased                    | Increasing the kernel width increases the number of parameters in the model | A wider kernel results in a narrower output dimension, reducing model capacity unless you use implicit zero padding to re- duce this effect. Wider kernels require more memory for parameter storage and increase runtime, but a narrower output reduces memory cost. |
+| Implicit zero padding    | increased                    | Adding implicit zeros before convolution keeps the representation size large | Increased time and memory cost of most operations.           |
+| Weight decay coefficient | decreased                    | Decreasing the weight de- cay coefficient frees the model parameters to be- come larger |                                                              |
+| Dropout rate             | decreased                    | Dropping units less often gives the units more opportunities to “conspire” with each other to fit the training set |                                                              |
+
+
+
+Manual hyperparameter tuning can work very well when the user has a good starting point, such as one determined by others having worked on the same type of application and architecture, or when the user has months or years of experience in exploring hyperparameter values for neural networks applied to similar tasks. However, for many applications, these starting points are not available. In these cases, **automated** algorithms can find useful values of the hyperparameters:
+
+1. Grid Search
+2. Random Search
+3. Model-Based Hyperparameter Optimization
+
+
+
+#### Debugging strategies
+
+
+
+1. Visualize the model in action
+2. Visualize the worst mistakes
+   1. Reasoning about software using train and test error. It is often difficult to determine whether the underlying software is correctly implemented. Some clues can be obtained from the train and test error. If training error is low but test error is high, then it is likely that that the training procedure works correctly, and the model is overfitting for fundamental algorithmic reasons. An alternative possibility is that the test error is measured incorrectly due to a problem with saving the model after training then reloading it for test set evaluation, or if the test data was prepared differently from the training data.
+3. Fit a tiny dataset
+4. Compare back-propagated derivatives to numerical derivatives
+5. Monitor histograms of activations and gradient. It is often useful to visualize statistics of neural network activations and gradients, collected over a large amount of training iterations (maybe one epoch). The pre-activation value of hidden units can tell us if the units saturate, or how often they do. In a deep network where the propagated gradients quickly grow or quickly vanish, optimization may be hampered. Finally, it is useful to compare the magnitude of parameter gradients to the magnitude of the parameters themselves.
+6. 
 
 
 

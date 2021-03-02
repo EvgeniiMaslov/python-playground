@@ -33,7 +33,7 @@ This folder demonstrate my study process. Most important things:
 | Practical Statistic for Data Scientist                       | Peter & Andrew Bruces                 | **Completed** |
 | Python Machine Learning                                      | Sebastian Raschka                     | **Completed** |
 | Code Complete                                                | Steve McConnell                       | **Completed** |
-| Deep Learning                                                | Ian Goodfellow                        |               |
+| Deep Learning                                                | Ian Goodfellow                        | **Completed** |
 | AI Crash Course                                              | Hadelin de Ponteves                   | **Completed** |
 | Introductory Statistics                                      |                                       | **Completed** |
 | Machine Learning a Probabilistic Perspective                 | Kevin P. Murphy                       |               |
