@@ -118,6 +118,7 @@
 * [K-Nearest Neighboors](#k-nearest-neighboors)
 * [Decision Tree](#Decision-tree)
 * [Random Forest](#Random-Forest)
+* 
 
 
 
@@ -162,7 +163,8 @@
 * [Train/validation split](#Train/validation-split)
 * [Maximum Likelihood](#Maximum Likelihood)
 * [Maximum a Posteriori Estimation](#Maximum-a-Posteriori-Estimation)
-* Gradient Descent
+* [Gradient Descent](#Gradient-Descent)
+* [Newton's Method](#Newton's-Method)
 * [Iteratively Reweighted Least Squares](#Iteratively-Reweighted-Least-Squares)
 * [Regression metrics](#Regression metrics)
 * [Regression residuals plot](#Regression-residuals-plot)
@@ -2770,6 +2772,14 @@ The random forest algorithm can be summarized in four simple steps:
 
 
 
+
+
+
+
+
+
+
+
 ### K-means
 
 The k-means algorithm belongs to the category of prototype-based clustering. 
@@ -3273,6 +3283,57 @@ As with full Bayesian inference, MAP Bayesian inference has the advantage of lev
 ### Gradient Descent
 
 
+
+
+
+### Newton's Method
+
+
+
+```python
+from autograd import grad
+from autograd import hessian
+
+# import NumPy library
+import numpy as np
+# Newton ’s method
+def newtons_method (g, max_its, w):
+    # compute gradient/ Hessian using autograd
+    gradient = grad(g)
+    hess = hessian (g)
+    
+    # set numerical stability parameter
+    epsilon = 10 **(-7)
+    if ’epsilon ’ in kwargs:
+        epsilon = kwargs[’epsilon ’]
+
+    # run the Newton ’s method loop
+    weight_history = [w] # container for weight history
+    cost_history = [g(w)] # container for cost function history
+
+    for k in range( max_its ):
+        # evaluate the gradient and hessian
+        grad_eval = gradient (w)
+        hess_eval = hess(w)
+
+        # reshape hessian to square matrix
+        hess_eval .shape = (int((np. size( hess_eval ))**(0 .5)),int((np.size( hess_eval ))**(0 .5)))
+
+        # solve second -order system for weight update
+        A = hess_eval + epsilon* np. eye(w. size)
+        b = grad_eval
+        w = np. linalg. solve(A, np .dot(A ,w)-b)
+
+        # record weight and cost
+        weight_history. append(w)
+        cost_history.append(g(w))
+        
+    return weight_history, cost_history
+```
+
+
+
+Newton’s method is a powerful algorithm that makes enormous progress towards finding a function’s minimum at each step, compared to zero- and first order methods that can require a large number of steps to make equivalent progress. However, Newton’s method suffers from its own unique weaknesses – primarily in dealing with nonconvexity, as well as scaling with input dimension.
 
 
 

@@ -6,14 +6,14 @@ class Config:
     output_dir = 'output'
     seed = 42
 
-    size = 400
+    size = 200
 
     model_name = 'resnext50_32x4d'
 
     n_folds = 4
-    batch_size = 8
-    epochs = 6
-    num_workers = 0
+    batch_size = 4
+    epochs = 5
+    num_workers = 4
 
     lr=1e-4
     min_lr=1e-6
