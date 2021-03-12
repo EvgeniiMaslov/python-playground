@@ -37,7 +37,7 @@ This folder demonstrate my study process. Most important things:
 | AI Crash Course                                              | Hadelin de Ponteves                   | **Completed** |
 | Introductory Statistics                                      |                                       | **Completed** |
 | Machine Learning a Probabilistic Perspective                 | Kevin P. Murphy                       |               |
-| Machine Learning Refined                                     | Jeremy Watt                           |               |
+| Machine Learning Refined                                     | Jeremy Watt                           | **Completed** |
 | Pattern Recognition and Machine Learning                     | Christopher M. Bishop                 |               |
 | Building ML Systems with Python                              | Willi Richert                         | **Completed** |
 | AI Modern Approach                                           | Stuart Russel                         |               |
