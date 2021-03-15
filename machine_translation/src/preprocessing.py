@@ -37,19 +37,14 @@ def train_val_test_split(df):
 def preprocess(df, chunk_index=None):
     df.dropna(inplace=True)
 
-    df['en'] = df['en'].apply(remove_punct_digits)
-    df['fr'] = df['fr'].apply(remove_punct_digits)
+    df['SRC'] = df['SRC'].apply(remove_punct_digits)
+    df['TRG'] = df['TRG'].apply(remove_punct_digits)
 
     train, val, test = train_val_test_split(df)
 
-    if chunk_index:
-        train_path = os.path.join(CFG.data_path, f'train_chunk{chunk_index}.csv')
-        val_path = os.path.join(CFG.data_path, f'val_chunk{chunk_index}.csv')
-        test_path = os.path.join(CFG.data_path, f'test_chunk{chunk_index}.csv')
-    else:
-        train_path = os.path.join(CFG.data_path, 'train.csv')
-        val_path = os.path.join(CFG.data_path, 'val.csv')
-        test_path = os.path.join(CFG.data_path, 'test.csv')
+    train_path = os.path.join(CFG.data_path, 'train.csv')
+    val_path = os.path.join(CFG.data_path, 'val.csv')
+    test_path = os.path.join(CFG.data_path, 'test.csv')
 
     train.to_csv(train_path, index=False)
     val.to_csv(val_path, index=False)
@@ -58,35 +53,21 @@ def preprocess(df, chunk_index=None):
 
 def main():
     print('Count the number of lines...')
-    filename = os.path.join(CFG.data_path, 'en-fr.csv')
+    filename = os.path.join(CFG.data_path, 'pairs.csv')
     n_rows = get_number_of_lines(filename)
     print(f'Total number of rows in {filename} : {n_rows}')
 
-    if CFG.use_chunks:
-        print('Process dataframe chunks...')
-        for i, chunk in enumerate(pd.read_csv(filename, chunksize=CFG.chunk_size)):
-            print(f'Chunk {i+1}, rows {i*CFG.chunk_size} to {(i+1)*CFG.chunk_size} / {n_rows}')
-            preprocess(chunk, i+1)
+    
+    n_rows = int(n_rows * CFG.split_ratio)
 
-            if CFG.debug and i == 0:
-                break
+    print('Reading dataframe...')
 
-        print('Preprocessing complete.')
-            
+    df = pd.read_csv(filename)
+    print('Dataframe preprocessing...')
 
-    else:
-        n_rows = int(n_rows * CFG.split_ratio)
+    preprocess(df)
 
-        print(f'Split dataframe; split_ratio: {CFG.split_ratio}. Final number of rows: {n_rows}')
-        print('Reading dataframe...')
-
-        df = pd.read_csv(filename, nrows=n_rows)
-
-        print('Dataframe preprocessing...')
-
-        preprocess(df)
-
-        print('Preprocessing complete.')
+    print('Preprocessing complete.')
         
 
 
