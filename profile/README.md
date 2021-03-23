@@ -46,6 +46,14 @@ This folder demonstrate my study process. Most important things:
 | Probability for Statistics and Machine Learning: Fundamentals and Advanced Topics | DasGupta                              |               |
 | Simultaneous Statistical Inference With Applications in the Life Sciences | Dickhaus                              |               |
 
+
+
+
+
+
+
+
+
 ### Courses and exams
 
 | Title                                                        | Status        | Certificate                                                  |

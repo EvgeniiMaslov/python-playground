@@ -373,6 +373,21 @@ There are, broadly speaking, six categories in which data analyses fall. In the 
   E_{x∼p}[f(x)] = \int p(x)f(x)dx
   $$
   
+  If we are given a finite number N of points drawn from the probability distribution or probability density, then the expectation can be approximated as a finite sum over these points:
+  $$
+  E[f] \simeq \frac{1}N \sum_{n=1}^N f(x_n)
+  $$
+  We can also consider a conditional expectation with respect to a conditional distribution, so that:
+  $$
+  E_x[f|y] = \sum_x p(x|y)f(x)
+  $$
+  with an analogous definition for continuous variables.
+  
+  
+
+
+
+
 
 #### Estimates of variability
 
