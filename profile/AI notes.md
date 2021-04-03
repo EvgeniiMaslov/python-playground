@@ -10,7 +10,30 @@
 
    2.2. [Infrastructure for search algorithms](#Infrastructure for search algorithms)
 
+   2.3. [Uniformed Search Strategies](#Uniformed Search Strategies)
+
    
+
+   * [Breadth-first search](#Breadth-first search)
+   * [Uniform-cost search](#Uniform-cost search)
+   * [Depth-first search](#Depth-first search)
+   * [Depth-limited search](#Depth-limited search)
+   * [Iterative deepening depth-first search](#Iterative deepening depth-first search)
+   * [Bidirectional search](#Bidirectional search)
+   * [Comparing uninformed search strategies](#Comparing uninformed search strategies)
+
+   
+
+   2.4. [Informed (Heuristic) Search Strategies](#Informed Search Strategies)
+
+   
+
+   * [Greedy best-first search](#Greedy best-first search)
+   * [A* search: Minimizing the total estimated solution cost](#A* search: Minimizing the total estimated solution cost)
+   * [Memory-bounded heuristic search](#Memory-bounded heuristic search)
+   * [Heuristic Functions](#Heuristic Functions)
+
+3. 
 
 
 
@@ -171,3 +194,281 @@ Now that we have nodes, we need somewhere to put them. The frontier needs to be 
 * EMPTY?(queue) returns true only if there are no more elements in the queue. 
 * POP(queue) removes the first element of the queue and returns it. 
 * INSERT(element, queue) inserts an element and returns the resulting queue.
+
+
+
+
+
+#### Uniformed Search Strategies
+
+
+
+The term **uninformed search** (also called blind search) means that the strategies have no additional information about states beyond that provided in the problem definition. All they can do is generate successors and distinguish a goal state from a non-goal state.
+
+
+
+##### Breadth-first search
+
+Breadth-first search is a simple strategy in which the root node is expanded first, then all the successors of the root node are expanded next, then their successors, and so on. In general, all the nodes are expanded at a given depth in the search tree before any nodes at the next level are expanded.
+
+Algorithm is *complete* — if the shallowest goal node is at some finite depth d, breadth-first search will eventually find it after generating all shallower nodes. 
+
+The shallowest goal node is not necessarily the *optimal* one; technically, breadth-first search is optimal if the path cost is a nondecreasing function of the depth of the node.
+
+Imagine searching a uniform tree where every state has b successors. The root of the search tree generates b nodes at the first level, each of which generates b more nodes, for a total of b^2 at the second level. Each of these generates b more nodes, yielding b^3 nodes at the third level, and so on. Now suppose that the solution is at depth d. In the worst case, it is the last node generated at that level. Then the total number of nodes generated is O(b^d). 
+
+As for space complexity: for any kind of graph search, which stores every expanded node in the explored set, the space complexity is always within a factor of b of the time complexity. 
+
+
+
+```pseudocode
+function BREADTH-FIRST-SEARCH(problem) returns a solution, or failure
+    node ←a node with STATE = problem.INITIAL-STATE, PATH-COST = 0
+    if problem.GOAL-TEST(node.STATE) then return SOLUTION(node)
+    frontier ← a FIFO queue with node as the only element
+    explored ← an empty set
+    loop do
+        if EMPTY?(frontier ) then return failure
+        node ← POP(frontier ) /* chooses the shallowest node in frontier */
+        add node.STATE to explored
+        for each action in problem.ACTIONS(node.STATE) do
+            child ← CHILD-NODE(problem, node, action)
+            if child.STATE is not in explored or frontier then
+                if problem.GOAL-TEST(child.STATE) then return SOLUTION(child)
+                frontier ← INSERT(child,frontier )	
+```
+
+
+
+##### Uniform-cost search
+
+
+
+When all step costs are equal, breadth-first search is optimal because it always expands the shallowest unexpanded node. By a simple extension, we can find an algorithm that is optimal with any step-cost function. Instead of expanding the shallowest node, **uniform-cost search** expands the node n with the lowest path cost g(n). This is done by storing the frontier as a priority queue ordered by g. 
+
+In addition to the ordering of the queue by path cost, there are two other significant differences from breadth-first search. The first is that the goal test is applied to a node when it is selected for expansion rather than when it is first generated.  The second difference is that a test is added in case a better path is found to a node currently on the frontier.
+
+It is easy to see that uniform-cost search is optimal in general. First, we observe that whenever uniform-cost search selects a node n for expansion, the optimal path to that node has been found.
+
+Uniform-cost search does not care about the number of steps a path has, but only about their total cost. Therefore, it will get stuck in an infinite loop if there is a path with an infinite sequence of zero-cost actions.
+
+Uniform-cost search is guided by path costs rather than depths, so its complexity is not easily characterized in terms of b and d. Instead, let C be the cost of the optimal solution,7 and assume that every action costs at least . Then the algorithm’s worst-case time and space complexity is
+$$
+O(b^{1 + floor(C / \epsilon)}) \text{, which can be much greater than b^d.}
+$$
+
+```pseudocode
+function UNIFORM-COST-SEARCH(problem) returns a solution, or failure
+    node ←a node with STATE = problem.INITIAL-STATE, PATH-COST = 0
+    frontier ← a priority queue ordered by PATH-COST, with node as the only element
+    explored ← an empty set
+    loop do
+        if EMPTY?(frontier ) then return failure
+        node ← POP(frontier ) /* chooses the lowest-cost node in frontier */
+        if problem.GOAL-TEST(node.STATE) then return SOLUTION(node)
+        add node.STATE to explored
+        for each action in problem.ACTIONS(node.STATE) do
+            child ← CHILD-NODE(problem, node, action)
+            if child.STATE is not in explored or frontier then
+            	frontier ← INSERT(child,frontier )
+            else if child.STATE is in frontier with higher PATH-COST then
+            	replace that frontier node with child
+```
+
+
+
+##### Depth-first search
+
+
+
+**Depth-first** search always expands the deepest node in the current frontier of the search tree. Depth-first search uses a LIFO queue (stack).
+
+The properties of depth-first search depend strongly on whether the graph-search or tree-search version is used. The graph-search version, which avoids repeated states and redundant paths, is complete in finite state spaces because it will eventually expand every node. The tree-search version, on the other hand, is not complete.
+
+The time complexity of depth-first graph search is bounded by the size of the state space (which may be infinite, of course). A depth-first tree search, on the other hand, may generate all of the O(b^m) nodes in the search tree, where m is the maximum depth of any node; this can be much greater than the size of the state space.
+
+So far, depth-first search seems to have no clear advantage over breadth-first search, so why do we include it? The reason is the space complexity. For a graph search, there is no advantage, but a depth-first tree search needs to store only a single path from the root to a leaf node, along with the remaining unexpanded sibling nodes for each node on the path.
+
+A variant of depth-first search called **backtracking search** uses still less memory. In backtracking, only one successor is generated at a time rather than all successors; each partially expanded node remembers which successor to generate next.
+
+
+
+##### Depth-limited search
+
+
+
+The embarrassing failure of depth-first search in infinite state spaces can be alleviated by supplying depth-first search with a predetermined depth limit. That is, nodes at depth are treated as if they have no successors.
+
+
+
+```pseudocode
+function DEPTH-LIMITED-SEARCH(problem, limit) returns a solution, or failure/cutoff
+	return RECURSIVE-DLS(MAKE-NODE(problem.INITIAL-STATE), problem, limit)
+	
+	
+function RECURSIVE-DLS(node, problem, limit) returns a solution, or failure/cutoff
+    if problem.GOAL-TEST(node.STATE) then return SOLUTION(node)
+    else if limit = 0 then return cutoff
+    else
+        cutoff occurred?←false
+        for each action in problem.ACTIONS(node.STATE) do
+            child ← CHILD-NODE(problem, node, action)
+            result ← RECURSIVE-DLS(child, problem, limit − 1)
+            if result = cutoff then cutoff occurred?← true
+            else if result = failure then return result
+        if cutoff occurred? then return cutoff else return failure
+```
+
+
+
+##### Iterative deepening depth-first search
+
+**Iterative deepening search** (or iterative deepening depth-first search) is a general strategy, often used in combination with depth-first tree search, that finds the best depth limit. It does this by gradually increasing the limit—first 0, then 1, then 2, and so on—until a goal is found. This will occur when the depth limit reaches d, the depth of the shallowest goal node.
+
+Like depth-first search, its memory requirements are modest: O(bd) to be precise. Like breadth-first search, it is complete when the branching factor is finite and optimal when the path cost is a nondecreasing function of the depth of the node.
+
+Iterative deepening search may seem wasteful because states are generated multiple times. It turns out this is not too costly. The reason is that in a search tree with the same (or nearly the same) branching factor at each level, most of the nodes are in the bottom level, so it does not matter much that the upper levels are generated multiple times.
+
+In general, iterative deepening is the preferred uninformed search method when the search space is large and the depth of the solution is not known.
+
+```pseudocode
+function ITERATIVE-DEEPENING-SEARCH(problem) returns a solution, or failure
+    for depth = 0 to ∞ do
+        result ← DEPTH-LIMITED-SEARCH(problem, depth)
+        if result != cutoff then return result
+```
+
+
+
+
+
+##### Bidirectional search
+
+The idea behind bidirectional search is to run two simultaneous searches—one forward from the initial state and the other backward from the goal—hoping that the two searches meet in the middle. Bidirectional search is implemented by replacing the goal test with a check to see whether the frontiers of the two searches intersect; if they do, a solution has been found.
+
+The reduction in time complexity makes bidirectional search attractive, but how do we search backward? This is not as easy as it sounds. Let the **predecessors** of a state x be all those states that have x as a successor. Bidirectional search requires a method for computing predecessors. When all the actions in the state space are reversible, the predecessors of x are just its successors. Other cases may require substantial ingenuity.
+
+
+
+
+
+##### Comparing uninformed search strategies
+
+* b is the branching factor; 
+* d is the depth of the shallowest solution; 
+* m is the maximum depth of the search tree; 
+* l is the depth limit.
+
+| Criterion | Breadth-First                       | Uniform-Cost                                                 | Depth-Limited | Iterative-Deepening                 | Bidirectional <br />(if applicable)                          |
+| --------- | ----------------------------------- | ------------------------------------------------------------ | ------------- | ----------------------------------- | ------------------------------------------------------------ |
+| Complete? | Yes if branching factor finite      | Yes if branching factor finite and if step costs ≥ epsilon  for positive epsilon | No            | Yes if branching factor finite      | Yes if branching factor finite and if both directions use breadth-first search |
+| Time      | O(b^d)                              | O(b^{1 + floor(C/epsilon)})                                  | O(b^m)        | O(b^d)                              | O(b^{d/2})                                                   |
+| Space     | O(b^d)                              | O(b^{1 + floor(C/epsilon)})                                  | O(b*m)        | O(b*d)                              | O(b^{d/2})                                                   |
+| Optimal?  | Yes if step costs are all identical | Yes                                                          | No            | Yes if step costs are all identical | Yes if step costs are all identical and if both directions use breadth-first search |
+
+
+
+
+
+
+
+#### Informed Search Strategies
+
+**Informed search strategy**—one that uses problem-specific knowledge beyond the definition of the problem itself—can find solutions more efficiently than can an uninformed strategy.
+
+The general approach we consider is called best-first search. Best-first search is an instance of the general TREE-SEARCH or GRAPH-SEARCH algorithm in which a node is selected for expansion based on an evaluation function, f(n). The evaluation function is construed as a cost estimate, so the node with the lowest evaluation is expanded first. The implementation of best-first graph search is identical to that for uniform-cost search, except for the use of f instead of g to order the priority queue. The choice of f determines the search strategy. Most best-first algorithms include as a component of f a heuristic function, denoted  h(n) = estimated cost of the cheapest path from the state at node n to a goal state.
+
+
+
+##### Greedy best-first search
+
+
+
+Greedy best-first search tries to expand the node that is closest to the goal, on the grounds that this is likely to lead to a solution quickly. “Greedy”—at each step it tries to get as close to the goal as it can. 
+
+Greedy best-first tree search is also incomplete even in a finite state space, much like depth-first search. The worst-case time and space complexity for the tree version is O(b^m), where m is the maximum depth of the search space. With a good heuristic function, however, the complexity can be reduced substantially. The amount of the reduction depends on the particular problem and on the quality of the heuristic.
+
+
+
+##### A* search: Minimizing the total estimated solution cost
+
+
+
+The most widely known form of best-first search is called A∗ A search (pronounced “A-star search”). It evaluates nodes by combining g(n), the cost to reach the node, and h(n), the cost to get from the node to the goal:
+$$
+f(n) = g(n) + h(n)
+$$
+Since g(n) gives the path cost from the start node to node n, and h(n) is the estimated cost of the cheapest path from n to the goal, we have f(n) = estimated cost of the cheapest solution through n .
+
+Thus, if we are trying to find the cheapest solution, a reasonable thing to try first is the node with the lowest value of g(n) + h(n). It turns out that this strategy is more than just reasonable: provided that the heuristic function h(n) satisfies certain conditions, A∗ search is both complete and optimal. The algorithm is identical to UNIFORM-COST-SEARCH except that A∗ uses g + h instead of g
+
+The first condition we require for optimality is that h(n) be an **admissible heuristic**. An admissible heuristic is one that never overestimates the cost to reach the goal. Because g(n) is the actual cost to reach n along the current path, and f(n) = g(n) + h(n), we have as an immediate consequence that f(n) never overestimates the true cost of a solution along the current path through n.
+
+A second, slightly stronger condition called **consistency** (or sometimes monotonicity) MONOTONICITY is required only for applications of A∗ to graph search.9 A heuristic h(n) is consistent if, for every node n and every successor n' of n generated by any action a, the estimated cost of reaching the goal from n is no greater than the step cost of getting to n' plus the estimated cost of reaching the goal from n':
+$$
+h(n) ≤ c(n, a, n') + h(n')
+$$
+This is a form of the general **triangle inequality**, which stipulates that each side of a triangle cannot be longer than the sum of the other two sides.
+
+A∗ has the following properties: the tree-search version of A∗ is optimal if h(n) is admissible, while the graph-search version is optimal if h(n) is consistent.
+
+Computation time is not, however, A∗’s main drawback. Because it keeps all generated nodes in memory (as do all GRAPH-SEARCH algorithms), A∗ usually runs out of space long before it runs out of time. For this reason, A∗ is not practical for many large-scale problems. 
+
+
+
+
+
+
+
+
+
+##### Memory-bounded heuristic search
+
+
+
+The simplest way to reduce memory requirements for A∗ is to adapt the idea of iterative deepening to the heuristic search context, resulting in the **iterative-deepening A∗** (IDA∗) algorithm. The main difference between IDA∗ and standard iterative deepening is that the cutoff used is the f-cost (g +h) rather than the depth; at each iteration, the cutoff value is the smallest f-cost of any node that exceeded the cutoff on the previous iteration. 
+
+**Recursive best-first search** (RBFS) is a simple recursive algorithm that attempts to mimic the operation of standard best-first search, but using only linear space. Its structure is similar to that of a recursive depth-first search, but rather than continuing indefinitely down the current path, it uses the f limit variable to keep track of the f-value of the best alternative path available from any ancestor of the current node. If the current node exceeds this limit, the recursion unwinds back to the alternative path. As the recursion unwinds, RBFS replaces the f-value of each node along the path with a backed-up value—the best f-value of its children. In this way, RBFS remembers the f-value of the best leaf in the forgotten subtree and can therefore decide whether it’s worth reexpanding the subtree at some later time.
+
+RBFS is somewhat more efficient than IDA∗, but still suffers from excessive node regeneration.
+
+
+
+```pseudocode
+function RECURSIVE-BEST-FIRST-SEARCH(problem) returns a solution, or failure
+	return RBFS(problem, MAKE-NODE(problem.INITIAL-STATE),∞)
+	
+function RBFS(problem, node,f limit) returns a solution, or failure and a new f-cost limit
+    if problem.GOAL-TEST(node.STATE) then return SOLUTION(node)
+    successors ←[ ]
+    for each action in problem.ACTIONS(node.STATE) do
+    	add CHILD-NODE(problem, node, action) into successors
+    if successors is empty then return failure, ∞
+    for each s in successors do /* update f with value from previous search, if any */
+    	s.f ← max(s.g + s.h, node.f ))
+    loop do
+        best ← the lowest f-value node in successors
+        if best.f > f limit then return failure, best.f
+        alternative ←the second-lowest f-value among successors
+        result, best.f ← RBFS(problem, best, min(f limit, alternative))
+        if result != failure then return result
+```
+
+
+
+IDA∗ and RBFS suffer from using too little memory. Between iterations, IDA∗ retains only a single number: the current f-cost limit. RBFS retains more information in memory, but it uses only linear space: even if more memory were available, RBFS has no way to make use of it. Because they forget most of what they have done, both algorithms may end up reexpanding the same states many times over. 
+
+It seems sensible, therefore, to use all available memory. Two algorithms that do this are **MA∗** (memory-bounded A∗) and **SMA∗** (simplified MA∗).
+
+SMA∗ proceeds just like A∗, expanding the best leaf until memory is full. At this point, it cannot add a new node to the search tree without dropping an old one. SMA∗ always drops the worst leaf node—the one with the highest f-value. Like RBFS, SMA∗ then backs up the value of the forgotten node to its parent. In this way, the ancestor of a forgotten subtree knows the quality of the best path in that subtree. With this information, SMA∗ regenerates the subtree only when all other paths have been shown to look worse than the path it has forgotten.
+
+On very hard problems, however, it will often be the case that SMA∗ is forced to switch back and forth continually among many candidate solution paths, only a small subset of which can fit in memory.
+
+
+
+
+
+#### Summary
+
+
+
