@@ -7,7 +7,6 @@
 This folder demonstrate my study process. Most important things:
 
 * Certificates folder consist of courses, competitions, private exams certificates what I earned to this moment
-* notes.md document with theoretical and practical explanations of different DS topics which are collected from various sources.
 * Tables bellow which demonstrates the books I read/courses I takes/lectures I watched. Also this is my study todo list.
 
 
@@ -46,9 +45,9 @@ This folder demonstrate my study process. Most important things:
 | Probability for Statistics and Machine Learning: Fundamentals and Advanced Topics | DasGupta                                          |                   |
 | Simultaneous Statistical Inference With Applications in the Life Sciences | Dickhaus                                          |                   |
 | Information Theory, Pattern Recognition and Neural Networks  | David MacKay                                      |                   |
-| Neural Networks for Pattern Recognition                      | C. M. Bishop                                      |                   |
+|                                                              |                                                   |                   |
 | The Elements of Statistical Learning: Data Mining, Inference, and Prediction | Trevor Hastie, Robert Tibshirani, Jerome Friedman |                   |
-| Building Machine Learning Pipelines                          | by Hannes Hapke, Catherine Nelson                 |                   |
+| Building Machine Learning Pipelines                          | by Hannes Hapke, Catherine Nelson                 | **Completed**     |
 
 
 
