@@ -24,7 +24,6 @@ Compute topic vectors that capture the semantics
 Compute topic-word vectors that capture the semantics
 
 * [Word Vectors](#Word Vectors)
-
 * [Word2vec](#Word2vec)
   * [Train word2vec](#Train word2vec)
   * [Tricks for word2vec](#Tricks for word2vec)
@@ -33,6 +32,10 @@ Compute topic-word vectors that capture the semantics
   * [Document similarity with Doc2vec](#Document similarity with Doc2vec)
 * [GloVe](#GloVe)
 * [fastText](#fastText)
+
+Semantics with CNN
+
+* [CNN for NLP](#CNN for NLP)
 
 Sentiment analysis
 
@@ -677,6 +680,20 @@ from gensim.models.fasttext import FastText
 ft_model = FastText.load_fasttext_format(model_file=MODEL_PATH)
 ft_model.most_similar('soccer')
 ```
+
+
+
+### CNN for NLP
+
+
+
+It turns out you can use convolutional neural networks for natural language processing by using word vectors (also known as word embeddings) or one-hot encoded vectors.
+
+The weight values in the filters are unchanged for a given input sample during the forward pass, which means you can take a given filter and all its “snapshots” in parallel and compose the output “image” all at once. This is the convolutional neural network’s secret to speed. This speed, plus its ability to ignore the position of a feature, is why researchers keep coming back to this convolutional approach to feature extraction.
+
+Why would you choose a CNN for your NLP classification task? The main benefit it provides is efficiency. In many ways, because of the pooling layers and the limits created by filter size (though you can make your filters large if you wish), you’re throwing away a good deal of information. But that doesn’t mean they aren’t useful models. As you’ve seen, they were able to efficiently detect and predict sentiment over a relatively large dataset, and even though you relied on the Word2vec embeddings, CNNs can perform on much less rich embeddings without mapping the entire language.
+
+
 
 
 
