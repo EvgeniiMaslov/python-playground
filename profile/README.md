@@ -48,7 +48,7 @@ This folder demonstrate my study process. Most important things:
 |                                                              |                                                   |                   |
 | The Elements of Statistical Learning: Data Mining, Inference, and Prediction | Trevor Hastie, Robert Tibshirani, Jerome Friedman |                   |
 | Building Machine Learning Pipelines                          | by Hannes Hapke, Catherine Nelson                 | **Completed**     |
-| Natural Language Processing in Action                        | Lane Hobson, Hapke Hannes, Howard Cole            |                   |
+| Natural Language Processing in Action                        | Lane Hobson, Hapke Hannes, Howard Cole            | **Completed**     |
 | Web Scraping with Python Collecting Data from the Modern Web | Ryan Mitchell                                     |                   |
 
 

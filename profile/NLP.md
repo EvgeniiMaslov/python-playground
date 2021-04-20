@@ -33,15 +33,42 @@ Compute topic-word vectors that capture the semantics
 * [GloVe](#GloVe)
 * [fastText](#fastText)
 
-Semantics with CNN
+ Neural networks
 
 * [CNN for NLP](#CNN for NLP)
+* [RNN](#RNN)
+  * [Simple RNN model example](#Simple RNN model example)
+  * [Bidirectional RNN model example](#Bidirectional RNN model example)
+
+* [LSTM](#LSTM)
+  * [LSTM model example](#LSTM model example)
 
 Sentiment analysis
 
 * [VADER - A rule-based sentiment analyzer](#VADER - A rule-based sentiment analyzer)
 
 
+
+Building chatbot
+
+* [Dialog engines](#Dialog engines)
+* [Pattern-matching approach](#Pattern-matching approach)
+* [Retrieval (search)](#Retrieval (search))
+* [Generative models](# Generative models)
+* [Pros and cons of each approach](#Pros and cons of each approach)
+
+
+
+Real-world NLP challenges
+
+* [Information extraction (named entity extraction and question answering)](#Information extraction (named entity extraction and question answering))
+
+  * [Named entities and relations](#Named entities and relations)
+  * [Regular patterns](#Regular patterns)
+  * [Information worth extracting](#Information worth extracting)
+    * [Useful regular expression](#Useful regular expression)
+
+  * [Extracting relationships (relations)](#Extracting relationships (relations))
 
 
 
@@ -697,6 +724,65 @@ Why would you choose a CNN for your NLP classification task? The main benefit it
 
 
 
+### RNN
+
+RNN provide a way to remember what just happened the moment before (specifically what happened at time step t when you’re looking at time step t+1). Recurrent neural nets (RNNs) enable neural networks to remember the past words within a sentence.
+
+Although the idea of affecting state across time can be a little mind boggling at first, the basic concept is simple. For each input you feed into a regular feedforward net, you’d like to take the output of the network at time step t and provide it as an additional input, along with the next piece of data being fed into the network at time step t+1. You tell the feedforward network what happened before along with what is happening “now.”
+
+
+
+##### Simple RNN model example
+
+Notice here the keyword argument return_sequences. It’s going to tell the network to return the network value at each time step, hence the 400 vectors, each 50 long. If return_sequences was set to False (the Keras default behavior), only a single 50-dimensional vector would be returned.
+
+Keras provides a keyword argument in the base RNN layer (therefore in the SimpleRNN as well) called stateful. It defaults to False. If you flip this to True when adding the SimpleRNN layer to your model, the last sample’s last output passes into itself at the next time step along with the first token input, just as it would in the middle of the sample.
+
+```python
+model = Sequential()
+model.add(SimpleRNN(num_neurons, return_sequences=True, input_shape=(maxlen, embedding_dims)))
+
+model.add(Dropout(.2))
+model.add(Flatten())
+model.add(Dense(1, activation='sigmoid'))
+model.compile('rmsprop', 'binary_crossentropy', metrics=['accuracy'])
+```
+
+##### Bidirectional RNN model example
+
+
+
+```python
+model = Sequential()
+model.add(Bidirectional(SimpleRNN(num_neurons, return_sequences=True),
+                        input_shape=(maxlen, embedding_dims)))
+```
+
+
+
+### LSTM
+
+
+
+Your challenge is to build a network that can pick up on the same core thought in both sentences. What you need is a way to remember the past across the entire input sequence. A long short-term memory (LSTM) is just what you need. Modern versions of a long short-term memory network typically use a special neural network unit called a gated recurrent unit (GRU). A gated recurrent unit can maintain both long- and short-term memory efficiently, enabling an LSTM to process a long sentence or document more accurately. In fact, LSTMs work so well they have replaced recurrent neural networks in almost all applications involving time series, discrete sequences, and NLP.
+
+LSTMs introduce the concept of a state for each layer in the recurrent network. The state acts as its memory. You can think of it as adding attributes to a class in object oriented programming. The memory state’s attributes are updated with each training example.
+
+In LSTMs, the rules that govern the information stored in the state (memory) are trained neural nets themselves—therein lies the magic. They can be trained to learn what to remember, while at the same time the rest of the recurrent net learns to predict the target label!
+
+With LSTMs, patterns that humans take for granted and process on a subconscious level begin to be available to your model.
+
+##### LSTM model example
+
+```python
+model = Sequential()
+model.add(LSTM(num_neurons, return_sequences=True, input_shape=(maxlen, embedding_dims)))
+model.add(Dropout(.2))
+model.add(Flatten())
+model.add(Dense(1, activation='sigmoid'))
+model.compile('rmsprop', 'binary_crossentropy', metrics=['accuracy'])
+```
+
 
 
 
@@ -724,4 +810,257 @@ for doc in corpus:
 ```
 
 The only drawback is that VADER doesn’t look at all the words in a document, only about 7,500.
+
+
+
+
+
+## Building chatbot
+
+
+
+### Dialog engines
+
+Chatbots have come a long way since the days of ELIZA. Pattern-matching technology has been generalized and refined over the decades. And completely new approaches have been developed to supplement pattern matching. In recent literature, chatbots are often referred to as dialog systems, perhaps because of this greater sophistication. Matching patterns in text and populating canned-response templates with information extracted with those patterns is only one of four modern approaches to building chatbots:
+
+* Pattern matching—Pattern matching and response templates (canned responses) 
+* Grounding—Logical knowledge graphs and inference on those graphs 
+* Search—Text retrieval 
+* Generative—Statistics and machine learning
+
+This is roughly the order in which these approaches were developed. The most advanced chatbots use a hybrid approach that combines all of these techniques.  This hybrid approach enables them to accomplish a broad range of tasks.
+
+**QUESTION ANSWERING DIALOG SYSTEMS** 
+
+Question answering chatbots are used to answer factual questions about the world, which can include questions about the chatbot itself. Many question answering systems first search a knowledge base or relational database to “ground” them in the real world. If they can’t find an acceptable answer there, they may search a corpus of unstructured data (or even the entire Web) to find answers to your questions. This is essentially what Google Search does. Parsing a statement to discern the question in need of answering and then picking the right answer requires a complex pipeline that combines most of the elements covered in previous chapters. Question answering chatbots are the most difficult to implement well because they require coordinating so many different elements. 
+
+**VIRTUAL ASSISTANTS** 
+
+Virtual assistants, such as Alexa and Google Assistant, are helpful when you have a goal in mind. Goals or intents are usually simple things such as launching an app, setting a reminder, playing some music, or turning on the lights in your home. For this reason, virtual assistants are often called goal-based dialog engines. Dialog with such chatbots is intended to conclude quickly, with the user being satisfied that a particular action has been accomplished or some bit of information has been retrieved.
+
+**CONVERSATIONAL CHATBOTS**
+
+Conversational chatbots, such as Worswick’s Mitsuku or any of the Pandorabots,15 are designed to entertain. They can often be implemented with very few lines of code, as long as you have lots of data. But doing conversation well is an ever-evolving challenge. The accuracy or performance of a conversational chatbot is usually measured with something like a Turing test. In a typical Turing test, humans interact with another chat participant through a terminal and try to figure out if it’s a bot or a human. The better the chatbot is at being indistinguishable from a human, the better its performance on a Turing test metric.
+
+**MARKETING CHATBOTS** 
+
+Marketing chatbots are designed to inform users about a product and entice them to purchase it. More and more video games, movies, and TV shows are launched with chatbots on websites promoting them
+
+**COMMUNITY MANAGEMENT** 
+
+Community management is a particularly important application of chatbots because it influences how society evolves. A good chatbot “shepherd” can steer a video game community away from chaos and help it grow into an inclusive, cooperative world where everyone has fun, not just the bullies and trolls. A bad chatbot, such as the Twitter bot Tay, can quickly create an environment of prejudice and ignorance.
+
+**CUSTOMER SERVICE** 
+
+Customer service chatbots are often the only “person” available when you visit an online store. IBM’s Watson, Amazon’s Lex, and other chatbot services are often used behind the scenes to power these customer assistants. They often combine both question answering skills (remember Watson’s Jeopardy training?) with virtual assistance skills. But unlike marketing bots, customer service chatbots must be well-grounded. And the knowledge base used to “ground” their answers to reality must be kept current, enabling customer service chatbots to answer questions about orders or products as well as initiate actions such as placing or canceling orders.
+
+**THERAPY** 
+
+Modern therapy chatbots, such as Wysa and YourDOST, have been built to help displaced tech workers adjust to their new lives. Therapy chatbots must be entertaining like a conversational chatbot. They must be informative like a question answering chatbot. And they must be persuasive like a marketing chatbot. And if they’re imbued with self-interest to augment their altruism, these chatbots may be “goal seeking” and use their marketing and influence skill to get you to come back for additional sessions.
+
+
+
+### Pattern-matching approach
+
+The earliest chatbots used pattern matching to trigger responses. In addition to detecting statements that your bot can respond to, patterns can also be used to extract information from the incoming text.
+
+The information extracted from your users’ statements can be used to populate a database of knowledge about the users, or about the world in general. And it can be used even more directly to populate an immediate response to some statements.
+
+### Retrieval (search)
+
+Another more data-driven approach to “listening” to your user is to search for previous statements in your logs of previous conversations. This is analogous to a human listener trying to recall where they’ve heard a question or statement or word before. A bot can search not only its own conversation logs, but also any transcript of human-to-human conversations, bot-to-human conversations, or even bot-to-bot conversations. But, as usual, garbage in means garbage out. So you should clean and curate your database of previous conversations to ensure that your bot is searching (and mimicking) high-quality dialog. You would like humans to enjoy the conversation with your bot.
+
+###  Generative models
+
+Sequence-to-sequence models are machine learning translation algorithms that “translate” statements by your user into replies by your chatbot.
+
+If you want to build a creative chatbot that says things that have never been said before, generative models such as these may be what you need: 
+
+* Sequence-to-sequence—Sequence models trained to generate replies based on their input sequences 
+* Restricted Boltzmann machines (RBMs)—Markov chains trained to minimize an “energy” function 
+* Generative adversarial networks (GANs)—Statistical models trained to fool a “judge” of good conversation 
+
+
+
+### Pros and cons of each approach
+
+
+
+| Approach   | Advantages                                                   | Disadvantages                                                |
+| ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Grammar    | Easy to get started <br />Training easy to reuse <br />Modular<br />Easily controlled/restrained | Limited “domain”<br />Capability limited by human effort <br />Difficult to debug <br />Rigid, brittle rules |
+| Grounding  | Answers logical questions well <br />Easily controlled/restrained | Sounds artificial, mechanical <br />Difficulty with ambiguity <br />Difficulty with common sense <br />Limited by structured data <br />Requires large scale information extraction <br />Requires human curation |
+| Retrieval  | Simple <br />Easy to “train” <br />Can mimic human dialog    | Difficult to scale <br />Incoherent personality <br />Ignorant of context <br />Can’t answer factual questions |
+| Generative | New, creative ways of talking <br />Less human effort <br />Domain limited only by data <br />Context aware | Difficult to “steer” <br />Difficult to train <br />Requires more data (dialog) <br />Requires more processing to train |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Real-world NLP challenges
+
+
+
+
+
+### Information extraction (named entity extraction and question answering)
+
+Information extraction and question answering systems are used for 
+
+* TA assistants for university courses 
+* Customer service 
+* Tech support 
+* Sales 
+* Software documentation and FAQs 
+
+Information extraction can be used to extract things such as
+
+* Dates 
+* Times
+* Prices 
+* Quantities
+* Addresses
+* Names – People – Places – Apps – Companies – Bots 
+* Relationships – “is-a” (kinds of things) – “has” (attributes of things) – “related-to”
+
+
+
+
+
+#### Named entities and relations
+
+You’d like your machine to extract pieces of information and facts from text so it can know a little bit about what a user is saying. A typical sentence may contain several named entities of various types, such as geographic entities, organizations, people, political entities, times (including dates), artifacts, events, and natural phenomena. And a sentence can contain several relations, too—facts about the relationships between the named entities in the sentence.
+
+**A knowledge base.** 
+
+('Stanislav Petrov', 'is-a', 'lieutenant colonel') This is an example of two named entity nodes ('Stanislav Petrov' and 'lieutenant colonel') and a relation or connection ('is a') between them in a knowledge graph or knowledge base. A collection of these triplets is a knowledge graph. This is also sometimes called an ontology by linguists, because it’s storing structured information about words. But when the graph is intended to represent facts about the world rather than merely words, it’s referred to as a knowledge graph or knowledge base.
+
+A knowledge base can be used to build a practical type of chatbot called a question answering system (QA system). Customer service chatbots, including university TA bots, rely almost exclusively on knowledge bases to generate their replies.
+
+**Information extraction.**
+
+“Information extraction” is converting unstructured text into structured information stored in a knowledge base or knowledge graph. Information extraction is part of an area of research called natural language understanding (NLU), though that term is often used synonymously with natural language processing. Information extraction and NLU is a different kind of learning than you may think of when researching data science. It isn’t only unsupervised learning; even the very “model” itself, the logic about how the world works, can be composed without human intervention. Instead of giving your machine fish (facts), you’re teaching it how to fish (extract information). Nonetheless, machine learning techniques are often used to train the information extractor. 
+
+
+
+#### Regular patterns
+
+
+
+You need a pattern-matching algorithm that can identify sequences of characters or words that match the pattern so you can “extract” them from a longer string of text. The naive way to build such a pattern-matching algorithm is in Python, with a sequence of if/then statements that look for that symbol (a word or character) at each position of a string.
+
+A pattern-matching engine is integrated into most modern computer languages, including Python. It’s called **regular expressions**. Regular expressions and string interpolation formatting expressions (for example, "{:05d}".format(42)), are mini programming languages unto themselves.
+
+So regular expressions are the pattern definition language of choice for many NLP problems involving pattern matching. Regular expressions define a finite state machine or FSM—a tree of “if-then” decisions about a sequence of symbols. A finite state machine that operates on a sequence of symbols such as ASCII character strings, or a sequence of English words, is called a grammar. They can also be called formal grammars to distinguish them from natural language grammar rules you learned in grammar school.
+
+**Information extraction as ML feature extraction.**
+
+You want your machine learning pipeline to be able to do some basic things, such as answer logical questions, or perform actions such as scheduling meetings based on NLP instructions. And machine learning falls flat here. You rarely have a labeled training set that covers the answers to all the questions people might ask in natural language. Plus, as you’ll see here, you can define a compact set of condition checks (a regular expression) to extract key bits of information from a natural language string. And it can work for a broad range of problems.
+
+**Pattern matching** (and regular expressions) continue to be the state-of-the art approach for information extraction. Even with machine learning approaches to natural language processing, you need to do feature engineering. You need to create bags of words or embeddings of words to try to reduce the nearly infinite possibilities of meaning in natural language text into a vector that a machine can process easily. Information extraction is just another form of machine learning feature extraction from unstructured natural language data, such as creating a bag of words, or doing PCA on that bag of words. 
+
+
+
+### Information worth extracting 
+
+##### Useful regular expression
+
+Some keystone bits of quantitative information are worth the effort of “hand-crafted” regular expressions: 
+
+* GPS locations 
+
+  ```python
+  # Regular expression for GPS coordinates
+  
+  import re
+  lat = r'([-]?[0-9]?[0-9][.][0-9]{2,10})'
+  lon = r'([-]?1?[0-9]?[0-9][.][0-9]{2,10})'
+  sep = r'[,/ ]{1,3}'
+  re_gps = re.compile(lat + sep + lon)
+  
+  re_gps.findall('http://...maps/@34.0551066,-118.2496763...')
+  # [(34.0551066, -118.2496763)]
+  re_gps.findall("https://www.openstreetmap.org/#map=10/5.9666/116.0566")
+  # [('5.9666', '116.0566')]
+  re_gps.findall("Zig Zag Cafe is at 45.344, -121.9431 on my GPS.")
+  # [('45.3440', '-121.9431')]
+  ```
+
+* Dates 
+
+  ```python
+  # US Dates
+  us = r'((([01]?\d)[-/]([0123]?\d))([-/]([0123]\d)\d\d)?)'
+  mdy = re.findall(us, 'Santa came 12/25/2017. An elf appeared 12/12.')
+  dates = [{'mdy': x[0], 'my': x[1], 'm': int(x[2]), 'd': int(x[3]),
+            'y': int(x[4].lstrip('/') or 0), 'c': int(x[5] or 0)} for x in mdy]
+  
+  # European Dates
+  eu = r'((([0123]?\d)[-/]([01]?\d))([-/]([0123]\d)?\d\d)?)'
+  dmy = re.findall(eu, 'Alan Mathison Turing OBE FRS (23/6/1912-7/6/1954)\
+  					was an English computer scientist.')
+  
+  # Recognizing month words
+  mon_words = 'January February March April May June July ' \
+  			'August September October November December'
+  
+  mon = (r'\b(' + '|'.join('{}|{}|{}|{}|{:02d}'.format(m, m[:4], m[:3], i + 1, i + 1) for i, m in
+                           enumerate(mon_words.split())) + r')\b')
+  
+  re.findall(mon, 'January has 31 days, February the 2nd month of 12, has 28, except in a Leap Year.')
+  
+  # Validating Dates
+  import datetime
+  dates = []
+  for g in groups:
+  	month_num = (g['us_mon'] or g['eu_mon']).strip()
+      
+  	try:
+  		month_num = int(month_num)
+          
+  	except ValueError:
+  		month_num = [w[:len(month_num)]
+                       for w in mon_words].index(month_num) + 1
+  	
+      date = datetime.date(
+          int(g['us_yr'] or g['eu_yr']),
+          month_num,
+          int(g['us_day'] or g['eu_day']))
+  	
+      dates.append(date)
+  ```
+
+  
+
+* Prices 
+
+* Numbers 
+
+Other important pieces of natural language information require more complex patterns than are easily captured with regular expressions:
+
+* Question trigger words 
+* Question target words 
+* Named entities
+
+
+
+
+
+### Extracting relationships (relations)
+
+
+
+Extracting the dates and the GPS coordinates might enable you to associate that date and location with Desoto, the Pascagoula people, and two rivers whose names you can’t pronounce. You’d like your bot (and your mind) to be able to connect those facts to larger facts—for example, that Desoto was a Spanish conquistador and that the Pascagoula people were a peaceful Native American tribe. And you’d like the dates and locations to be associated with the right “things”: Desoto, and the intersection of two rivers, respectively.
+
+
 
