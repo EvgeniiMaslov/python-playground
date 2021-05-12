@@ -1,3 +1,12 @@
+[**Linear Algebra**](#Linear algebra)
+
+* [Eigen decomposition](#Eigen decomposition)
+* [Singular Value Decomposition](#Singular Value Decomposition)
+
+
+
+
+
 **Statistic**
 
 * [The main divisions of DS questions](#the-main-divisions-of-ds-questions)
@@ -46,6 +55,56 @@
 * [Central limit theorem](#Central limit theorem)
 * [Bayesian curve fitting](#bayesian-curve-fitting)
 * [Curse of dimensionality](#Curse of dimensionality)
+
+
+
+
+
+
+
+
+
+## Linear Algebra
+
+
+
+### Eigen decomposition
+
+$$
+\bold A \bold v = \lambda \bold v
+$$
+
+\lambda = eigenvalue, **v** - eigenvector. We can form a matrix **V** by concatenating vectors **v** with one vector per column. Likewise, we can concatenate the eigenvalues to form a vector **λ**. The eigendecomposition of **A** is given by:
+$$
+\bold A = \bold V diag(\bold λ) \bold V^{-1}
+$$
+Every real symmetric matrix can be decomposed into an expression using only real-valued eigenvectors and eigenvalues:
+$$
+\bold A = \bold Q \bold Λ \bold Q^T
+$$
+Where **Q** - orthogonal matrix composed of eigenvectors of **A**, and **Λ** is a diagonal matrix, Λ_i,i is associated with eigenvector in column i of **Q**, denoted as **Q**_:,i
+
+Ортогона́льная ма́трица — квадратная матрица с вещественными  элементами, результат умножения которой на транспонированную матрицу  равен единичной матрице: или, что эквивалентно, её обратная матрица равна транспонированной  матрице.
+
+
+
+### Singular Value Decomposition
+
+
+
+Every real matrix has a SVD, but the same is not true of the eigen decomposition. The SVD is similar to eigen decomposition, except A is the product of three matrices:
+$$
+\bold A = \bold U \bold D \bold V^T
+$$
+**U** and **V** - orthogonal matrices, **D** - diagonal. The elements along the diagonal of **D** are known as the singular values of matrix **A**. The columns of **U** - left-singular vectors; the columns of **V** - right-singular vectors.
+
+We can interpret SVD in terms of eigen decomposition of **A**. The left-singular vectors of **A** are the eigenvectors of **A**^T; the right-singular vectors are the eigenvectors **A**^T **A**. The non-zero singular values of **A** are the square root of eigenvalues of **A**^T **A**.
+
+U: u_j - собственные векторы матрицы A * A^T
+
+V: v_j - собственные векторы матрицы A^T * A
+
+D: на диагонали - корни из собственных значений матриц A^T * A и  A * A^T
 
 
 
@@ -739,7 +798,7 @@ import math
 def normal_approximation_to_binomial(n: int, p: float) -> Tuple[float, float]:
 	"""Returns mu and sigma corresponding to a Binomial(n, p)"""
 	mu = p * n
-	sigma = math.sqrt(p * (1 - p) * n)
+	sigma = math.sqrt(p * (1 - p) / n)
 	return mu, sigma
 ```
 
@@ -1453,9 +1512,9 @@ Finding out how big a sample size you need requires thinking ahead to the statis
 
 
    Another, perhaps more pertinent, question about the BSE test is the following: *suppose my cow tests positive; what is the probability it really has BSE*?
-   $$
+$$
    P(B|T) = \frac{P(T \cap B)}{P(T)} = \frac{P(T|B)P(B)}{P(T|B)P(B) + P(T|\neg B)P(\neg B)} = \frac{0.7*0.02}{0.7*0.02+ 0.1*(1-0.02)} = 0.125
-   $$
+$$
 
 4. **Bayes’ rule**. Suppose the events C1, C2, ..., Cm are disjoint and C1 ∪ C2 ∪···∪ Cm = Ω. The conditional probability of Ci, given an arbitrary event A, can be expressed as:
    $$

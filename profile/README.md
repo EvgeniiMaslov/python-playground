@@ -39,17 +39,27 @@ This folder demonstrate my study process. Most important things:
 | Machine Learning Refined                                     | Jeremy Watt                                       | **Completed**     |
 | Pattern Recognition and Machine Learning                     | Christopher M. Bishop                             | Bayesian Networks |
 | Building ML Systems with Python                              | Willi Richert                                     | **Completed**     |
-| AI Modern Approach                                           | Stuart Russel                                     |                   |
+| AI Modern Approach                                           | Stuart Russel                                     | p. 187            |
 | A Modern Introduction to Probability and Statistics          | Dekking, Kraaikamp, Lopuhaa, Meester              | **Completed**     |
-| Advanced High School Statistics                              | Diez, Barr, Çetinkaya-Rundel, Dorazio             |                   |
-| Probability for Statistics and Machine Learning: Fundamentals and Advanced Topics | DasGupta                                          |                   |
-| Simultaneous Statistical Inference With Applications in the Life Sciences | Dickhaus                                          |                   |
+| Designing Data-Intensive Applications                        | Martin Kleppmann                                  |                   |
+|                                                              |                                                   |                   |
+|                                                              |                                                   |                   |
 | Information Theory, Pattern Recognition and Neural Networks  | David MacKay                                      |                   |
 |                                                              |                                                   |                   |
 | The Elements of Statistical Learning: Data Mining, Inference, and Prediction | Trevor Hastie, Robert Tibshirani, Jerome Friedman |                   |
 | Building Machine Learning Pipelines                          | by Hannes Hapke, Catherine Nelson                 | **Completed**     |
 | Natural Language Processing in Action                        | Lane Hobson, Hapke Hannes, Howard Cole            | **Completed**     |
 | Web Scraping with Python Collecting Data from the Modern Web | Ryan Mitchell                                     | **Completed**     |
+| Clean Code                                                   | Robert Martin                                     |                   |
+| Head First Design Patterns                                   | Eric Freeman                                      |                   |
+| Machine Learning Design Patterns                             | Valliappa Lakshmanan                              | **Completed**     |
+| Building Machine Learning Powered Applications: Going from Idea to Product | Emmanuel Ameisen                                  | .**Completed**    |
+| Practical Weak Supervision: Doing More with Less Data        | Wee Hyong Tok, Amit Bahree, Senja Filipi          |                   |
+| TensorFlow 2 Pocket Reference                                | KC Tung                                           |                   |
+| Fundamentals of Deep Learning: Designing Next-Generation Machine Intelligence Algorithms | Nicholas Locascio                                 |                   |
+|                                                              |                                                   |                   |
+| Advanced Natural Language Processing with TensorFlow 2       | Ashish Bansal                                     |                   |
+|                                                              |                                                   |                   |
 
 
 
@@ -87,3 +97,4 @@ This folder demonstrate my study process. Most important things:
 | https://www.kaggle.com/learn/advanced-sql                    | Advanced SQL                                            | **Completed** |
 | https://www.kaggle.com/learn/geospatial-analysis             | Geospatial analysis                                     | **Completed** |
 | https://www.kaggle.com/learn/natural-language-processing     | NLP                                                     | **Completed** |
+| https://www.youtube.com/playlist?list=PLJEYfuHbcEIB-DdeoWaQ6Bzt0903kbmWK | Samsung Deep Learning                                   |               |

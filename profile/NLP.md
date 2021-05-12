@@ -2,16 +2,18 @@
 
 
 
-Preprocessing
+### Preprocessing
 
-* [Best sentence tokenizers](#Best sentence tokenizers)
-* [Normalizing your vocabulary](#Normalizing your vocabulary)
+##### Basic preprocessing steps
+
+* [Tokenizers](#Tokenizers)
+* [Normalizing](#Normalizing)
 * [Stop words](#Stop words)
 * [Bag of words](#Bag of words)
 * [n-Gram Language Models](#n-gram-language-models)
 * [TFIDF](#tfidf)
 
-Compute topic vectors that capture the semantics
+##### Compute topic vectors that capture the semantics
 
 * [Latent Dirichlet Allocation](#Latent Dirichlet Allocation)
   * [Latent Dirichlet Allocation + Linear Discriminant Analysis for sms](#Latent Dirichlet Allocation + Linear Discriminant Analysis for sms)
@@ -21,7 +23,7 @@ Compute topic vectors that capture the semantics
 * [Principal Component Analysis](#principal-component-analysis)
   * [PCA for SMS spam classifier](#PCA for SMS spam classifier)
 
-Compute topic-word vectors that capture the semantics
+##### Compute topic-word vectors that capture the semantics
 
 * [Word Vectors](#Word Vectors)
 * [Word2vec](#Word2vec)
@@ -33,23 +35,31 @@ Compute topic-word vectors that capture the semantics
 * [GloVe](#GloVe)
 * [fastText](#fastText)
 
- Neural networks
+
+
+### ML models for NLP
+
+##### Neural networks
 
 * [CNN for NLP](#CNN for NLP)
 * [RNN](#RNN)
+  * [Common RNN challenges](#Common RNN challenges)
   * [Simple RNN model example](#Simple RNN model example)
-  * [Bidirectional RNN model example](#Bidirectional RNN model example)
-
+* [Bidirectional RNN model example](#Bidirectional RNN model example)
 * [LSTM](#LSTM)
-  * [LSTM model example](#LSTM model example)
+* [GRU](#GRU)
 
-Sentiment analysis
+##### Rule-based models
 
 * [VADER - A rule-based sentiment analyzer](#VADER - A rule-based sentiment analyzer)
 
 
 
-Building chatbot
+### NLP common task and solution
+
+
+
+##### Building chatbot
 
 * [Dialog engines](#Dialog engines)
 * [Pattern-matching approach](#Pattern-matching approach)
@@ -59,7 +69,13 @@ Building chatbot
 
 
 
-Real-world NLP challenges
+##### [Sentiment](#Sentiment)
+
+[Sequence-to-sequence learning ](#Sequence-to-sequence learning )
+
+
+
+##### Real-world NLP challenges
 
 * [Information extraction (named entity extraction and question answering)](#Information extraction (named entity extraction and question answering))
 
@@ -76,7 +92,7 @@ Real-world NLP challenges
 
 
 
-### Best sentence tokenizers
+### Tokenizers
 
 You can use the NLTK function RegexpTokenizer to replicate your simple tokenizer example like this:
 
@@ -105,7 +121,7 @@ casual_tokenize(message)
 
 
 
-### Normalizing your vocabulary
+### Normalizing
 
 
 
@@ -156,16 +172,22 @@ For a search-based chatbot, however, accuracy is more important. As a result, a 
 
 
 
+
+
 ### Stop words
 
 Stop words are common words in any language that occur with a high frequency but carry much less substantive information about the meaning of a phrase (for example: a, an, the, this, etc.).
 
-Historically, stop words have been excluded from NLP pipelines in order to reduce the computational effort to extract information from a text. Even though the words themselves carry little information, the stop words can provide important relational information as part of an n-gram. Consider these two examples: 
+Historically, stop words have been excluded from NLP pipelines in order to reduce the computational effort to extract information from a text. Even though the words themselves carry little information, the **stop words can provide important relational information** as part of an n-gram. 
+
+Consider these two examples: 
 
 * Mark reported to the CEO 
 * Suzanne reported as the CEO to the board 
 
-In your NLP pipeline, you might create 4-grams such as reported to the CEO and reported as the CEO. If you remove the stop words from the 4-grams, both examples would be reduced to "reported CEO", and you would lack the information about the professional hierarchy. Unfortunately, retaining the stop words within your pipeline creates another problem: it increases the length of the n-grams required to make use of these connections formed by the otherwise meaningless stop words. 
+In your NLP pipeline, you might create 4-grams such as reported to the CEO and reported as the CEO. If you remove the stop words from the 4-grams, both examples would be reduced to "reported CEO", and you would lack the information about the professional hierarchy. 
+
+Unfortunately, **retaining the** **stop words** within your pipeline **creates another problem**: it increases the length of the n-grams required to make use of these connections formed by the otherwise meaningless stop words. 
 
 So if you have sufficient memory and processing bandwidth to run all the NLP steps in your pipeline on the larger vocabulary, you probably don’t want to worry about ignoring a few unimportant words here and there. And if you’re worried about overfitting a small training set with a large vocabulary, there are better ways to select your vocabulary or reduce your dimensionality than ignoring stop words.
 
@@ -732,6 +754,18 @@ Although the idea of affecting state across time can be a little mind boggling a
 
 
 
+##### Common RNN challenges
+
+
+
+* Vanishing and exploding gradients: As the lengths of these sequences increase, the gradients going back will become smaller and smaller. This will cause the network to train slowly or not learn at all. This effect will be more pronounced as sequence lengths increase. For managing exploding gradients, a technique called gradient clipping is used. This technique artificially clips gradients if their magnitude exceeds a threshold. This prevents gradients from becoming too large or exploding.
+* Inability to manage long-term dependencies
+* Two specific RNN cell designs mitigate these problems: Long-Short Term Memory (LSTM) and Gated Recurrent Unit (GRU).
+
+
+
+
+
 ##### Simple RNN model example
 
 Notice here the keyword argument return_sequences. It’s going to tell the network to return the network value at each time step, hence the 400 vectors, each 50 long. If return_sequences was set to False (the Keras default behavior), only a single 50-dimensional vector would be returned.
@@ -766,24 +800,26 @@ model.add(Bidirectional(SimpleRNN(num_neurons, return_sequences=True),
 
 Your challenge is to build a network that can pick up on the same core thought in both sentences. What you need is a way to remember the past across the entire input sequence. A long short-term memory (LSTM) is just what you need. Modern versions of a long short-term memory network typically use a special neural network unit called a gated recurrent unit (GRU). A gated recurrent unit can maintain both long- and short-term memory efficiently, enabling an LSTM to process a long sentence or document more accurately. In fact, LSTMs work so well they have replaced recurrent neural networks in almost all applications involving time series, discrete sequences, and NLP.
 
+LSTM has four main parts: 
+
+* Cell value or memory of the network, also referred to as the cell, which stores accumulated knowledge 
+* Input gate, which controls how much of the input is used in computing the new cell value 
+* Output gate, which determines how much of the cell value is used in the output 
+* Forget gate, which determines how much of the current cell value is used for updating the cell value
+
 LSTMs introduce the concept of a state for each layer in the recurrent network. The state acts as its memory. You can think of it as adding attributes to a class in object oriented programming. The memory state’s attributes are updated with each training example.
 
 In LSTMs, the rules that govern the information stored in the state (memory) are trained neural nets themselves—therein lies the magic. They can be trained to learn what to remember, while at the same time the rest of the recurrent net learns to predict the target label!
 
 With LSTMs, patterns that humans take for granted and process on a subconscious level begin to be available to your model.
 
-##### LSTM model example
-
-```python
-model = Sequential()
-model.add(LSTM(num_neurons, return_sequences=True, input_shape=(maxlen, embedding_dims)))
-model.add(Dropout(.2))
-model.add(Flatten())
-model.add(Dense(1, activation='sigmoid'))
-model.compile('rmsprop', 'binary_crossentropy', metrics=['accuracy'])
-```
 
 
+### GRU
+
+
+
+Compared to the LSTM, it has fewer gates. Input and forget gates are combined into a single update gate. Some of the internal cell state and hidden state is merged together as well. This reduction in complexity makes it easier to train. It has shown great results in the speech and sound domains. However, in neural machine translation tasks, LSTMs have shown superior performance.
 
 
 
@@ -899,9 +935,30 @@ If you want to build a creative chatbot that says things that have never been sa
 
 
 
+## Sentiment
 
 
 
+Whether you use raw single-word tokens, n-grams, stems, or lemmas in your NLP pipeline, each of those tokens contains some information. An important part of this information is the word’s sentiment—the overall feeling or emotion that the word invokes. This sentiment analysis—measuring the sentiment of phrases or chunks of text—is a common application of NLP. In many companies it’s the main thing an NLP engineer is asked to do. Companies like to know what users think of their products. So they often will provide some way for you to give feedback. A star rating on Amazon or Rotten Tomatoes is one way to get quantitative data about how people feel about products they’ve purchased. But a more natural way is to use natural language comments.
+
+There are two approaches to sentiment analysis: 
+
+* A rule-based (heuristics) algorithm composed by a human. A common rule-based approach to sentiment analysis is to find keywords in the text and map each one to numerical scores or weights in a dictionary.
+* A machine learning model learned from data by a machine. Relies on a labeled set of statements or documents to train a machine learning model to create those rules.
+
+
+
+### Sequence-to-sequence learning 
+
+Sequence-to-sequence learning (often abbreviated as seq2seq learning) is a generalization of the sequence labeling problem. In seq2seq, Xi and Yi can have different lengths. seq2seq models have found application in machine translation (where, for example, the input is an English sentence, and the output is the corresponding French sentence), conversational interfaces (where the input is a question typed by the user, and the output is the answer from the machine), text summarization, spelling correction, and many others.
+
+Many but not all seq2seq learning problems are currently best solved by neural networks. The network architectures used in seq2seq all have two parts: an encoder and a decoder. 
+
+In seq2seq neural network learning, the encoder is a neural network that accepts sequential input. It can be an RNN, but also a CNN or some other architecture. The role of the encoder is to read the input and generate some sort of state (similar to the state in RNN) that can be seen as a numerical representation of the meaning of the input the machine can work with. The meaning of some entity, whether it be an image, a text or a video, is usually a vector or a matrix that contains real numbers. This vector (or matrix) is called in the machine learning jargon the embedding of the input.
+
+The decoder is another neural network that takes an embedding as input and is capable of generating a sequence of outputs. As you could have already guessed, that embedding comes from the encoder. To produce a sequence of outputs, the decoder takes a start of sequence input feature vector x(0) (typically all zeroes), produces the first output y(1), updates its state by combining the embedding and the input x(0), and then uses the output y(1) as its next input x(1). 
+
+More accurate predictions can be obtained using an architecture with **attention**. Attention mechanism is implemented by an additional set of parameters that combine some information from the encoder (in RNNs, this information is the list of state vectors of the last recurrent layer from all encoder time steps) and the current state of the decoder to generate the label. That allows for even better retention of long-term dependencies than provided by gated units and bidirectional RNN.
 
 
 
