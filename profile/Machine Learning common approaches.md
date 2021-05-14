@@ -337,7 +337,27 @@ The criterion calculated by the criterion function can simply be the difference 
 
 Also we can select features use random forest importance, l1 regularization.
 
+There are two main methods for feature selection, i.e, filter, and wrapper methods.
 
+#### Filter Methods
+
+This involves: 
+
+- Linear discrimination analysis
+- ANOVA
+- Chi-Square
+
+The best analogy for selecting features is "bad data in, bad answer out." When we're limiting or selecting the features, it's all about cleaning up the data coming in. 
+
+#### Wrapper Methods
+
+This involves: 
+
+- **Forward Selection**: We test one feature at a time and keep adding them until we get a good fit
+- **Backward Selection**: We test all the features and start removing them to see what works better
+- **Recursive Feature Elimination**: Recursively looks through all the different features and how they pair together
+
+Wrapper methods are very labor-intensive, and high-end computers are needed if a lot of data analysis is performed with the wrapper method. 
 
 
 
@@ -1156,6 +1176,18 @@ Now, in our classification problem, we can replace the label yi for each example
 Learning to rank is a supervised learning problem. Among others, one frequent problem solved using learning to rank is the optimization of search results returned by a search engine for a query. In search result ranking optimization, a labeled example Xi in the training set of size N is a ranked collection of documents of size ri (labels are ranks of documents). A feature vector represents each document in the collection. The goal of the learning is to find a ranking function f which outputs values that can be used to rank documents. For each training example, an ideal function f would output values that induce the same ranking of documents as given by the labels.
 
 ### Learning to Recommend
+
+
+
+A recommender system predicts what a user would rate a specific product based on their preferences. It can be split into two different areas:
+
+#### Collaborative Filtering
+
+As an example, Last.fm recommends tracks that other users with similar interests play often. This is also commonly seen on Amazon after making a purchase; customers may notice the following message accompanied by product recommendations: "Users who bought this also bought…"
+
+#### Content-based Filtering
+
+As an example: Pandora uses the properties of a song to recommend music with similar properties. Here, we look at content, instead of looking at who else is listening to music.
 
 Learning to recommend is an approach to build recommender systems. Usually, we have a user who consumes content. We have the history of consumption and want to suggest this user new content that they would like. It could be a movie on Netflix or a book on Amazon. Traditionally, two approaches were used to give recommendations: content-based filtering and collaborative filtering.
 

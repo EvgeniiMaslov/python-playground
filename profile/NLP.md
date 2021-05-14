@@ -57,7 +57,7 @@
 
 ### NLP common task and solution
 
-
+[Named Entity Recognition](#Named Entity Recognition)
 
 ##### Building chatbot
 
@@ -848,6 +848,16 @@ for doc in corpus:
 The only drawback is that VADER doesn’t look at all the words in a document, only about 7,500.
 
 
+
+
+
+## Named Entity Recognition
+
+
+
+One of the fundamental building blocks of NLU is Named Entity Recognition (NER). The names of people, companies, products, and quantities can be tagged in a piece of text with NER, which is very useful in chatbot applications and many other use cases in information retrieval and extraction.
+
+Given a sentence or a piece of text, the objective of an NER model is to locate and classify text tokens as named entities in categories such as people's names, organizations and companies, physical locations, quantities, monetary quantities, times, dates, and even protein or DNA sequences.
 
 
 
