@@ -92,36 +92,13 @@
 
 
 
-### Tokenizers
-
-You can use the NLTK function RegexpTokenizer to replicate your simple tokenizer example like this:
-
-```python
-from nltk.tokenize import RegexpTokenizer
-tokenizer = RegexpTokenizer(r'\w+|$[0-9.]+|\S+')
-tokenizer.tokenize(sentence)
-```
+**Tokenizers.** You can use the NLTK function RegexpTokenizer to replicate your simple tokenizer.
 
 An even better tokenizer is the Treebank Word Tokenizer from the NLTK package. It incorporates a variety of common rules for English word tokenization. For example, it separates phrase-terminating punctuation (?!.;,) from adjacent tokens and retains decimal numbers containing a period as a single token. In addition it contains rules for English contractions. For example “don’t” is tokenized as ["do", "n’t"] (it’s important to separate the words to allow the syntax tree parser to have a consistent, predictable set of tokens with known grammar rules as its input).
 
-```python
-from nltk.tokenize import TreebankWordTokenizer
-sentence = """Monticello wasn't designated as UNESCO World Heritage Site until 1987."""
-tokenizer = TreebankWordTokenizer()
-tokenizer.tokenize(sentence)
-```
-
 The NLTK library includes a tokenizer—casual_tokenize—that was built to deal with short, informal, emoticon-laced texts from social networks where grammar and spelling conventions vary widely.
 
-```python
-from nltk.tokenize.casual import casual_tokenize
-message = """RT @TJMonticello Best day everrrrrrr at Monticello. Awesommmmmmeeeeeeee day :*)"""
-casual_tokenize(message)
-```
-
-
-
-### Normalizing
+**Normalizing.**
 
 
 
