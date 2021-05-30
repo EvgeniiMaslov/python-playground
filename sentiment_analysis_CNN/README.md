@@ -1,1 +1,0 @@
-Download the original dataset from the Stanford AI department (https://ai.stanford.edu/%7eamaas/data/sentiment/). This is a dataset compiled for the 2011 paper Learning Word Vectors for Sentiment Analysis. 
