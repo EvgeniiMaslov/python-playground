@@ -11,6 +11,7 @@ def split(n_splits=cfg.N_FOLDS, random_state=42):
         dataset.loc[val_idx, 'fold'] = fold
 
     dataset.to_csv(cfg.SPLIT_DATAFRAME, index=False)
+    print('Created.')
 
 
 if __name__ == '__main__':

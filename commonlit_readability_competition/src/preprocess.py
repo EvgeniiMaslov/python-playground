@@ -1,10 +1,11 @@
+import argparse
 import pandas as pd
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import config as cfg
 
 
-def preprocess(text, remove_stopwords=False, remove_not_letters=True, as_text=True):
+def preprocess(text, remove_stopwords=False, remove_not_letters=False, as_text=True):
     text = text.strip().lower()
     tokens = word_tokenize(text)
 
@@ -20,8 +21,9 @@ def preprocess(text, remove_stopwords=False, remove_not_letters=True, as_text=Tr
 
 def main():
     dataset = pd.read_csv(cfg.TRAIN_DATAFRAME)
-    dataset['text_preprocessed'] = dataset.excerpt.apply(preprocess, args=(False, True, True,))
+    dataset['text_preprocessed'] = dataset.excerpt.apply(preprocess)
     dataset.to_csv(cfg.PREPROCESSED_DATAFRAME, index=False)
+    print('Preprocessing completed.')
 
 
 if __name__ == '__main__':
