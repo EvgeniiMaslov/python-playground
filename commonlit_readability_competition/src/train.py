@@ -8,8 +8,7 @@ import os
 import config as cfg
 
 
-def train_fold(fold, model_name, extractor_name):
-    df = pd.read_csv(cfg.SPLIT_DATAFRAME)
+def train_fold(df, fold, model_name, extractor_name):
     model = dispatcher.models[model_name]
     extractor = dispatcher.extractors[extractor_name]
 
@@ -25,19 +24,30 @@ def train_fold(fold, model_name, extractor_name):
     model.fit(x_train, y_train)
     predictions = model.predict(x_val)
     rmse = np.sqrt(mean_squared_error(y_val, predictions))
-    print(f'Fold {fold} RMSE: {rmse}')
 
-    joblib.dump(extractor, os.path.join(cfg.EXTRACTOR_OUTPUT, f'{extractor_name}_fold{fold}.bin'))
-    joblib.dump(model, os.path.join(cfg.MODEL_OUTPUT, f'{model_name}_{extractor_name}_fold{fold}.bin'))
+    return model, extractor, rmse
+
+
+def main(model_name, extractor_name):
+    df = pd.read_csv(cfg.SPLIT_DATAFRAME)
+
+    scores = []
+    for fold in range(cfg.N_FOLDS):
+        model, extractor, rmse = train_fold(df, fold, model_name, extractor_name)
+
+        print(f'Fold {fold} RMSE: {rmse}')
+        scores.append(rmse)
+
+        joblib.dump(extractor, os.path.join(cfg.EXTRACTOR_OUTPUT, f'{extractor_name}_fold{fold}.bin'))
+        joblib.dump(model, os.path.join(cfg.MODEL_OUTPUT, f'{model_name}_{extractor_name}_fold{fold}.bin'))
+
+    scores = np.array(scores)
+    print('Mean folds RMSE: ', scores.mean())
 
 
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        '--fold',
-        type=int
-    )
     parser.add_argument(
         '--model',
         type=str
@@ -48,8 +58,7 @@ if __name__ == '__main__':
     )
     args = parser.parse_args()
 
-    train_fold(
-        fold=args.fold,
+    main(
         model_name=args.model,
         extractor_name=args.extractor
     )

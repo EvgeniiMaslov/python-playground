@@ -3,7 +3,7 @@ from sklearn.model_selection import KFold
 import config as cfg
 
 
-def split(n_splits=5, random_state=42):
+def split(n_splits=cfg.N_FOLDS, random_state=42):
     dataset = pd.read_csv(cfg.PREPROCESSED_DATAFRAME)
 
     k_fold = KFold(n_splits=n_splits, shuffle=True, random_state=random_state)
